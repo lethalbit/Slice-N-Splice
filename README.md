@@ -2,7 +2,7 @@
 Slice 'N Splice (SNS) is an application that encourages gross abuse of the ELF file format by allowing one to do whatever one sees fit with the file within the limits of the standard and beyond.
 
 ## Usage
-SNS is primarily used via its interactive Ncurses interface, that can be reached by simply running `sns` or `sns <filename>`. However, an interactive interface may not always be the best choice, so SNS also has an extensive set of command line options that allow you to do almost everything you could via the interface, they are documented in the [`sns(1)`](doc/sns.1)] manpage
+SNS is primarily used via its interactive Ncurses interface, that can be reached by simply running `sns` or `sns <filename>`. However, an interactive interface may not always be the best choice, so SNS also has an extensive set of command line options that allow you to do almost everything you could via the interface, they are documented in the [`sns(1)`](doc/sns.1) manpage.
 
 
 ## Building
