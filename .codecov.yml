@@ -1,0 +1,4 @@
+parsers:
+  gcov:
+    branch_detection:
+      method: yes

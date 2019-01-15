@@ -1,0 +1,57 @@
+language: cpp
+sudo: false
+dist: xenial
+
+matrix:
+  include:
+    - os: linux
+      compiler: gcc-8
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+            - python3
+            - python3-pip
+
+      env:
+        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && GCOV=gcov-8"
+
+    - os: linux
+      compiler: clang-5.0
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - g++-8
+            - clang-5.0
+            - python3
+            - python3-pip
+
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0 && GCOV='llvm-cov gcov'"
+
+
+
+before_install:
+  - mkdir -p ~/.local/bin
+  - eval "${MATRIX_EVAL}"
+  - eval "PATH=$PATH:~/.local/bin"
+  - curl -LO https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip
+  - unzip ninja-linux.zip -d ~/.local/bin
+
+install:
+  - pip3 install --user meson
+
+script:
+  - meson  build
+  - ninja -C build
+  - ninja -C build test
+
+after_success:
+  - if [ "$COVERAGE" == "1" ]; then
+      bash <(curl -s https://codecov.io/bash) -x $GCOV;
+    fi
