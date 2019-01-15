@@ -20,7 +20,7 @@ matrix:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && GCOV=gcov-8"
 
     - os: linux
-      compiler: clang-5.0
+      compiler: clang-7
       addons:
         apt:
           sources:
@@ -49,7 +49,7 @@ install:
   - pip3 install --user meson
 
 script:
-  - meson -Db_coverage=true build
+  - meson -Db_coverage=true -Db_sanitize=address,memory build
   - ninja -C build
   - ninja -C build test
 

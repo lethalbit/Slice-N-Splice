@@ -2097,8 +2097,8 @@ public:
 		{ /* NOP */ }
 
 	elf_t(fs::path file, bool readonly = true) noexcept :
-		_file{file}, _file_fd{_file.c_str(), ((readonly) ? O_RDONLY : O_RDWR)},
-		_file_map{_file_fd.map(PROT_READ | ((readonly) ? PROT_WRITE : 0) )},
+		_file{file}, _file_fd{_file.c_str(), O_RDONLY},
+		_file_map{_file_fd.map(PROT_READ)},
 		_header{_file_map.at<ehdr_t>(0)}, _pheaders{}, _sheaders{} {
 
 		if(_header.phnum() > 0)
