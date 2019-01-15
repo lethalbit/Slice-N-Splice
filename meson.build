@@ -18,7 +18,7 @@ endif
 
 deps = [
 	dependency('zlib', required: true),
-	dependency('ncursesw', required: true, version: '>=6.1.20180127'),
+	dependency('ncursesw', required: true, version: '>=6.0.20160213'),
 	cxx.find_library('libstdc++fs', required: true)
 ]
 
