@@ -28,13 +28,13 @@ matrix:
             - llvm-toolchain-trusty-7
           packages:
             - g++-8
-            - clang-7.0
+            - clang-7
             - python3
             - python3-pip
             - python3-setuptools
 
       env:
-        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0 && GCOV='llvm-cov gcov'"
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7 && GCOV='llvm-cov gcov'"
 
 
 
