@@ -49,7 +49,7 @@ install:
   - pip3 install --user meson
 
 script:
-  - meson -Db_coverage=true -Db_sanitize=address,memory build
+  - meson -Db_coverage=true -Db_sanitize=address,undefined build
   - ninja -C build
   - ninja -C build test
 
