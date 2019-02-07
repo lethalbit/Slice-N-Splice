@@ -25,7 +25,7 @@ enum class test_enum : uint8_t {
 	Test3 = 255,
 };
 
-const std::array<const enum_pair_t<test_enum>, 18> test_enum_s{{
+const std::array<const enum_pair_t<test_enum>, 4> test_enum_s{{
 	{ test_enum::None,  "None"  },
 	{ test_enum::Test1, "Test1" },
 	{ test_enum::Test2, "Test2" },
