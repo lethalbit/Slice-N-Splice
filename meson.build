@@ -45,10 +45,12 @@ install_man('doc/sns.1')
 
 test_srcs = [
 	'src/tests/test-main.cc',
+	'src/tests/test-cli.cc',
 	'src/tests/test-elf.cc',
 	'src/tests/test-macho.cc',
 	'src/tests/test-pe.cc',
 	'src/tests/test-coff.cc',
+	'src/tests/test-zlib.cc',
 ]
 
 catch_harness = executable(
