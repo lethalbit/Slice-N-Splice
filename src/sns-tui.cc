@@ -2,6 +2,8 @@
 #include <elf.hh>
 #include <zlib.hh>
 
+#include <sns-tui.hh>
+
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
