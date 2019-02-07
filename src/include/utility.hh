@@ -407,9 +407,15 @@ operator^=(F& lh, F rh) {
 }
 
 
+/* IEC Units*/
 constexpr uint64_t operator ""_KiB(const unsigned long long value) noexcept { return uint64_t(value) * 1024; }
 constexpr uint64_t operator ""_MiB(const unsigned long long value) noexcept { return uint64_t(value) * 1048576; }
+constexpr uint64_t operator ""_GiB(const unsigned long long value) noexcept { return uint64_t(value) * 1073741824; }
 
+/* SI Units */
+constexpr uint64_t operator ""_KB(const unsigned long long value) noexcept { return uint64_t(value) * 1000; }
+constexpr uint64_t operator ""_MB(const unsigned long long value) noexcept { return uint64_t(value) * 1000000; }
+constexpr uint64_t operator ""_GB(const unsigned long long value) noexcept { return uint64_t(value) * 1000000000; }
 
 /* enum <-> string mapping */
 
@@ -419,13 +425,6 @@ struct enum_pair_t final {
 	using value_type = T;
 	T _value;
 	const char* _name;
-	// constexpr enum_pair_t() noexcept :
-	// 	_value{}, _name{""} { /* NOP */ }
-
-	// enum_pair_t(T value, const char* name) noexcept :
-	// 	_value{value}, _name{name} { /* NOP */ }
-
-	// enum_pair_t(std::initializer_list<T>)
 
 	void value(const T value) noexcept { _value = value; }
 	T value() const noexcept { return _value; }
@@ -460,21 +459,5 @@ typename Map::value_type::value_type enum_value(Map m, const std::string& n) noe
 		pos->value() :
 		static_cast<typename Map::value_type::value_type>(0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif /* __SNS_UTILITY_HH__ */

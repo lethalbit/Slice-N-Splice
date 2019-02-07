@@ -46,18 +46,4 @@ TEST_CASE( "ELF File Test", "[elf]" ) {
 	REQUIRE(self.header().phnum() == self.pheaders().length());
 
 	REQUIRE(self.header().shnum() == self.sheaders().length());
-
-	for (auto& shdr :  self.sheaders()) {
-		printf("%s\n", self.section_name(shdr.name()).c_str());
-		printf("         Type: %s\n", enum_name(elf_shtype_s, shdr.type()).c_str());
-		printf("        Flags: %X\n", shdr.flags());
-		printf("      Address: 0x%016lX\n", shdr.addr());
-		printf("       Offset: 0x%016lX\n", shdr.offset());
-		printf("         Size: %016lX\n", shdr.size());
-		printf("         Link: %016lX\n", shdr.link());
-		printf("         Info: %lX\n", shdr.info());
-		printf("   Addr Align: %lX\n", shdr.addraline());
-		printf("     Ent Size: %lX\n", shdr.entsize());
-	}
-
 }
