@@ -3,7 +3,6 @@
 #if !defined(__SNS_ELF_HH__)
 #define __SNS_ELF_HH__
 
-#include <cassert>
 #include <cstdint>
 #include <cstring>
 #include <memory>
@@ -15,7 +14,6 @@ namespace fs = std::experimental::filesystem;
 
 #include <utility.hh>
 #include <zlib.hh>
-
 
 /* Basic types used to composite the larger types */
 
@@ -1029,32 +1027,29 @@ extern std::ostream& operator<<(std::ostream& out, const elf_note_type_t& notety
 /* ELF Magic */
 struct elf_magic_t final {
 private:
-	uint8_t magic1; /* Should be 0x7F*/
-	uint8_t magic2; /* Should be 'E' */
-	uint8_t magic3; /* Should be 'L' */
-	uint8_t magic4; /* Should be 'F' */
+	uint8_t _magic1; /* Should be 0x7F*/
+	uint8_t _magic2; /* Should be 'E' */
+	uint8_t _magic3; /* Should be 'L' */
+	uint8_t _magic4; /* Should be 'F' */
 public:
 	constexpr elf_magic_t() noexcept :
-		magic1{}, magic2{}, magic3{}, magic4{}
+		_magic1{}, _magic2{}, _magic3{}, _magic4{}
 		{ /* NOP */ }
 
-	bool is_valid() noexcept {
-		if(magic1 != 0x7F) return false;
-		if(magic2 != 0x45) return false;
-		if(magic3 != 0x4C) return false;
-		if(magic4 != 0x46) return false;
-		return true;
+	bool is_valid() const noexcept {
+		return (_magic1 == 0x7F && _magic2 == 0x45
+			 && _magic3 == 0x4C && _magic4 == 0x46);
 	}
 
 	void set() noexcept {
-		magic1 = 0x7F;
-		magic2 = 0x45;
-		magic3 = 0x4C;
-		magic4 = 0x46;
+		_magic1 = 0x7F;
+		_magic2 = 0x45;
+		_magic3 = 0x4C;
+		_magic4 = 0x46;
 	}
 
 	std::array<uint8_t, 4> get() const noexcept {
-		return { magic1, magic2, magic3, magic4 };
+		return { _magic1, _magic2, _magic3, _magic4 };
 	}
 
 };
@@ -1063,7 +1058,7 @@ public:
 /* ELF Identity */
 struct elf_ident_t final {
 private:
-	elf_magic_t _magic;				 /* The ELF magic number (0x7F 'E' 'L' 'F') */
+	elf_magic_t _magic;              /* The ELF magic number (0x7F 'E' 'L' 'F') */
 	elf_class_t _eclass;             /* Class of the object file, 32 vs 64 bit */
 	elf_data_t _data;                /* The endianness of the object file */
 	elf_ident_version_t _version;    /* File version (Should be Current) */
