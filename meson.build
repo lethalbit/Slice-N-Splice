@@ -23,10 +23,11 @@ deps = [
 ]
 
 srcs = [
+	'src/cli.cc',
+	'src/coff.cc',
 	'src/elf.cc',
 	'src/macho.cc',
 	'src/pe.cc',
-	'src/coff.cc',
 	'src/zlib.cc',
 ]
 
