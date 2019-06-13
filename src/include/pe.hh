@@ -11,6 +11,8 @@
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
+#include <mmap_t.hh>
+#include <fd_t.hh>
 #include <utility.hh>
 
 #endif /* __SNS_PE_HH__ */

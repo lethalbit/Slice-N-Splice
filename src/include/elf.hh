@@ -13,6 +13,8 @@
 namespace fs = std::experimental::filesystem;
 
 #include <utility.hh>
+#include <mmap_t.hh>
+#include <fd_t.hh>
 #include <zlib.hh>
 
 /* Basic types used to composite the larger types */
