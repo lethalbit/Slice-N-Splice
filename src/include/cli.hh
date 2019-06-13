@@ -46,7 +46,6 @@ struct arg final {
 public:
 
 private:
-
 	/* The argument to look for */
 	std::string _short;
 	std::string _long;
@@ -56,7 +55,6 @@ private:
 	T _default;
 	std::function<T(const std::string)>  _parser;
 	std::function<bool()> _validate;
-
 	/* Actual Value */
 	T _value;
 	/* control value */

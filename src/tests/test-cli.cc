@@ -21,6 +21,7 @@ static const char* faux_args[] = {
 
 TEST_CASE( "command parsing", "[cli]" ) {
 	arg<bool> DoThing("t", "thing", "Does the thing", true, false);
+	arg<std::string> Quux("q", "quux", "Quux the Foo", true);
 
 
 	uint64_t parsed = ParseCli(7, faux_args);
