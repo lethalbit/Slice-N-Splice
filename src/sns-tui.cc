@@ -1,5 +1,12 @@
 #include <utility.hh>
+#include <aout.hh>
+#include <coff.hh>
+#include <ecoff.hh>
 #include <elf.hh>
+#include <os360.hh>
+#include <macho.hh>
+#include <pe.hh>
+#include <xcoff.hh>
 #include <zlib.hh>
 
 #include <sns-tui.hh>

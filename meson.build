@@ -23,11 +23,16 @@ deps = [
 ]
 
 srcs = [
+	'src/aout.cc',
 	'src/cli.cc',
 	'src/coff.cc',
+	'src/ecoff.cc',
 	'src/elf.cc',
 	'src/macho.cc',
+	'src/os360.cc',
 	'src/pe.cc',
+	'src/utility.cc',
+	'src/xcoff.cc',
 	'src/zlib.cc',
 ]
 
@@ -46,11 +51,15 @@ install_man('doc/sns.1')
 
 test_srcs = [
 	'src/tests/test-main.cc',
+
 	'src/tests/test-cli.cc',
+	'src/tests/test-coff.cc',
+	'src/tests/test-ecoff.cc',
 	'src/tests/test-elf.cc',
 	'src/tests/test-macho.cc',
+	'src/tests/test-os360.cc',
 	'src/tests/test-pe.cc',
-	'src/tests/test-coff.cc',
+	'src/tests/test-xcoff.cc',
 	'src/tests/test-zlib.cc',
 ]
 
