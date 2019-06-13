@@ -460,4 +460,10 @@ typename Map::value_type::value_type enum_value(Map m, const std::string& n) noe
 		static_cast<typename Map::value_type::value_type>(0);
 }
 
+constexpr uint16_t _sns_bswap16(const uint16_t x) noexcept;
+constexpr uint32_t _sns_bswap32(const uint32_t x) noexcept;
+constexpr uint64_t _sns_bswap64(const uint64_t x) noexcept;
+
+
+
 #endif /* __SNS_UTILITY_HH__ */
