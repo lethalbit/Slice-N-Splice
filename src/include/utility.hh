@@ -52,10 +52,17 @@
 // #define assert(expr, msg) ((void)0)
 #endif
 
-/**/
+/* SFINAE helpers */
 template<typename T1, typename T2, typename T3> using enabled_if_sv =
 	typename std::enable_if_t<std::is_same_v<T1, T2>, T3>;
 
+template<typename T1> using enabled_if_enum =
+	std::enable_if_t<std::is_enum<T1>::value, void*>;
+
+template<typename T1> using enabled_ifn_enum =
+	std::enable_if_t<!std::is_enum<T1>::value, void*>;
+
+/* Some helper types */
 
 template<typename T>
 struct fixed_iterator_t final {
