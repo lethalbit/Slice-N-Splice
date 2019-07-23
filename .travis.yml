@@ -56,4 +56,5 @@ script:
   - ninja -C build test
 
 after_success:
+  - cd build
   - codecov --gcov-exec $GCOV
