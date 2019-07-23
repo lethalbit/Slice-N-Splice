@@ -46,11 +46,12 @@ before_install:
   - unzip ninja-linux.zip -d ~/.local/bin
 
 install:
+  - pip3 install --user wheel
   - pip3 install --user meson
   - pip3 install --user codecov
 
 script:
-  - meson -Db_coverage=true -Db_sanitize=address,undefined build
+  - meson -Db_coverage=true -Db_sanitize=address build
   - ninja -C build
   - ninja -C build test
   - codecov
