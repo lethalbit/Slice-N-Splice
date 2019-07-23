@@ -5,6 +5,11 @@ codecov:
 parsers:
   gcov:
     branch_detection:
+      conditional: yes
       method: yes
       loop: yes
-      method: yes
+
+
+ignore:
+  - "third_party/.*"
+  - "src/tests/.*"
