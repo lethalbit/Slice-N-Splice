@@ -41,7 +41,7 @@ public:
 		{ return read(value.get(), valueLen); }
 
 	template<typename T, size_t N> bool read(std::array<T, N> &value, const size_t count_ = N) const noexcept {
-		const size_t count = count < N ? count : N;
+		const size_t count = count_ < N ? count_ : N;
 		bool result = true;
 		for (size_t i = 0; i < count; ++i)
 			result &= read(value[i]);
