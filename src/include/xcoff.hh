@@ -86,7 +86,7 @@ public:
 		_magic{}, _sec_num{}, _timdat{}, _symtbl{}, _sym_count{},
 		_opthdr_offset{}, _flags{} { /* NOP */ }
 
-	constexpr xcoff_hdr(uint16_t magic, uint16_t sec_num, uint32_t timdat,
+	constexpr xcoff_hdr(uint16_t magic, uint16_t sec_num, int32_t timdat,
 			offset_t symtbl, uint32_t sym_count, uint16_t opthdr_offset,
 			xcoff_hdr_flags_t flags) noexcept :
 		_magic{magic}, _sec_num{sec_num}, _timdat{timdat}, _symtbl{symtbl},
