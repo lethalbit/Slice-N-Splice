@@ -1,4 +1,10 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
 parsers:
   gcov:
     branch_detection:
+      method: yes
+      loop: yes
       method: yes
