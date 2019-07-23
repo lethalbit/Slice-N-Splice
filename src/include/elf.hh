@@ -1889,7 +1889,7 @@ public:
 	constexpr elf_nhdr_t() noexcept :
 		_name_sz{}, _desc_sz{}, _type{} { /* NOP */ }
 
-	elf_nhdr_t(word_t name_sz, word_t _desc_sz,
+	elf_nhdr_t(word_t name_sz, word_t desc_sz,
 			word_t type) noexcept :
 		_name_sz{_name_sz}, _desc_sz{desc_sz}, _type{type} { /* NOP */ }
 
@@ -2118,7 +2118,7 @@ public:
 	void pheaders(const set_t<phdr_t> pheaders) noexcept { _pheaders = pheaders; }
 	set_t<phdr_t> pheaders() const noexcept { return _pheaders; }
 
-	void sheaders(const set_t<shdr_t> pheaders) noexcept { _sheaders = sheaders; }
+	void sheaders(const set_t<shdr_t> sheaders) noexcept { _sheaders = sheaders; }
 	set_t<shdr_t> sheaders() const noexcept { return _sheaders; }
 
 	std::string section_name(const size_t index) const noexcept { return std::string(_strtbl + index); }
