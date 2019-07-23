@@ -31,7 +31,7 @@ TEST_CASE( "ELF File Test", "[elf]" ) {
 
 	REQUIRE(self.header().ident().abi_version() == 0);
 
-	REQUIRE(self.header().type() == elf_type_t::SharedObject /* Apparently? */);
+	REQUIRE(self.header().type() == elf_type_t::Executable);
 
 	REQUIRE(self.header().machine() == elf_machine_t::X86_64);
 
