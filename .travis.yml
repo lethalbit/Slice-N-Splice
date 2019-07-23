@@ -54,7 +54,6 @@ script:
   - meson -Db_coverage=true -Db_sanitize=address build
   - ninja -C build
   - ninja -C build test
-  - codecov
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -x $GCOV
+  - codecov --gcov-exec $GCOV
