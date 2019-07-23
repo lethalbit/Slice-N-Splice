@@ -1891,7 +1891,7 @@ public:
 
 	elf_nhdr_t(word_t name_sz, word_t desc_sz,
 			word_t type) noexcept :
-		_name_sz{_name_sz}, _desc_sz{desc_sz}, _type{type} { /* NOP */ }
+		_name_sz{name_sz}, _desc_sz{desc_sz}, _type{type} { /* NOP */ }
 
 	void name_sz(const word_t name_sz) noexcept { _name_sz = name_sz; }
 	word_t name_sz() const noexcept { return _name_sz; }
