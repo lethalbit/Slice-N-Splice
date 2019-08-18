@@ -11,9 +11,9 @@
 #if !defined(_OBJ_VER)
 #define _OBJ_VER 0x01
 #endif
-/* Object file OS ABI (System V if not specified) */
+/* Object file OS ABI (Linux if not specified) */
 #if !defined(_OBJ_ABI)
-#define _OBJ_ABI 0x00
+#define _OBJ_ABI 0x03
 #endif
 /* Object file ABI version */
 #if !defined(_OBJ_ABI_VER)
@@ -21,11 +21,11 @@
 #endif
 /* Object file type (none if not specified) */
 #if !defined(_OBJ_TYPE)
-#define _OBJ_TYPE 0x00
+#define _OBJ_TYPE 0x02
 #endif
 /* Object file ISA (None if not specified) */
 #if !defined(_OBJ_ISA)
-#define _OBJ_ISA 0x00
+#define _OBJ_ISA 0x3E
 #endif
 
 // #define phdr(_ph_type, _flags, _offset, _vaddr, _paddr, _fsz, _msz, )
@@ -53,7 +53,7 @@ _start:
 	/* ISA */
 	.short _OBJ_ISA
 	/* ELF Version */
-	.short 0x00, 0x00
+	.short 0x01, 0x00
 	/* Entry addr */
 	#if _OBJ_BIT == 0x02
 		/* 64-bit address */
