@@ -10,11 +10,12 @@ project(
 
 cxx = meson.get_compiler('cpp')
 
-
-
 if cxx.has_header('experimental/filesystem') == false
 	error('Unable to find C++17 header experimental/filesystem')
 endif
+
+
+mkobj = find_program('./etc/mkobj.sh', required: true)
 
 deps = [
 	dependency('zlib', required: true),
@@ -62,6 +63,27 @@ test_srcs = [
 	'src/tests/test-xcoff.cc',
 	'src/tests/test-zlib.cc',
 ]
+
+obj_srcs = [
+	'etc/test-files/aout.S',
+	'etc/test-files/coff.S',
+	'etc/test-files/ecoff.S',
+	'etc/test-files/elf.S',
+	'etc/test-files/macho.S',
+	'etc/test-files/os360.S',
+	'etc/test-files/pe.S',
+	'etc/test-files/xcoff.S',
+]
+
+foreach obj_src : obj_srcs
+	custom_target(
+		'@0@'.format(obj_src.underscorify()),
+		input: obj_src,
+		output: '@BASENAME@',
+		command: [mkobj, '@INPUT@', './test-objs/@OUTPUT@'],
+		build_by_default: true
+	)
+endforeach
 
 catch_harness = executable(
 	'sns-test',

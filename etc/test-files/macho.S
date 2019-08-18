@@ -1,0 +1,12 @@
+/* Funny thing about Mach-O, the header is expected to be in Big-endian  */
+.section .text
+.global _start
+_start:
+	/* MAGIC */
+	.byte 0xFE, 0xED, 0xFA, 0xCE
+	/* CPU_TYPE */
+	.byte 0x00, 0x00, 0x00, 0x12
+	/* CPU_SUBTYPE */
+	.byte 0x00, 0x00, 0x00, 0x64
+	/* FILE_TYPE */
+	.byte 0x00, 0x00, 0x00, 0x04
