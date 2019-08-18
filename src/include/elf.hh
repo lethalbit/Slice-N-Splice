@@ -73,7 +73,7 @@ extern std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& id
 
 /* ELF Operating System ABI */
 enum class elf_osabi_t : uint8_t {
-	None,
+	SystemV,
 	HPUX,
 	NetBSD,
 	Linux,
@@ -2088,29 +2088,39 @@ private:
 	set_t<phdr_t> _pheaders; /* Program Headers */
 	set_t<shdr_t> _sheaders; /* Section Headers */
 	char* _strtbl;           /* Section name string table */
+
+	bool _constructed;
 public:
 	constexpr elf_t() noexcept :
-		_file{}, _file_fd{}, _file_map{}, _header{}, _pheaders{}, _sheaders{}
-		{ /* NOP */ }
+		_file{}, _file_fd{}, _file_map{}, _header{}, _pheaders{}, _sheaders{},
+		_constructed{true} { /* NOP */ }
 
 	elf_t(fs::path file, bool readonly = true) noexcept :
 		_file{file}, _file_fd{_file.c_str(), O_RDONLY},
 		_file_map{_file_fd.map(PROT_READ)},
-		_header{_file_map.at<ehdr_t>(0)}, _pheaders{}, _sheaders{} {
+		_header{}, _pheaders{}, _sheaders{}, _constructed{true} {
 
-		if(_header.phnum() > 0)
-			_pheaders = {&_file_map.at<phdr_t>(_header.phoff()), _header.phnum()};
+		if(!_file_map.valid()) {
+			_constructed = false;
+			return;
+		} else {
+			_header = _file_map.at<ehdr_t>(0);
+
+			if(_header.phnum() > 0)
+				_pheaders = {&_file_map.at<phdr_t>(_header.phoff()), _header.phnum()};
 
 
-		if(_header.shnum() > 0)
-			_sheaders = {&_file_map.at<shdr_t>(_header.shoff()), _header.shnum()};
+			if(_header.shnum() > 0) {
+				_sheaders = {&_file_map.at<shdr_t>(_header.shoff()), _header.shnum()};
+				/* Map the string table */
+				_strtbl = &_file_map.at<char>((_sheaders[_header.shstrndx()]).offset());
+			}
 
-		/* Map the string table */
-		_strtbl = &_file_map.at<char>((_sheaders[_header.shstrndx()]).offset());
-
+		}
 	}
 
-	bool is_valid() const noexcept { return _header.ident().magic().is_valid(); }
+	bool valid() const noexcept { return _constructed; }
+	bool elf_valid() const noexcept { return _header.ident().magic().is_valid(); }
 
 	void header(const ehdr_t header) noexcept { _header = header; }
 	ehdr_t header() const noexcept { return _header; }

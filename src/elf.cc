@@ -44,7 +44,7 @@ std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& ident_ver
 
 
 const std::array<const enum_pair_t<elf_osabi_t>, 18> elf_osabi_s{{
-	{ elf_osabi_t::None,          "None"          },
+	{ elf_osabi_t::SystemV,       "SystemV"       },
 	{ elf_osabi_t::HPUX,          "HPUX"          },
 	{ elf_osabi_t::NetBSD,        "NetBSD"        },
 	{ elf_osabi_t::Linux,         "Linux"         },
