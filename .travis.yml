@@ -87,4 +87,4 @@ script:
 
 after_success:
   - cd build
-  - codecov --gcov-exec $GCOV
+  - codecov --gcov-exec "$GCOV"
