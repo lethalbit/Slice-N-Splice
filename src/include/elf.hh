@@ -91,9 +91,7 @@ enum class elf_osabi_t : uint8_t {
 	AmigaROS      = 0x0F,
 	FenixOS       = 0x10,
 	OpenVOS       = 0x11,
-	ArmEABI = 64,
-	ARM = 97,
-	Standalone = 255,
+	Standalone    = 0xFF,
 };
 extern const std::array<const enum_pair_t<elf_osabi_t>, 18> elf_osabi_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_osabi_t& abi);
