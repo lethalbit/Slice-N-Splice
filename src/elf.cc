@@ -43,25 +43,28 @@ std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& ident_ver
 }
 
 
-const std::array<const enum_pair_t<elf_osabi_t>, 18> elf_osabi_s{{
-	{ elf_osabi_t::SystemV,       "SystemV"       },
-	{ elf_osabi_t::HPUX,          "HPUX"          },
-	{ elf_osabi_t::NetBSD,        "NetBSD"        },
-	{ elf_osabi_t::Linux,         "Linux"         },
-	{ elf_osabi_t::GNUMach,       "GNUMach"       },
-	{ elf_osabi_t::IA32,          "IA32"          },
-	{ elf_osabi_t::Solaris,       "Solaris"       },
-	{ elf_osabi_t::AIX,           "AIX"           },
-	{ elf_osabi_t::IRIX,          "IRIX"          },
-	{ elf_osabi_t::FreeBSD,       "FreeBSD"       },
-	{ elf_osabi_t::TRU64,         "TRU64"         },
-	{ elf_osabi_t::Modesto,       "Modesto"       },
-	{ elf_osabi_t::OpenBSD,       "OpenBSD"       },
-	{ elf_osabi_t::OpenVMS,       "OpenVMS"       },
-	{ elf_osabi_t::NonStopKernel, "NonStopKernel" },
-	{ elf_osabi_t::ArmEABI,       "Arm  EABI"     },
-	{ elf_osabi_t::ARM,           "ARM"           },
-	{ elf_osabi_t::Standalone,    "Standalone"    },
+const std::array<const enum_pair_t<elf_osabi_t>, 21> elf_osabi_s{{
+	{ elf_osabi_t::SystemV,       "SystemV"           },
+	{ elf_osabi_t::HPUX,          "HPUX"              },
+	{ elf_osabi_t::NetBSD,        "NetBSD"            },
+	{ elf_osabi_t::Linux,         "Linux"             },
+	{ elf_osabi_t::GNUMach,       "GNUMach"           },
+	{ elf_osabi_t::IA32,          "IA32"              },
+	{ elf_osabi_t::Solaris,       "Solaris"           },
+	{ elf_osabi_t::AIX,           "AIX"               },
+	{ elf_osabi_t::IRIX,          "IRIX"              },
+	{ elf_osabi_t::FreeBSD,       "FreeBSD"           },
+	{ elf_osabi_t::TRU64,         "TRU64"             },
+	{ elf_osabi_t::Modesto,       "Modesto"           },
+	{ elf_osabi_t::OpenBSD,       "OpenBSD"           },
+	{ elf_osabi_t::OpenVMS,       "OpenVMS"           },
+	{ elf_osabi_t::NonStopKernel, "NonStopKernel"     },
+	{ elf_osabi_t::AmigaROS,      "Amiga Research OS" },
+	{ elf_osabi_t::FenixOS,       "FenixOS"           },
+	{ elf_osabi_t::OpenVOS,       "OpenVOS"           },
+	{ elf_osabi_t::ArmEABI,       "Arm  EABI"         },
+	{ elf_osabi_t::ARM,           "ARM"               },
+	{ elf_osabi_t::Standalone,    "Standalone"        },
 }};
 std::ostream& operator<<(std::ostream& out, const elf_osabi_t& abi) {
 	return (out << enum_name(elf_osabi_s, abi));

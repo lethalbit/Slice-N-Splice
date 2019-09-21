@@ -73,21 +73,24 @@ extern std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& id
 
 /* ELF Operating System ABI */
 enum class elf_osabi_t : uint8_t {
-	SystemV,
-	HPUX,
-	NetBSD,
-	Linux,
-	GNUMach, /* IA64 Supplemented */
-	IA32,    /* IA64 Supplemented */
-	Solaris,
-	AIX,
-	IRIX,
-	FreeBSD,
-	TRU64,
-	Modesto,
-	OpenBSD,
-	OpenVMS,
-	NonStopKernel,
+	SystemV       = 0x00,
+	HPUX          = 0x01,
+	NetBSD        = 0x02,
+	Linux         = 0x03,
+	GNUMach       = 0x04, /* IA64 Supplemented */
+	IA32          = 0x05,    /* IA64 Supplemented */
+	Solaris       = 0x06,
+	AIX           = 0x07,
+	IRIX          = 0x08,
+	FreeBSD       = 0x09,
+	TRU64         = 0x0A,
+	Modesto       = 0x0B,
+	OpenBSD       = 0x0C,
+	OpenVMS       = 0x0D,
+	NonStopKernel = 0x0E,
+	AmigaROS      = 0x0F,
+	FenixOS       = 0x10,
+	OpenVOS       = 0x11,
 	ArmEABI = 64,
 	ARM = 97,
 	Standalone = 255,
@@ -107,17 +110,17 @@ extern std::ostream& operator<<(std::ostream& out, const elf_version_t& version)
 
 /* ELF Object type */
 enum class ALIGN(0x02) elf_type_t : uint16_t {
-	None = 0x0000,
-	Relocatable,
-	Executable,
-	SharedObject,
-	CoreFile,
-	LOW_OS = 0xFE00,
+	None         = 0x0000,
+	Relocatable  = 0x0001,
+	Executable   = 0x0002,
+	SharedObject = 0x0003,
+	CoreFile     = 0x0004,
+	LOW_OS       = 0xFE00,
 	/* Operating System Specific */
-	HIGH_OS = 0xFEFF,
-	LOW_PROC = 0xFF00,
+	HIGH_OS      = 0xFEFF,
+	LOW_PROC     = 0xFF00,
 	/* Processor Specific */
-	HIGH_PROC = 0xFFFF
+	HIGH_PROC    = 0xFFFF
 };
 extern const std::array<const enum_pair_t<elf_type_t>, 9> elf_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_type_t& type);
