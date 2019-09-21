@@ -45,13 +45,6 @@
 #define LOG(...)
 #endif
 
-#if !defined(NDEBUG)
-
-
-#else
-// #define assert(expr, msg) ((void)0)
-#endif
-
 /* SFINAE helpers */
 template<typename T1, typename T2, typename T3> using enabled_if_sv =
 	typename std::enable_if_t<std::is_same_v<T1, T2>, T3>;
@@ -183,11 +176,6 @@ public:
 		std::swap(_data, set._data);
 		std::swap(_size, set._size);
 	}
-
-
-	// set_t(const set_t&) = delete;
-	// set_t& operator=(const set_t&) = delete;
-
 };
 
 /* Enum bitmasks */
