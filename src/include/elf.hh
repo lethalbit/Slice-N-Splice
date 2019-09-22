@@ -323,7 +323,7 @@ extern std::ostream& operator<<(std::ostream& out, const elf_machine_t& machine)
 
 /* ELF Header Flags */
 enum class elf_flag_t : uint32_t {
-	None,
+	None              = 0x00000000,
 	/* ARM Processor Supplement */
 	ARM_HasEntry      = 0x00000002,
 	ARM_SymsAreSrtd   = 0x00000004,
