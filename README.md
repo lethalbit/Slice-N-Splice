@@ -1,4 +1,4 @@
-# Slice 'N Splice [![Build Status](https://travis-ci.org/lethalbit/Slice-N-Splice.svg?branch=master)](https://travis-ci.org/lethalbit/Slice-N-Splice) [![codecov](https://codecov.io/gh/lethalbit/Slice-N-Splice/branch/master/graph/badge.svg)](https://codecov.io/gh/lethalbit/Slice-N-Splice)[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/lethalbit/Slice-N-Splice.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/lethalbit/Slice-N-Splice/context:cpp)
+# Slice 'N Splice [![Build Status](https://travis-ci.org/lethalbit/Slice-N-Splice.svg?branch=master)](https://travis-ci.org/lethalbit/Slice-N-Splice) [![codecov](https://codecov.io/gh/lethalbit/Slice-N-Splice/branch/master/graph/badge.svg)](https://codecov.io/gh/lethalbit/Slice-N-Splice) [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/lethalbit/Slice-N-Splice.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/lethalbit/Slice-N-Splice/context:cpp)
 
 
 Slice 'N Splice (SNS) is an application that encourages gross abuse of object files in all their forms, mix and match them as you please.
