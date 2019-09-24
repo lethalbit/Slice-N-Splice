@@ -81,7 +81,7 @@ install:
   - pip3 install --user codecov
 
 script:
-  - meson -Db_coverage=true -Db_sanitize=address build
+  - meson -Db_coverage=true -Db_sanitize=address,undefined build
   - ninja -C build
   - ninja -C build test
 
