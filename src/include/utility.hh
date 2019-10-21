@@ -180,7 +180,7 @@ struct EnableBitmask{
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F>::type
 operator|(F lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return static_cast<F>(
 		static_cast<utype>(lh) | static_cast<utype>(rh)
 	);
@@ -189,7 +189,7 @@ operator|(F lh, F rh) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F>::type
 operator&(F lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return static_cast<F>(
 		static_cast<utype>(lh) & static_cast<utype>(rh)
 	);
@@ -198,7 +198,7 @@ operator&(F lh, F rh) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled, F>::type
 operator~(F en) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return static_cast<F>(
 		~static_cast<utype>(en)
 	);
@@ -207,7 +207,7 @@ operator~(F en) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F>::type
 operator^(F lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return static_cast<F>(
 		static_cast<utype>(lh) ^ static_cast<utype>(rh)
 	);
@@ -216,7 +216,7 @@ operator^(F lh, F rh) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
 operator|=(F& lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) | static_cast<utype>(rh)
 	);
@@ -225,7 +225,7 @@ operator|=(F& lh, F rh) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
 operator&=(F& lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) & static_cast<utype>(rh)
 	);
@@ -234,7 +234,7 @@ operator&=(F& lh, F rh) {
 template<typename F>
 typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
 operator^=(F& lh, F rh) {
-	typedef typename std::underlying_type<F>::type utype;
+	using utype = typename std::underlying_type<F>::type;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) ^ static_cast<utype>(rh)
 	);
