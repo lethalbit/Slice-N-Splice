@@ -7,7 +7,7 @@
 #include <variant>
 #include <vector>
 
-std::vector<arg_variant> _args{};
+// std::vector<arg_variant> _args{};
 
 /* TODO: */
 uint64_t ParseCli(int argc, const char** argv, std::ostream& output) {
