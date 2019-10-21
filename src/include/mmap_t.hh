@@ -28,7 +28,8 @@ public:
 	~mmap_t() noexcept { if (fd != -1) close(fd); munmap(addr, len); }
 	void operator =(mmap_t &&file) noexcept { swap(file); }
 
-	NODSC bool valid() const noexcept  { return fd != -1 && addr; }
+	[[nodiscard]]
+	bool valid() const noexcept  { return fd != -1 && addr; }
 	void swap(mmap_t &file) noexcept {
 		std::swap(fd, file.fd);
 		std::swap(addr, file.addr);
@@ -37,7 +38,8 @@ public:
 
 	template<typename T> T *address() noexcept { return static_cast<T *>(addr); }
 	template<typename T> const T *address() const noexcept { return static_cast<T *const>(addr); }
-	NODSC off_t length() const noexcept  { return len; }
+	[[nodiscard]]
+	off_t length() const noexcept  { return len; }
 	template<typename T> T &operator [](const off_t idx) { return index<T>(idx); }
 	template<typename T> const T &operator [](const off_t idx) const { return index<const T>(idx); }
 	template<typename T> T &at(const off_t idx) { return index<T>(idx); }
