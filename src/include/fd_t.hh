@@ -26,10 +26,14 @@ public:
 	~fd_t() noexcept { if (fd != -1) close(fd); }
 	void operator =(fd_t &&file) noexcept { swap(file); }
 
-	NODSC operator int32_t() const noexcept { return fd; }
-	NODSC bool operator ==(const int32_t desc) const noexcept { return fd == desc; }
-	NODSC bool valid() const noexcept { return fd != -1; }
-	NODSC bool isEOF() const noexcept { return eof; }
+	[[nodiscard]]
+	operator int32_t() const noexcept { return fd; }
+	[[nodiscard]]
+	bool operator ==(const int32_t desc) const noexcept { return fd == desc; }
+	[[nodiscard]]
+	bool valid() const noexcept { return fd != -1; }
+	[[nodiscard]]
+	bool isEOF() const noexcept { return eof; }
 	void swap(fd_t &file) noexcept {
 		std::swap(fd, file.fd);
 		std::swap(eof, file.eof);
@@ -62,15 +66,17 @@ public:
 		return result;
 	}
 
-	NODSC bool read(void *const value, const size_t valueLen) const noexcept {
+	[[nodiscard]]
+	bool read(void *const value, const size_t valueLen) const noexcept {
 		size_t actualLen;
 		return read(value, valueLen, actualLen);
 	}
 
-	NODSC bool read(void *const value, const size_t valueLen, size_t &actualLen) const noexcept {
+	[[nodiscard]]
+	bool read(void *const value, const size_t valueLen, size_t &actualLen) const noexcept {
 		actualLen = 0;
 		if (eof)
-			return 0;
+			return false;
 		const ssize_t result = ::read(fd, value, valueLen);
 		if (result == 0 && valueLen != 0)
 			eof = true;
@@ -78,21 +84,26 @@ public:
 			actualLen = size_t(result);
 		return actualLen == valueLen;
 	}
-	ssize_t write(const void *const bufferPtr, const size_t len) const noexcept { return ::write(fd, bufferPtr, len); }
-	NODSC off_t seek(off_t offset, int32_t whence) const noexcept { return ::lseek(fd, offset, whence); }
-	NODSC off_t tell() const noexcept { return seek(0, SEEK_CUR); }
 
-	NODSC off_t length() const noexcept {
-		struct stat fileStat;
+	ssize_t write(const void *const bufferPtr, const size_t len) const noexcept { return ::write(fd, bufferPtr, len); }
+	[[nodiscard]]
+	off_t seek(off_t offset, int32_t whence) const noexcept { return ::lseek(fd, offset, whence); }
+	[[nodiscard]]
+	off_t tell() const noexcept { return seek(0, SEEK_CUR); }
+
+	[[nodiscard]]
+	off_t length() const noexcept {
+		struct stat fileStat{};
 		if (!fstat(fd, &fileStat))
 			return fileStat.st_size;
 		return 0;
 	}
 
-	NODSC mmap_t map(const int32_t prot) noexcept
-		{ return map(prot, length()); }
+	[[nodiscard]]
+	mmap_t map(const int32_t prot) noexcept { return map(prot, length()); }
 
-	NODSC mmap_t map(const int32_t prot, const off_t len) noexcept {
+	[[nodiscard]]
+	mmap_t map(const int32_t prot, const off_t len) noexcept {
 		// If we don't represent a valid file desriptor, don't return a valid mmap_t,
 		// but rather invoke it's default constructor.
 		if (!valid())
