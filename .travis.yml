@@ -1,6 +1,6 @@
 language: cpp
 sudo: false
-dist: xenial
+dist: bionic
 
 # AMD64 Builds
 matrix:
@@ -44,7 +44,7 @@ matrix:
     #     apt:
     #       sources:
     #         - ubuntu-toolchain-r-test
-    #         - llvm-toolchain-xenial-9
+    #         - llvm-toolchain-bionic-9
     #       packages:
     #         - g++-9
     #         - clang-9
@@ -62,7 +62,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-8
+            - llvm-toolchain-bionic-8
           packages:
             - g++-8
             - clang-8
@@ -80,7 +80,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-7
+            - llvm-toolchain-bionic-7
           packages:
             - g++-7
             - clang-7
