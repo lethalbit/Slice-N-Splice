@@ -38,6 +38,24 @@ matrix:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9 && GCOV=gcov-9"
 
     - os: linux
+      compiler: clang-9
+      arch: amd64
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-9
+          packages:
+            - g++-9
+            - clang-9
+            - python3
+            - python3-pip
+            - python3-setuptools
+
+      env:
+        - MATRIX_EVAL="CC=clang-9 && CXX=clang++-9 && GCOV='llvm-cov gcov'"
+
+    - os: linux
       compiler: clang-8
       arch: amd64
       addons:
