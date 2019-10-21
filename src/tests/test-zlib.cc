@@ -86,28 +86,7 @@ static char zlib_uncompressed[] = {
 static const size_t zlib_uncompressed_size = 1023;
 
 
-static void dump_hex(uint8_t* obj, size_t len) {
-	size_t idx = 0;
-	unsigned char ascii_line[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	while(idx < len) {
-		printf("0x%04X: ", idx);
-		for(int off = 0; off < 16; ++off) {
-			printf("%02X ", (ascii_line[off] = obj[idx++]));
-		}
-		printf("| ");
-		for(int off = 0; off < 16; ++off) {
-			if((unsigned)(ascii_line[off]-33) <= 90) {
-				printf("%c",ascii_line[off]);
-			} else {
-				printf(".");
-			}
-		}
-		printf("\n");
-	}
-}
-
-
-TEST_CASE( "Zlib Compression", "[zlib]" ) {
+TEST_CASE( "zlib Compression", "[zlib]" ) {
 	// zlib_t zlib{zlib_mode::deflate};
 	// uint8_t output_buffer[2_KiB]{};
 	// size_t out = zlib.transform(zlib_uncompressed, zlib_uncompressed_size, output_buffer);
@@ -117,7 +96,7 @@ TEST_CASE( "Zlib Compression", "[zlib]" ) {
 	// REQUIRE(out == zlib_uncompressed_size);
 }
 
-TEST_CASE( "Zlib Decompression", "[zlib]" ) {
+TEST_CASE( "zlib Decompression", "[zlib]" ) {
 	// zlib_t zlib{zlib_mode::inflate};
 	// uint8_t output_buffer[2_KiB]{};
 	// size_t out = zlib.transform(zlib_compressed, zlib_compressed_size, output_buffer);
