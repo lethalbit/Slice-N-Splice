@@ -20,24 +20,24 @@ namespace fs = std::experimental::filesystem;
 /* Basic types used to composite the larger types */
 
 /* 32-Bit ELF types */
-typedef /* ALIGN(0x04) */ uint32_t elf32_addr_t;
-typedef /* ALIGN(0x04) */ uint32_t elf32_off_t;
-typedef /* ALIGN(0x02) */ uint16_t elf32_half_t;
-typedef /* ALIGN(0x04) */ uint32_t elf32_word_t;
-typedef /* ALIGN(0x08) */ uint64_t elf32_xword_t;
-typedef /* ALIGN(0x04) */ int32_t  elf32_sword_t;
-typedef /* ALIGN(0x08) */ int64_t  elf32_sxword_t;
-typedef /* ALIGN(0x01) */ uint8_t  elf32_uchar_t;
+using elf32_addr_t   = /* ALIGN(0x04) */ uint32_t;
+using elf32_off_t    = /* ALIGN(0x04) */ uint32_t;
+using elf32_half_t   = /* ALIGN(0x02) */ uint16_t;
+using elf32_word_t   = /* ALIGN(0x04) */ uint32_t;
+using elf32_xword_t  = /* ALIGN(0x08) */ uint64_t;
+using elf32_sword_t  = /* ALIGN(0x04) */ int32_t;
+using elf32_sxword_t = /* ALIGN(0x08) */ int64_t;
+using elf32_uchar_t  = /* ALIGN(0x01) */ uint8_t;
 
 /* 64-Bit ELF Types */
-typedef /* ALIGN(0x08) */ uint64_t elf64_addr_t;
-typedef /* ALIGN(0x08) */ uint64_t elf64_off_t;
-typedef /* ALIGN(0x02) */ uint16_t elf64_half_t;
-typedef /* ALIGN(0x04) */ uint32_t elf64_word_t;
-typedef /* ALIGN(0x08) */ uint64_t elf64_xword_t;
-typedef /* ALIGN(0x04) */ int32_t  elf64_sword_t;
-typedef /* ALIGN(0x08) */ int64_t  elf64_sxword_t;
-typedef /* ALIGN(0x01) */ uint8_t  elf64_uchar_t;
+using elf64_addr_t   = /* ALIGN(0x08) */ uint64_t;
+using elf64_off_t    = /* ALIGN(0x08) */ uint64_t;
+using elf64_half_t   = /* ALIGN(0x02) */ uint16_t;
+using elf64_word_t   = /* ALIGN(0x04) */ uint32_t;
+using elf64_xword_t  = /* ALIGN(0x08) */ uint64_t;
+using elf64_sword_t  = /* ALIGN(0x04) */ int32_t;
+using elf64_sxword_t = /* ALIGN(0x08) */ int64_t;
+using elf64_uchar_t  = /* ALIGN(0x01) */ uint8_t;
 
 /* Alternative type declarations */
 struct elf_types_32_t;
@@ -45,18 +45,18 @@ struct elf_types_64_t;
 
 /* ELF Class */
 enum class elf_class_t : uint8_t {
-	None  = 0x00,
-	ELF32 = 0x01,
-	ELF64 = 0x02,
+	None  = 0x00U,
+	ELF32 = 0x01U,
+	ELF64 = 0x02U,
 };
 extern const std::array<const enum_pair_t<elf_class_t>, 3> elf_class_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_class_t& eclass);
 
 /* ELF Data encoding */
 enum class elf_data_t : uint8_t {
-	None = 0x00,
-	LSB  = 0x01,
-	MSB  = 0x02,
+	None = 0x00U,
+	LSB  = 0x01U,
+	MSB  = 0x02U,
 };
 extern const std::array<const enum_pair_t<elf_data_t>, 3> elf_data_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_data_t& data);
@@ -64,8 +64,8 @@ extern std::ostream& operator<<(std::ostream& out, const elf_data_t& data);
 
 /* ELF Ident Version */
 enum class elf_ident_version_t : uint8_t {
-	None    = 0x00,
-	Current = 0x01,
+	None    = 0x00U,
+	Current = 0x01U,
 };
 extern const std::array<const enum_pair_t<elf_ident_version_t>, 2> elf_ident_version_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& ident_version);
@@ -73,25 +73,25 @@ extern std::ostream& operator<<(std::ostream& out, const elf_ident_version_t& id
 
 /* ELF Operating System ABI */
 enum class elf_osabi_t : uint8_t {
-	SystemV       = 0x00,
-	HPUX          = 0x01,
-	NetBSD        = 0x02,
-	Linux         = 0x03,
-	GNUMach       = 0x04, /* IA64 Supplemented */
-	IA32          = 0x05,    /* IA64 Supplemented */
-	Solaris       = 0x06,
-	AIX           = 0x07,
-	IRIX          = 0x08,
-	FreeBSD       = 0x09,
-	TRU64         = 0x0A,
-	Modesto       = 0x0B,
-	OpenBSD       = 0x0C,
-	OpenVMS       = 0x0D,
-	NonStopKernel = 0x0E,
-	AmigaROS      = 0x0F,
-	FenixOS       = 0x10,
-	OpenVOS       = 0x11,
-	Standalone    = 0xFF,
+	SystemV       = 0x00U,
+	HPUX          = 0x01U,
+	NetBSD        = 0x02U,
+	Linux         = 0x03U,
+	GNUMach       = 0x04U, /* IA64 Supplemented */
+	IA32          = 0x05U,    /* IA64 Supplemented */
+	Solaris       = 0x06U,
+	AIX           = 0x07U,
+	IRIX          = 0x08U,
+	FreeBSD       = 0x09U,
+	TRU64         = 0x0AU,
+	Modesto       = 0x0BU,
+	OpenBSD       = 0x0CU,
+	OpenVMS       = 0x0DU,
+	NonStopKernel = 0x0EU,
+	AmigaROS      = 0x0FU,
+	FenixOS       = 0x10U,
+	OpenVOS       = 0x11U,
+	Standalone    = 0xFFU,
 };
 extern const std::array<const enum_pair_t<elf_osabi_t>, 19> elf_osabi_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_osabi_t& abi);
@@ -99,8 +99,8 @@ extern std::ostream& operator<<(std::ostream& out, const elf_osabi_t& abi);
 
 /* ELF Version */
 enum class elf_version_t : uint32_t {
-	None    = 0x00,
-	Current = 0x01,
+	None    = 0x00U,
+	Current = 0x01U,
 };
 extern const std::array<const enum_pair_t<elf_version_t>, 2> elf_version_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_version_t& version);
@@ -108,17 +108,17 @@ extern std::ostream& operator<<(std::ostream& out, const elf_version_t& version)
 
 /* ELF Object type */
 enum class ALIGN(0x02) elf_type_t : uint16_t {
-	None         = 0x0000,
-	Relocatable  = 0x0001,
-	Executable   = 0x0002,
-	SharedObject = 0x0003,
-	CoreFile     = 0x0004,
-	LOW_OS       = 0xFE00,
+	None         = 0x0000U,
+	Relocatable  = 0x0001U,
+	Executable   = 0x0002U,
+	SharedObject = 0x0003U,
+	CoreFile     = 0x0004U,
+	LOW_OS       = 0xFE00U,
 	/* Operating System Specific */
-	HIGH_OS      = 0xFEFF,
-	LOW_PROC     = 0xFF00,
+	HIGH_OS      = 0xFEFFU,
+	LOW_PROC     = 0xFF00U,
 	/* Processor Specific */
-	HIGH_PROC    = 0xFFFF
+	HIGH_PROC    = 0xFFFFU,
 };
 extern const std::array<const enum_pair_t<elf_type_t>, 9> elf_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_type_t& type);
@@ -126,196 +126,196 @@ extern std::ostream& operator<<(std::ostream& out, const elf_type_t& type);
 
 /* ELF Machine Types */
 enum class ALIGN(0x02) elf_machine_t : uint16_t {
-	None          = 0,     /* No machine */
-	M32           = 1,     /* AT&T WE 32100 */
-	SPARC         = 2,     /* SUN SPARC */
-	I386          = 3,     /* Intel 80386 */
-	M68K          = 4,     /* Motorola m68k family */
-	M88K          = 5,     /* Motorola m88k family */
-	IAMCU         = 6,     /* Intel MCU */
-	I860          = 7,     /* Intel 80860 */
-	MIPS          = 8,     /* MIPS R3000 big-endian */
-	S370          = 9,     /* IBM System/370 */
-	MIPS_RS3_LE   = 10,    /* MIPS R3000 little-endian */
+	None          = 0U,     /* No machine */
+	M32           = 1U,     /* AT&T WE 32100 */
+	SPARC         = 2U,     /* SUN SPARC */
+	I386          = 3U,     /* Intel 80386 */
+	M68K          = 4U,     /* Motorola m68k family */
+	M88K          = 5U,     /* Motorola m88k family */
+	IAMCU         = 6U,     /* Intel MCU */
+	I860          = 7U,     /* Intel 80860 */
+	MIPS          = 8U,     /* MIPS R3000 big-endian */
+	S370          = 9U,     /* IBM System/370 */
+	MIPS_RS3_LE   = 10U,    /* MIPS R3000 little-endian */
 	/* reserved 11-14 */
-	PARISC        = 15,    /* HPPA */
+	PARISC        = 15U,    /* HPPA */
 	/* reserved 16 */
-	VPP500        = 17,    /* Fujitsu VPP500 */
-	SPARC32PLUS   = 18,    /* Sun's "v8plus" */
-	I960          = 19,    /* Intel 80960 */
-	PPC           = 20,    /* PowerPC */
-	PPC64         = 21,    /* PowerPC 64-bit */
-	S390          = 22,    /* IBM S390 */
-	SPU           = 23,    /* IBM SPU/SPC */
+	VPP500        = 17U,    /* Fujitsu VPP500 */
+	SPARC32PLUS   = 18U,    /* Sun's "v8plus" */
+	I960          = 19U,    /* Intel 80960 */
+	PPC           = 20U,    /* PowerPC */
+	PPC64         = 21U,    /* PowerPC 64-bit */
+	S390          = 22U,    /* IBM S390 */
+	SPU           = 23U,    /* IBM SPU/SPC */
 	/* reserved 24-35 */
-	V800          = 36,    /* NEC V800 series */
-	FR20          = 37,    /* Fujitsu FR20 */
-	RH32          = 38,    /* TRW RH-32 */
-	RCE           = 39,    /* Motorola RCE */
-	ARM           = 40,    /* ARM */
-	FAKE_ALPHA    = 41,    /* Digital Alpha */
-	SH            = 42,    /* Hitachi SH */
-	SPARCV9       = 43,    /* SPARC v9 64-bit */
-	TRICORE       = 44,    /* Siemens Tricore */
-	ARC           = 45,    /* Argonaut RISC Core */
-	H8_300        = 46,    /* Hitachi H8/300 */
-	H8_300H       = 47,    /* Hitachi H8/300H */
-	H8S           = 48,    /* Hitachi H8S */
-	H8_500        = 49,    /* Hitachi H8/500 */
-	IA_64         = 50,    /* Intel Merced */
-	MIPS_X        = 51,    /* Stanford MIPS-X */
-	COLDFIRE      = 52,    /* Motorola Coldfire */
-	M68HC12       = 53,    /* Motorola M68HC12 */
-	MMA           = 54,    /* Fujitsu MMA Multimedia Accelerator */
-	PCP           = 55,    /* Siemens PCP */
-	NCPU          = 56,    /* Sony nCPU embeeded RISC */
-	NDR1          = 57,    /* Denso NDR1 microprocessor */
-	STARCORE      = 58,    /* Motorola Start*Core processor */
-	ME16          = 59,    /* Toyota ME16 processor */
-	ST100         = 60,    /* STMicroelectronic ST100 processor */
-	TINYJ         = 61,    /* Advanced Logic Corp. Tinyj emb.fam */
-	X86_64        = 62,    /* AMD x86-64 architecture */
-	PDSP          = 63,    /* Sony DSP Processor */
-	PDP10         = 64,    /* Digital PDP-10 */
-	PDP11         = 65,    /* Digital PDP-11 */
-	FX66          = 66,    /* Siemens FX66 microcontroller */
-	ST9PLUS       = 67,    /* STMicroelectronics ST9+ 8/16 mc */
-	ST7           = 68,    /* STmicroelectronics ST7 8 bit mc */
-	M68HC16       = 69,    /* Motorola MC68HC16 microcontroller */
-	M68HC11       = 70,    /* Motorola MC68HC11 microcontroller */
-	M68HC08       = 71,    /* Motorola MC68HC08 microcontroller */
-	M68HC05       = 72,    /* Motorola MC68HC05 microcontroller */
-	SVX           = 73,    /* Silicon Graphics SVx */
-	ST19          = 74,    /* STMicroelectronics ST19 8 bit mc */
-	VAX           = 75,    /* Digital VAX */
-	CRIS          = 76,    /* Axis Communications 32-bit emb.proc */
-	JAVELIN       = 77,    /* Infineon Technologies 32-bit emb.proc */
-	FIREPATH      = 78,    /* Element 14 64-bit DSP Processor */
-	ZSP           = 79,    /* LSI Logic 16-bit DSP Processor */
-	MMIX          = 80,    /* Donald Knuth's educational 64-bit proc */
-	HUANY         = 81,    /* Harvard University machine-independent object files */
-	PRISM         = 82,    /* SiTera Prism */
-	AVR           = 83,    /* Atmel AVR 8-bit microcontroller */
-	FR30          = 84,    /* Fujitsu FR30 */
-	D10V          = 85,    /* Mitsubishi D10V */
-	D30V          = 86,    /* Mitsubishi D30V */
-	V850          = 87,    /* NEC v850 */
-	M32R          = 88,    /* Mitsubishi M32R */
-	MN10300       = 89,    /* Matsushita MN10300 */
-	MN10200       = 90,    /* Matsushita MN10200 */
-	PJ            = 91,    /* picoJava */
-	OPENRISC      = 92,    /* OpenRISC 32-bit embedded processor */
-	ARC_COMPACT   = 93,    /* ARC International ARCompact */
-	XTENSA        = 94,    /* Tensilica Xtensa Architecture */
-	VIDEOCORE     = 95,    /* Alphamosaic VideoCore */
-	TMM_GPP       = 96,    /* Thompson Multimedia General Purpose Proc */
-	NS32K         = 97,    /* National Semi. 32000 */
-	TPC           = 98,    /* Tenor Network TPC */
-	SNP1K         = 99,    /* Trebia SNP 1000 */
-	ST200         = 100,   /* STMicroelectronics ST200 */
-	IP2K          = 101,   /* Ubicom IP2xxx */
-	MAX           = 102,   /* MAX processor */
-	CR            = 103,   /* National Semi. CompactRISC */
-	F2MC16        = 104,   /* Fujitsu F2MC16 */
-	MSP430        = 105,   /* Texas Instruments msp430 */
-	BLACKFIN      = 106,   /* Analog Devices Blackfin DSP */
-	SE_C33        = 107,   /* Seiko Epson S1C33 family */
-	SEP           = 108,   /* Sharp embedded microprocessor */
-	ARCA          = 109,   /* Arca RISC */
-	UNICORE       = 110,   /* PKU-Unity & MPRC Peking Uni. mc series */
-	EXCESS        = 111,   /* eXcess configurable cpu */
-	DXP           = 112,   /* Icera Semi. Deep Execution Processor */
-	ALTERA_NIOS2  = 113,   /* Altera Nios II */
-	CRX           = 114,   /* National Semi. CompactRISC CRX */
-	XGATE         = 115,   /* Motorola XGATE */
-	C166          = 116,   /* Infineon C16x/XC16x */
-	M16C          = 117,   /* Renesas M16C */
-	DSPIC30F      = 118,   /* Microchip Technology dsPIC30F */
-	CE            = 119,   /* Freescale Communication Engine RISC */
-	M32C          = 120,   /* Renesas M32C */
+	V800          = 36U,    /* NEC V800 series */
+	FR20          = 37U,    /* Fujitsu FR20 */
+	RH32          = 38U,    /* TRW RH-32 */
+	RCE           = 39U,    /* Motorola RCE */
+	ARM           = 40U,    /* ARM */
+	FAKE_ALPHA    = 41U,    /* Digital Alpha */
+	SH            = 42U,    /* Hitachi SH */
+	SPARCV9       = 43U,    /* SPARC v9 64-bit */
+	TRICORE       = 44U,    /* Siemens Tricore */
+	ARC           = 45U,    /* Argonaut RISC Core */
+	H8_300        = 46U,    /* Hitachi H8/300 */
+	H8_300H       = 47U,    /* Hitachi H8/300H */
+	H8S           = 48U,    /* Hitachi H8S */
+	H8_500        = 49U,    /* Hitachi H8/500 */
+	IA_64         = 50U,    /* Intel Merced */
+	MIPS_X        = 51U,    /* Stanford MIPS-X */
+	COLDFIRE      = 52U,    /* Motorola Coldfire */
+	M68HC12       = 53U,    /* Motorola M68HC12 */
+	MMA           = 54U,    /* Fujitsu MMA Multimedia Accelerator */
+	PCP           = 55U,    /* Siemens PCP */
+	NCPU          = 56U,    /* Sony nCPU embeeded RISC */
+	NDR1          = 57U,    /* Denso NDR1 microprocessor */
+	STARCORE      = 58U,    /* Motorola Start*Core processor */
+	ME16          = 59U,    /* Toyota ME16 processor */
+	ST100         = 60U,    /* STMicroelectronic ST100 processor */
+	TINYJ         = 61U,    /* Advanced Logic Corp. Tinyj emb.fam */
+	X86_64        = 62U,    /* AMD x86-64 architecture */
+	PDSP          = 63U,    /* Sony DSP Processor */
+	PDP10         = 64U,    /* Digital PDP-10 */
+	PDP11         = 65U,    /* Digital PDP-11 */
+	FX66          = 66U,    /* Siemens FX66 microcontroller */
+	ST9PLUS       = 67U,    /* STMicroelectronics ST9+ 8/16 mc */
+	ST7           = 68U,    /* STmicroelectronics ST7 8 bit mc */
+	M68HC16       = 69U,    /* Motorola MC68HC16 microcontroller */
+	M68HC11       = 70U,    /* Motorola MC68HC11 microcontroller */
+	M68HC08       = 71U,    /* Motorola MC68HC08 microcontroller */
+	M68HC05       = 72U,    /* Motorola MC68HC05 microcontroller */
+	SVX           = 73U,    /* Silicon Graphics SVx */
+	ST19          = 74U,    /* STMicroelectronics ST19 8 bit mc */
+	VAX           = 75U,    /* Digital VAX */
+	CRIS          = 76U,    /* Axis Communications 32-bit emb.proc */
+	JAVELIN       = 77U,    /* Infineon Technologies 32-bit emb.proc */
+	FIREPATH      = 78U,    /* Element 14 64-bit DSP Processor */
+	ZSP           = 79U,    /* LSI Logic 16-bit DSP Processor */
+	MMIX          = 80U,    /* Donald Knuth's educational 64-bit proc */
+	HUANY         = 81U,    /* Harvard University machine-independent object files */
+	PRISM         = 82U,    /* SiTera Prism */
+	AVR           = 83U,    /* Atmel AVR 8-bit microcontroller */
+	FR30          = 84U,    /* Fujitsu FR30 */
+	D10V          = 85U,    /* Mitsubishi D10V */
+	D30V          = 86U,    /* Mitsubishi D30V */
+	V850          = 87U,    /* NEC v850 */
+	M32R          = 88U,    /* Mitsubishi M32R */
+	MN10300       = 89U,    /* Matsushita MN10300 */
+	MN10200       = 90U,    /* Matsushita MN10200 */
+	PJ            = 91U,    /* picoJava */
+	OPENRISC      = 92U,    /* OpenRISC 32-bit embedded processor */
+	ARC_COMPACT   = 93U,    /* ARC International ARCompact */
+	XTENSA        = 94U,    /* Tensilica Xtensa Architecture */
+	VIDEOCORE     = 95U,    /* Alphamosaic VideoCore */
+	TMM_GPP       = 96U,    /* Thompson Multimedia General Purpose Proc */
+	NS32K         = 97U,    /* National Semi. 32000 */
+	TPC           = 98U,    /* Tenor Network TPC */
+	SNP1K         = 99U,    /* Trebia SNP 1000 */
+	ST200         = 100U,   /* STMicroelectronics ST200 */
+	IP2K          = 101U,   /* Ubicom IP2xxx */
+	MAX           = 102U,   /* MAX processor */
+	CR            = 103U,   /* National Semi. CompactRISC */
+	F2MC16        = 104U,   /* Fujitsu F2MC16 */
+	MSP430        = 105U,   /* Texas Instruments msp430 */
+	BLACKFIN      = 106U,   /* Analog Devices Blackfin DSP */
+	SE_C33        = 107U,   /* Seiko Epson S1C33 family */
+	SEP           = 108U,   /* Sharp embedded microprocessor */
+	ARCA          = 109U,   /* Arca RISC */
+	UNICORE       = 110U,   /* PKU-Unity & MPRC Peking Uni. mc series */
+	EXCESS        = 111U,   /* eXcess configurable cpu */
+	DXP           = 112U,   /* Icera Semi. Deep Execution Processor */
+	ALTERA_NIOS2  = 113U,   /* Altera Nios II */
+	CRX           = 114U,   /* National Semi. CompactRISC CRX */
+	XGATE         = 115U,   /* Motorola XGATE */
+	C166          = 116U,   /* Infineon C16x/XC16x */
+	M16C          = 117U,   /* Renesas M16C */
+	DSPIC30F      = 118U,   /* Microchip Technology dsPIC30F */
+	CE            = 119U,   /* Freescale Communication Engine RISC */
+	M32C          = 120U,   /* Renesas M32C */
 	/* reserved 121-130 */
-	TSK3000       = 131,   /* Altium TSK3000 */
-	RS08          = 132,   /* Freescale RS08 */
-	SHARC         = 133,   /* Analog Devices SHARC family */
-	ECOG2         = 134,   /* Cyan Technology eCOG2 */
-	SCORE7        = 135,   /* Sunplus S+core7 RISC */
-	DSP24         = 136,   /* New Japan Radio (NJR) 24-bit DSP */
-	VIDEOCORE3    = 137,   /* Broadcom VideoCore III */
-	LATTICEMICO32 = 138,   /* RISC for Lattice FPGA */
-	SE_C17        = 139,   /* Seiko Epson C17 */
-	TI_C6000      = 140,   /* Texas Instruments TMS320C6000 DSP */
-	TI_C2000      = 141,   /* Texas Instruments TMS320C2000 DSP */
-	TI_C5500      = 142,   /* Texas Instruments TMS320C55x DSP */
-	TI_ARP32      = 143,   /* Texas Instruments App. Specific RISC */
-	TI_PRU        = 144,   /* Texas Instruments Prog. Realtime Unit */
+	TSK3000       = 131U,   /* Altium TSK3000 */
+	RS08          = 132U,   /* Freescale RS08 */
+	SHARC         = 133U,   /* Analog Devices SHARC family */
+	ECOG2         = 134U,   /* Cyan Technology eCOG2 */
+	SCORE7        = 135U,   /* Sunplus S+core7 RISC */
+	DSP24         = 136U,   /* New Japan Radio (NJR) 24-bit DSP */
+	VIDEOCORE3    = 137U,   /* Broadcom VideoCore III */
+	LATTICEMICO32 = 138U,   /* RISC for Lattice FPGA */
+	SE_C17        = 139U,   /* Seiko Epson C17 */
+	TI_C6000      = 140U,   /* Texas Instruments TMS320C6000 DSP */
+	TI_C2000      = 141U,   /* Texas Instruments TMS320C2000 DSP */
+	TI_C5500      = 142U,   /* Texas Instruments TMS320C55x DSP */
+	TI_ARP32      = 143U,   /* Texas Instruments App. Specific RISC */
+	TI_PRU        = 144U,   /* Texas Instruments Prog. Realtime Unit */
 	/* reserved 145-159 */
-	MMDSP_PLUS    = 160,   /* STMicroelectronics 64bit VLIW DSP */
-	CYPRESS_M8C   = 161,   /* Cypress M8C */
-	R32C          = 162,   /* Renesas R32C */
-	TRIMEDIA      = 163,   /* NXP Semi. TriMedia */
-	QDSP6         = 164,   /* QUALCOMM DSP6 */
-	I8051         = 165,   /* Intel 8051 and variants */
-	STXP7X        = 166,   /* STMicroelectronics STxP7x */
-	NDS32         = 167,   /* Andes Tech. compact code emb. RISC */
-	ECOG1X        = 168,   /* Cyan Technology eCOG1X */
-	MAXQ30        = 169,   /* Dallas Semi. MAXQ30 mc */
-	XIMO16        = 170,   /* New Japan Radio (NJR) 16-bit DSP */
-	MANIK         = 171,   /* M2000 Reconfigurable RISC */
-	CRAYNV2       = 172,   /* Cray NV2 vector architecture */
-	RX            = 173,   /* Renesas RX */
-	METAG         = 174,   /* Imagination Tech. META */
-	MCST_ELBRUS   = 175,   /* MCST Elbrus */
-	ECOG16        = 176,   /* Cyan Technology eCOG16 */
-	CR16          = 177,   /* National Semi. CompactRISC CR16 */
-	ETPU          = 178,   /* Freescale Extended Time Processing Unit */
-	SLE9X         = 179,   /* Infineon Tech. SLE9X */
-	L10M          = 180,   /* Intel L10M */
-	K10M          = 181,   /* Intel K10M */
+	MMDSP_PLUS    = 160U,   /* STMicroelectronics 64bit VLIW DSP */
+	CYPRESS_M8C   = 161U,   /* Cypress M8C */
+	R32C          = 162U,   /* Renesas R32C */
+	TRIMEDIA      = 163U,   /* NXP Semi. TriMedia */
+	QDSP6         = 164U,   /* QUALCOMM DSP6 */
+	I8051         = 165U,   /* Intel 8051 and variants */
+	STXP7X        = 166U,   /* STMicroelectronics STxP7x */
+	NDS32         = 167U,   /* Andes Tech. compact code emb. RISC */
+	ECOG1X        = 168U,   /* Cyan Technology eCOG1X */
+	MAXQ30        = 169U,   /* Dallas Semi. MAXQ30 mc */
+	XIMO16        = 170U,   /* New Japan Radio (NJR) 16-bit DSP */
+	MANIK         = 171U,   /* M2000 Reconfigurable RISC */
+	CRAYNV2       = 172U,   /* Cray NV2 vector architecture */
+	RX            = 173U,   /* Renesas RX */
+	METAG         = 174U,   /* Imagination Tech. META */
+	MCST_ELBRUS   = 175U,   /* MCST Elbrus */
+	ECOG16        = 176U,   /* Cyan Technology eCOG16 */
+	CR16          = 177U,   /* National Semi. CompactRISC CR16 */
+	ETPU          = 178U,   /* Freescale Extended Time Processing Unit */
+	SLE9X         = 179U,   /* Infineon Tech. SLE9X */
+	L10M          = 180U,   /* Intel L10M */
+	K10M          = 181U,   /* Intel K10M */
 	/* reserved 182 */
-	AARCH64       = 183,   /* ARM AARCH64 */
+	AARCH64       = 183U,   /* ARM AARCH64 */
 	/* reserved 184 */
-	AVR32         = 185,   /* Amtel 32-bit microprocessor */
-	STM8          = 186,   /* STMicroelectronics STM8 */
-	TILE64        = 187,   /* Tileta TILE64 */
-	TILEPRO       = 188,   /* Tilera TILEPro */
-	MICROBLAZE    = 189,   /* Xilinx MicroBlaze */
-	CUDA          = 190,   /* NVIDIA CUDA */
-	TILEGX        = 191,   /* Tilera TILE-Gx */
-	CLOUDSHIELD   = 192,   /* CloudShield */
-	COREA_1ST     = 193,   /* KIPO-KAIST Core-A 1st gen. */
-	COREA_2ND     = 194,   /* KIPO-KAIST Core-A 2nd gen. */
-	ARC_COMPACT2  = 195,   /* Synopsys ARCompact V2 */
-	OPEN8         = 196,   /* Open8 RISC */
-	RL78          = 197,   /* Renesas RL78 */
-	VIDEOCORE5    = 198,   /* Broadcom VideoCore V */
-	R78KOR        = 199,   /* Renesas 78KOR */
-	F56800EX      = 200,   /* Freescale 56800EX DSC */
-	BA1           = 201,   /* Beyond BA1 */
-	BA2           = 202,   /* Beyond BA2 */
-	XCORE         = 203,   /* XMOS xCORE */
-	MCHP_PIC      = 204,   /* Microchip 8-bit PIC(r) */
+	AVR32         = 185U,   /* Amtel 32-bit microprocessor */
+	STM8          = 186U,   /* STMicroelectronics STM8 */
+	TILE64        = 187U,   /* Tileta TILE64 */
+	TILEPRO       = 188U,   /* Tilera TILEPro */
+	MICROBLAZE    = 189U,   /* Xilinx MicroBlaze */
+	CUDA          = 190U,   /* NVIDIA CUDA */
+	TILEGX        = 191U,   /* Tilera TILE-Gx */
+	CLOUDSHIELD   = 192U,   /* CloudShield */
+	COREA_1ST     = 193U,   /* KIPO-KAIST Core-A 1st gen. */
+	COREA_2ND     = 194U,   /* KIPO-KAIST Core-A 2nd gen. */
+	ARC_COMPACT2  = 195U,   /* Synopsys ARCompact V2 */
+	OPEN8         = 196U,   /* Open8 RISC */
+	RL78          = 197U,   /* Renesas RL78 */
+	VIDEOCORE5    = 198U,   /* Broadcom VideoCore V */
+	R78KOR        = 199U,   /* Renesas 78KOR */
+	F56800EX      = 200U,   /* Freescale 56800EX DSC */
+	BA1           = 201U,   /* Beyond BA1 */
+	BA2           = 202U,   /* Beyond BA2 */
+	XCORE         = 203U,   /* XMOS xCORE */
+	MCHP_PIC      = 204U,   /* Microchip 8-bit PIC(r) */
 	/* reserved 205-209 */
-	KM32          = 210,   /* KM211 KM32 */
-	KMX32         = 211,   /* KM211 KMX32 */
-	EMX16         = 212,   /* KM211 KMX16 */
-	EMX8          = 213,   /* KM211 KMX8 */
-	KVARC         = 214,   /* KM211 KVARC */
-	CDP           = 215,   /* Paneve CDP */
-	COGE          = 216,   /* Cognitive Smart Memory Processor */
-	COOL          = 217,   /* Bluechip CoolEngine */
-	NORC          = 218,   /* Nanoradio Optimized RISC */
-	CSR_KALIMBA   = 219,   /* CSR Kalimba */
-	Z80           = 220,   /* Zilog Z80 */
-	VISIUM        = 221,   /* Controls and Data Services VISIUMcore */
-	FT32          = 222,   /* FTDI Chip FT32 */
-	MOXIE         = 223,   /* Moxie processor */
-	AMDGPU        = 224,   /* AMD GPU */
+	KM32          = 210U,   /* KM211 KM32 */
+	KMX32         = 211U,   /* KM211 KMX32 */
+	EMX16         = 212U,   /* KM211 KMX16 */
+	EMX8          = 213U,   /* KM211 KMX8 */
+	KVARC         = 214U,   /* KM211 KVARC */
+	CDP           = 215U,   /* Paneve CDP */
+	COGE          = 216U,   /* Cognitive Smart Memory Processor */
+	COOL          = 217U,   /* Bluechip CoolEngine */
+	NORC          = 218U,   /* Nanoradio Optimized RISC */
+	CSR_KALIMBA   = 219U,   /* CSR Kalimba */
+	Z80           = 220U,   /* Zilog Z80 */
+	VISIUM        = 221U,   /* Controls and Data Services VISIUMcore */
+	FT32          = 222U,   /* FTDI Chip FT32 */
+	MOXIE         = 223U,   /* Moxie processor */
+	AMDGPU        = 224U,   /* AMD GPU */
 	/* reserved 225-242 */
-	RISCV        = 243,    /* RISC-V */
-	BPF          = 247,    /* Linux BPF -- in-kernel virtual machine */
+	RISCV        = 243U,    /* RISC-V */
+	BPF          = 247U,    /* Linux BPF -- in-kernel virtual machine */
 	/* Unofficial */
-	BONELESS     = 0x666,  /* whitequark's Boneless-III CPU https://github.com/whitequark/Boneless-CPU */
-	ALPHA        = 0x9026, /* Digital Alpha */
+	BONELESS     = 0x666U,  /* whitequark's Boneless-III CPU https://github.com/whitequark/Boneless-CPU */
+	ALPHA        = 0x9026U, /* Digital Alpha */
 };
 extern const std::array<const enum_pair_t<elf_machine_t>, 180> elf_machine_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_machine_t& machine);
@@ -323,21 +323,21 @@ extern std::ostream& operator<<(std::ostream& out, const elf_machine_t& machine)
 
 /* ELF Header Flags */
 enum class elf_flag_t : uint32_t {
-	None              = 0x00000000,
+	None              = 0x00000000U,
 	/* ARM Processor Supplement */
-	ARM_HasEntry      = 0x00000002,
-	ARM_SymsAreSrtd   = 0x00000004,
-	ARM_DynSymsSegIdx = 0x00000008,
-	ARM_MapSymsFirst  = 0x00000010,
-	ARM_EABIMask      = 0xFF000000,
+	ARM_HasEntry      = 0x00000002U,
+	ARM_SymsAreSrtd   = 0x00000004U,
+	ARM_DynSymsSegIdx = 0x00000008U,
+	ARM_MapSymsFirst  = 0x00000010U,
+	ARM_EABIMask      = 0xFF000000U,
 
 	/* IA64 Processor Supplement */
-	IA64_ReduceDFP    = 0x00000020,
-	IA64_ConsGP       = 0x00000040,
-	IA64_Nofuncdesc   = 0x00000080,
-	IA64_Absolute     = 0x00000100,
-	IA64_MaskOS       = 0x00FF000F,
-	IA64_Arch         = 0xFF000000,
+	IA64_ReduceDFP    = 0x00000020U,
+	IA64_ConsGP       = 0x00000040U,
+	IA64_Nofuncdesc   = 0x00000080U,
+	IA64_Absolute     = 0x00000100U,
+	IA64_MaskOS       = 0x00FF000FU,
+	IA64_Arch         = 0xFF000000U,
 };
 template<>
 struct EnableBitmask<elf_flag_t>{
@@ -349,18 +349,18 @@ extern std::ostream& operator<<(std::ostream& out, const elf_flag_t& flag);
 
 /* ELF Special Section Indexes */
 enum class elf_shns_t : uint16_t {
-	Undefined   = 0x0000,
-	LowReserve  = 0xFF00,
-	LowProc     = 0xFF00,
-	Before      = 0xFF00,
-	After       = 0xFF01,
-	HighProc    = 0xFF1F,
-	LowOS       = 0xFF20,
-	HighOS      = 0xFF3F,
-	ABS         = 0xFFF1,
-	Common      = 0xFFF2,
-	XIndex      = 0xFFFF,
-	HighReserve = 0xFFFF,
+	Undefined   = 0x0000U,
+	LowReserve  = 0xFF00U,
+	LowProc     = 0xFF00U,
+	Before      = 0xFF00U,
+	After       = 0xFF01U,
+	HighProc    = 0xFF1FU,
+	LowOS       = 0xFF20U,
+	HighOS      = 0xFF3FU,
+	ABS         = 0xFFF1U,
+	Common      = 0xFFF2U,
+	XIndex      = 0xFFFFU,
+	HighReserve = 0xFFFFU,
 };
 extern const std::array<const enum_pair_t<elf_shns_t>, 12> elf_shns_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_shns_t& shns);
@@ -368,39 +368,39 @@ extern std::ostream& operator<<(std::ostream& out, const elf_shns_t& shns);
 
 /* ELF section header types */
 enum class elf_shtype_t : uint32_t {
-	Null             = 0x00000000,
-	ProgBits         = 0x00000001,
-	SymbolTable      = 0x00000002,
-	StringTable      = 0x00000003,
-	RelA             = 0x00000004,
-	HashTable        = 0x00000005,
-	Dynamic          = 0x00000006,
-	Note             = 0x00000007,
-	NoBits           = 0x00000008,
-	Rel              = 0x00000009,
-	SHLib            = 0x0000000A,
-	DynamicSymbols   = 0x0000000B,
-	InitArray        = 0x0000000E,
-	FiniArray        = 0x0000000F,
-	PreinitArray     = 0x00000010,
-	Group            = 0x00000011,
-	SymbolTableIndex = 0x00000012,
-	LowOS            = 0x60000000,
-	GNUAttributes    = 0x6FFFFFF5,
-	GNUHash          = 0x6FFFFFF6,
-	GNULibList       = 0x6FFFFFF7,
-	Checksum         = 0x6FFFFFF8,
-	SUNMove          = 0x6FFFFFFA,
-	SUNComDat        = 0x6FFFFFFB,
-	SUNSymInfo       = 0x6FFFFFFC,
-	GNUVerDef        = 0x6FFFFFFD,
-	GNUVerNeed       = 0x6FFFFFFE,
-	GNUVerSym        = 0x6FFFFFFF,
-	HighOS           = 0x6FFFFFFF,
-	LowProc          = 0x70000000,
-	HighProc         = 0x7FFFFFFF,
-	LowUser          = 0x80000000,
-	HighUser         = 0xFFFFFFFF,
+	Null             = 0x00000000U,
+	ProgBits         = 0x00000001U,
+	SymbolTable      = 0x00000002U,
+	StringTable      = 0x00000003U,
+	RelA             = 0x00000004U,
+	HashTable        = 0x00000005U,
+	Dynamic          = 0x00000006U,
+	Note             = 0x00000007U,
+	NoBits           = 0x00000008U,
+	Rel              = 0x00000009U,
+	SHLib            = 0x0000000AU,
+	DynamicSymbols   = 0x0000000BU,
+	InitArray        = 0x0000000EU,
+	FiniArray        = 0x0000000FU,
+	PreinitArray     = 0x00000010U,
+	Group            = 0x00000011U,
+	SymbolTableIndex = 0x00000012U,
+	LowOS            = 0x60000000U,
+	GNUAttributes    = 0x6FFFFFF5U,
+	GNUHash          = 0x6FFFFFF6U,
+	GNULibList       = 0x6FFFFFF7U,
+	Checksum         = 0x6FFFFFF8U,
+	SUNMove          = 0x6FFFFFFAU,
+	SUNComDat        = 0x6FFFFFFBU,
+	SUNSymInfo       = 0x6FFFFFFCU,
+	GNUVerDef        = 0x6FFFFFFDU,
+	GNUVerNeed       = 0x6FFFFFFEU,
+	GNUVerSym        = 0x6FFFFFFFU,
+	HighOS           = 0x6FFFFFFFU,
+	LowProc          = 0x70000000U,
+	HighProc         = 0x7FFFFFFFU,
+	LowUser          = 0x80000000U,
+	HighUser         = 0xFFFFFFFFU,
 };
 extern const std::array<const enum_pair_t<elf_shtype_t>, 33> elf_shtype_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_shtype_t& type);
@@ -408,20 +408,20 @@ extern std::ostream& operator<<(std::ostream& out, const elf_shtype_t& type);
 
 /* 32-Bit Section flags */
 enum class elf32_shflags_t : uint32_t {
-	None            = 0x00000000,
-	Write           = 0x00000001,
-	Alloc           = 0x00000002,
-	ExecInstr       = 0x00000004,
-	Merge           = 0x00000010,
-	Strings         = 0x00000020,
-	InfoLink        = 0x00000040,
-	LinkOrder       = 0x00000080,
-	NonconformingOS = 0x00000100,
-	Group           = 0x00000200,
-	TLS             = 0x00000400,
-	Compressed      = 0x00000800,
-	Ordered         = 0x40000000,
-	Exclude         = 0x80000000,
+	None            = 0x00000000U,
+	Write           = 0x00000001U,
+	Alloc           = 0x00000002U,
+	ExecInstr       = 0x00000004U,
+	Merge           = 0x00000010U,
+	Strings         = 0x00000020U,
+	InfoLink        = 0x00000040U,
+	LinkOrder       = 0x00000080U,
+	NonconformingOS = 0x00000100U,
+	Group           = 0x00000200U,
+	TLS             = 0x00000400U,
+	Compressed      = 0x00000800U,
+	Ordered         = 0x40000000U,
+	Exclude         = 0x80000000U,
 };
 template<>
 struct EnableBitmask<elf32_shflags_t>{
@@ -433,20 +433,20 @@ extern std::ostream& operator<<(std::ostream& out, const elf32_shflags_t& shflag
 
 /* 64-Bit Section flags */
 enum class elf64_shflags_t : uint64_t {
-	None            = 0x00000000,
-	Write           = 0x00000001,
-	Alloc           = 0x00000002,
-	ExecInstr       = 0x00000004,
-	Merge           = 0x00000010,
-	Strings         = 0x00000020,
-	InfoLink        = 0x00000040,
-	LinkOrder       = 0x00000080,
-	NonconformingOS = 0x00000100,
-	Group           = 0x00000200,
-	TLS             = 0x00000400,
-	Compressed      = 0x00000800,
-	Ordered         = 0x40000000,
-	Exclude         = 0x80000000,
+	None            = 0x00000000U,
+	Write           = 0x00000001U,
+	Alloc           = 0x00000002U,
+	ExecInstr       = 0x00000004U,
+	Merge           = 0x00000010U,
+	Strings         = 0x00000020U,
+	InfoLink        = 0x00000040U,
+	LinkOrder       = 0x00000080U,
+	NonconformingOS = 0x00000100U,
+	Group           = 0x00000200U,
+	TLS             = 0x00000400U,
+	Compressed      = 0x00000800U,
+	Ordered         = 0x40000000U,
+	Exclude         = 0x80000000U,
 };
 template<>
 struct EnableBitmask<elf64_shflags_t>{
@@ -458,10 +458,10 @@ extern std::ostream& operator<<(std::ostream& out, const elf64_shflags_t& shflag
 
 /* Section group flags */
 enum class elf_shgroup_t : uint32_t {
-	None     = 0x00000000,
-	Comdat   = 0x00000001,
-	MaskOS   = 0x0FF00000,
-	MaskProc = 0xF0000000,
+	None     = 0x00000000U,
+	Comdat   = 0x00000001U,
+	MaskOS   = 0x0FF00000U,
+	MaskProc = 0xF0000000U,
 };
 template<>
 struct EnableBitmask<elf_shgroup_t>{
@@ -473,13 +473,13 @@ extern std::ostream& operator<<(std::ostream& out, const elf_shgroup_t& shgroup)
 
 /* Symbol Binding */
 enum class elf_symbol_binding_t : uint8_t {
-	Local    = 0x00,
-	Global   = 0x01,
-	Weak     = 0x02,
-	LowOS    = 0x0A,
-	HighOS   = 0x0C,
-	LowProc  = 0x0D,
-	HighProc = 0x0F,
+	Local    = 0x00U,
+	Global   = 0x01U,
+	Weak     = 0x02U,
+	LowOS    = 0x0AU,
+	HighOS   = 0x0CU,
+	LowProc  = 0x0DU,
+	HighProc = 0x0FU,
 };
 extern const std::array<const enum_pair_t<elf_symbol_binding_t>, 7> elf_symbol_binding_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_symbol_binding_t& symbind);
@@ -487,17 +487,17 @@ extern std::ostream& operator<<(std::ostream& out, const elf_symbol_binding_t& s
 
 /* Symbol Type */
 enum class elf_symbol_type_t : uint8_t {
-	NoType             = 0x00,
-	Object             = 0x01,
-	Function           = 0x02,
-	Section            = 0x03,
-	File               = 0x04,
-	Common             = 0x05,
-	ThreadLocalStorage = 0x06,
-	LowOS              = 0x0A,
-	HighOS             = 0x0C,
-	LowProc            = 0x0D,
-	HighProc           = 0x0F,
+	NoType             = 0x00U,
+	Object             = 0x01U,
+	Function           = 0x02U,
+	Section            = 0x03U,
+	File               = 0x04U,
+	Common             = 0x05U,
+	ThreadLocalStorage = 0x06U,
+	LowOS              = 0x0AU,
+	HighOS             = 0x0CU,
+	LowProc            = 0x0DU,
+	HighProc           = 0x0FU,
 };
 extern const std::array<const enum_pair_t<elf_symbol_type_t>, 11> elf_symbol_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_symbol_type_t& symtype);
@@ -505,10 +505,10 @@ extern std::ostream& operator<<(std::ostream& out, const elf_symbol_type_t& symt
 
 /* Symbol Visibility */
 enum class elf_symbol_visibility_t : uint8_t {
-	Default   = 0x00,
-	Internal  = 0x01,
-	Hidden    = 0x02,
-	Protected = 0x03,
+	Default   = 0x00U,
+	Internal  = 0x01U,
+	Hidden    = 0x02U,
+	Protected = 0x03U,
 };
 extern const std::array<const enum_pair_t<elf_symbol_visibility_t>, 4> elf_symbol_visibility_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_symbol_visibility_t& symvis);
@@ -516,10 +516,10 @@ extern std::ostream& operator<<(std::ostream& out, const elf_symbol_visibility_t
 
 /* Symbol binding */
 enum  class elf_syminfo_bound_t : uint16_t {
-	None       = 0x0000,
-	LowReserve = 0xFF00,
-	Parent     = 0xFFFE,
-	Self       = 0xFFFF,
+	None       = 0x0000U,
+	LowReserve = 0xFF00U,
+	Parent     = 0xFFFEU,
+	Self       = 0xFFFFU,
 };
 extern const std::array<const enum_pair_t<elf_syminfo_bound_t>, 4> elf_syminfo_bound_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_syminfo_bound_t& symibind);
@@ -527,11 +527,11 @@ extern std::ostream& operator<<(std::ostream& out, const elf_syminfo_bound_t& sy
 
 /* Symbol info flags */
 enum class elf_syminfo_flag_t : uint16_t {
-	None     = 0x0000,
-	Direct   = 0x0001,
-	Passthru = 0x0002,
-	Copy     = 0x0004,
-	LazyLoad = 0x0008,
+	None     = 0x0000U,
+	Direct   = 0x0001U,
+	Passthru = 0x0002U,
+	Copy     = 0x0004U,
+	LazyLoad = 0x0008U,
 };
 template<>
 struct EnableBitmask<elf_syminfo_flag_t>{
@@ -543,23 +543,23 @@ extern std::ostream& operator<<(std::ostream& out, const elf_syminfo_flag_t& sym
 
 /* Program header type */
 enum class elf_phdr_type_t : uint32_t {
-	None               = 0x00000000,
-	Load               = 0x00000001,
-	Dynamic            = 0x00000002,
-	Interpreter        = 0x00000003,
-	Note               = 0x00000004,
-	SHLib              = 0x00000005,
-	ProgramHeader      = 0x00000006,
-	ThreadLocalStorage = 0x00000007,
-	LowOS              = 0x60000000,
-	GNUEHFrame         = 0x6474E550,
-	GNUStack           = 0x6474E551,
-	GNURelRO           = 0x6474E552,
-	SUNBSS             = 0x6FFFFFFA,
-	SUNStack           = 0x6FFFFFFB,
-	HighOS             = 0x6FFFFFFF,
-	LowProc            = 0x70000000,
-	HighProc           = 0x7FFFFFFF,
+	None               = 0x00000000U,
+	Load               = 0x00000001U,
+	Dynamic            = 0x00000002U,
+	Interpreter        = 0x00000003U,
+	Note               = 0x00000004U,
+	SHLib              = 0x00000005U,
+	ProgramHeader      = 0x00000006U,
+	ThreadLocalStorage = 0x00000007U,
+	LowOS              = 0x60000000U,
+	GNUEHFrame         = 0x6474E550U,
+	GNUStack           = 0x6474E551U,
+	GNURelRO           = 0x6474E552U,
+	SUNBSS             = 0x6FFFFFFAU,
+	SUNStack           = 0x6FFFFFFBU,
+	HighOS             = 0x6FFFFFFFU,
+	LowProc            = 0x70000000U,
+	HighProc           = 0x7FFFFFFFU,
 };
 extern const std::array<const enum_pair_t<elf_phdr_type_t>, 17> elf_phdr_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_phdr_type_t& phdrtype);
@@ -567,12 +567,12 @@ extern std::ostream& operator<<(std::ostream& out, const elf_phdr_type_t& phdrty
 
 /* Program header flags */
 enum class elf_phdr_flags_t : uint32_t {
-	None     = 0x00000000,
-	Execute  = 0x00000001,
-	Write    = 0x00000002,
-	Read     = 0x00000004,
-	MaskOS   = 0x0FF00000,
-	MaskProc = 0xF0000000,
+	None     = 0x00000000U,
+	Execute  = 0x00000001U,
+	Write    = 0x00000002U,
+	Read     = 0x00000004U,
+	MaskOS   = 0x0FF00000U,
+	MaskProc = 0xF0000000U,
 };
 template<>
 struct EnableBitmask<elf_phdr_flags_t>{
@@ -584,71 +584,71 @@ extern std::ostream& operator<<(std::ostream& out, const elf_phdr_flags_t& phdrf
 
 /* Note Segment Descriptor Types */
 enum class elf_note_desc_t : uint32_t {
-	None            = 0x00000000,
-	PRSTATUS        = 0x00000001,
-	FPREGSET        = 0x00000002,
-	PRPSINFO        = 0x00000003,
-	PRXREG          = 0x00000004,
-	TASKSTRUCT      = 0x00000005,
-	PLATFORM        = 0x00000006,
-	AUXV            = 0x00000007,
-	GWINDOWS        = 0x00000008,
-	ASRS            = 0x00000009,
-	PSTATUS         = 0x0000000A,
-	PSINFO          = 0x0000000D,
-	PRCRED          = 0x0000000E,
-	UTSNAME         = 0x0000000F,
-	LWPSTATUS       = 0x00000010,
-	LWPSINFO        = 0x00000011,
-	PRFPXREG        = 0x00000014,
+	None            = 0x00000000U,
+	PRSTATUS        = 0x00000001U,
+	FPREGSET        = 0x00000002U,
+	PRPSINFO        = 0x00000003U,
+	PRXREG          = 0x00000004U,
+	TASKSTRUCT      = 0x00000005U,
+	PLATFORM        = 0x00000006U,
+	AUXV            = 0x00000007U,
+	GWINDOWS        = 0x00000008U,
+	ASRS            = 0x00000009U,
+	PSTATUS         = 0x0000000AU,
+	PSINFO          = 0x0000000DU,
+	PRCRED          = 0x0000000EU,
+	UTSNAME         = 0x0000000FU,
+	LWPSTATUS       = 0x00000010U,
+	LWPSINFO        = 0x00000011U,
+	PRFPXREG        = 0x00000014U,
 	/* Power PC Specific */
-	PPC_VMV         = 0x00000100,
-	PPC_SPE         = 0x00000101,
-	PPC_VSX         = 0x00000102,
-	PPC_TAR         = 0x00000103,
-	PPC_PPR         = 0x00000104,
-	PPC_DSCR        = 0x00000105,
-	PPC_EBB         = 0x00000106,
-	PPC_PMU         = 0x00000107,
-	PPC_TM_CGPR     = 0x00000108,
-	PPC_TM_CFPR     = 0x00000109,
-	PPC_TM_CVMX     = 0x0000010A,
-	PPC_TM_CVSX     = 0x0000010B,
-	PPC_TM_SPR      = 0x0000010C,
-	PPC_TM_CTAR     = 0x0000010D,
-	PPC_TM_CPPR     = 0x0000010E,
-	PPC_TM_CDSCR    = 0x0000010F,
-	PPC_PKEY        = 0x00000110,
+	PPC_VMV         = 0x00000100U,
+	PPC_SPE         = 0x00000101U,
+	PPC_VSX         = 0x00000102U,
+	PPC_TAR         = 0x00000103U,
+	PPC_PPR         = 0x00000104U,
+	PPC_DSCR        = 0x00000105U,
+	PPC_EBB         = 0x00000106U,
+	PPC_PMU         = 0x00000107U,
+	PPC_TM_CGPR     = 0x00000108U,
+	PPC_TM_CFPR     = 0x00000109U,
+	PPC_TM_CVMX     = 0x0000010AU,
+	PPC_TM_CVSX     = 0x0000010BU,
+	PPC_TM_SPR      = 0x0000010CU,
+	PPC_TM_CTAR     = 0x0000010DU,
+	PPC_TM_CPPR     = 0x0000010EU,
+	PPC_TM_CDSCR    = 0x0000010FU,
+	PPC_PKEY        = 0x00000110U,
 	/* x86 PC Specific */
-	I386_TLS        = 0x00000200,
-	I386_IOPerm     = 0x00000201,
-	X86_XState      = 0x00000202,
+	I386_TLS        = 0x00000200U,
+	I386_IOPerm     = 0x00000201U,
+	X86_XState      = 0x00000202U,
 	/* System/390 Specific */
-	S390_HighGprs   = 0x00000300,
-	S390_Timer      = 0x00000301,
-	S390_TODCmp     = 0x00000302,
-	S390_TODPreg    = 0x00000303,
-	S390_CTRS       = 0x00000304,
-	S390_Prefix     = 0x00000305,
-	S390_LastBreak  = 0x00000306,
-	S390_SystemCall = 0x00000307,
-	S390_TBD        = 0x00000308,
-	S390_VXRS_Low   = 0x00000309,
-	S390_VXRS_High  = 0x0000030A,
-	S390_GS_CB      = 0x0000030B,
-	S390_GS_BC      = 0x0000030C,
-	S390_RI_CB      = 0x0000030D,
+	S390_HighGprs   = 0x00000300U,
+	S390_Timer      = 0x00000301U,
+	S390_TODCmp     = 0x00000302U,
+	S390_TODPreg    = 0x00000303U,
+	S390_CTRS       = 0x00000304U,
+	S390_Prefix     = 0x00000305U,
+	S390_LastBreak  = 0x00000306U,
+	S390_SystemCall = 0x00000307U,
+	S390_TBD        = 0x00000308U,
+	S390_VXRS_Low   = 0x00000309U,
+	S390_VXRS_High  = 0x0000030AU,
+	S390_GS_CB      = 0x0000030BU,
+	S390_GS_BC      = 0x0000030CU,
+	S390_RI_CB      = 0x0000030DU,
 	/* ARM Specific */
-	ARM_VFP         = 0x00000400,
-	ARM_TLS         = 0x00000401,
-	ARM_HW_BREAK    = 0x00000402,
-	ARM_HW_WATCH    = 0x00000403,
-	ARM_SYSTEM_CALL = 0x00000404,
-	ARM_SVE         = 0x00000405,
+	ARM_VFP         = 0x00000400U,
+	ARM_TLS         = 0x00000401U,
+	ARM_HW_BREAK    = 0x00000402U,
+	ARM_HW_WATCH    = 0x00000403U,
+	ARM_SYSTEM_CALL = 0x00000404U,
+	ARM_SVE         = 0x00000405U,
 	/* Extended */
-	File            = 0x46494C45,
-	PRXFPReg        = 0x46E62B7F,
-	SigInfo         = 0x53494749,
+	File            = 0x46494C45U,
+	PRXFPReg        = 0x46E62B7FU,
+	SigInfo         = 0x53494749U,
 };
 extern const std::array<const enum_pair_t<elf_note_desc_t>, 60> elf_note_desc_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_note_desc_t& notedesc);
@@ -656,154 +656,154 @@ extern std::ostream& operator<<(std::ostream& out, const elf_note_desc_t& notede
 
 /* Dynamic section tags */
 enum class elf32_dyn_tag_t : elf32_sword_t {
-	None             = 0x00000000,
-	Needed           = 0x00000001,
-	PLTRelSize       = 0x00000002,
-	PLTGOT           = 0x00000003,
-	Hash             = 0x00000004,
-	StrTab           = 0x00000005,
-	SymTab           = 0x00000006,
-	RelA             = 0x00000006,
-	RelASize         = 0x00000008,
-	RelAEnt          = 0x00000009,
-	StrTabSize       = 0x0000000A,
-	SymTabEnt        = 0x0000000B,
-	Init             = 0x0000000C,
-	Fini             = 0x0000000D,
-	SOName           = 0x0000000E,
-	RPath            = 0x0000000F,
-	Symbolic         = 0x00000010,
-	Rel              = 0x00000011,
-	RelSize          = 0x00000012,
-	RelEnt           = 0x00000013,
-	PLTRel           = 0x00000014,
-	Debug            = 0x00000015,
-	TextRel          = 0x00000016,
-	JmpRel           = 0x00000017,
-	BindNow          = 0x00000018,
-	InitArray        = 0x00000019,
-	FiniArray        = 0x0000001A,
-	InitArraySize    = 0x0000001B,
-	FiniArraySize    = 0x0000001C,
-	RunPath          = 0x0000001D,
-	Flags            = 0x0000001E,
-	Encoding         = 0x0000001F,
-	PreInitArray     = 0x00000020,
-	PreInitArraySize = 0x00000021,
-	SymtabSHNDX      = 0x00000022,
-	LowOS            = 0x6000000D,
-	HighOS           = 0x6FFFF000,
-	GNUPrelinked     = 0x6FFFFDF5,
-	GNUConflictSize  = 0x6FFFFDF6,
-	GNULibListSize   = 0x6FFFFDF7,
-	Checksum         = 0x6FFFFDF8,
-	PLTPadSize       = 0x6FFFFDF9,
-	MoveEnt          = 0x6FFFFDFA,
-	MoveSize         = 0x6FFFFDFB,
-	Feature          = 0x6FFFFDFC,
-	PosFlag          = 0x6FFFFDFD,
-	SyminfoSize      = 0x6FFFFDFE,
-	SyminfoEnt       = 0x6FFFFDFF,
-	AddrRNGLow       = 0x6FFFFE00,
-	GNUHash          = 0x6FFFFEF5,
-	TLSDescPLT       = 0x6FFFFEF6,
-	TLSDescGOT       = 0x6FFFFEF7,
-	GNUConflict      = 0x6FFFFEF8,
-	GNULibList       = 0x6FFFFEF9,
-	Config           = 0x6FFFFEFA,
-	DEPAudit         = 0x6FFFFEFB,
-	Audit            = 0x6FFFFEFC,
-	PLTPad           = 0x6FFFFEFD,
-	MoveTAB          = 0x6FFFFEFE,
-	Syminfo          = 0x6FFFFEFF,
-	VerSym           = 0x6FFFFF00,
-	RelACount        = 0x6FFFFFF9,
-	RelCount         = 0x6FFFFFFA,
-	Flags_1          = 0x6FFFFFFB,
-	VerDef           = 0x6FFFFFFC,
-	VerDefNum        = 0x6FFFFFFD,
-	VerNeed          = 0x6FFFFFFE,
-	VerNeedNum       = 0x6FFFFFFF,
-	LowProc          = 0x70000000,
-	Auxiliary        = 0x7FFFFFFD,
-	HighProc         = 0x7FFFFFFF,
+	None             = 0x00000000U,
+	Needed           = 0x00000001U,
+	PLTRelSize       = 0x00000002U,
+	PLTGOT           = 0x00000003U,
+	Hash             = 0x00000004U,
+	StrTab           = 0x00000005U,
+	SymTab           = 0x00000006U,
+	RelA             = 0x00000006U,
+	RelASize         = 0x00000008U,
+	RelAEnt          = 0x00000009U,
+	StrTabSize       = 0x0000000AU,
+	SymTabEnt        = 0x0000000BU,
+	Init             = 0x0000000CU,
+	Fini             = 0x0000000DU,
+	SOName           = 0x0000000EU,
+	RPath            = 0x0000000FU,
+	Symbolic         = 0x00000010U,
+	Rel              = 0x00000011U,
+	RelSize          = 0x00000012U,
+	RelEnt           = 0x00000013U,
+	PLTRel           = 0x00000014U,
+	Debug            = 0x00000015U,
+	TextRel          = 0x00000016U,
+	JmpRel           = 0x00000017U,
+	BindNow          = 0x00000018U,
+	InitArray        = 0x00000019U,
+	FiniArray        = 0x0000001AU,
+	InitArraySize    = 0x0000001BU,
+	FiniArraySize    = 0x0000001CU,
+	RunPath          = 0x0000001DU,
+	Flags            = 0x0000001EU,
+	Encoding         = 0x0000001FU,
+	PreInitArray     = 0x00000020U,
+	PreInitArraySize = 0x00000021U,
+	SymtabSHNDX      = 0x00000022U,
+	LowOS            = 0x6000000DU,
+	HighOS           = 0x6FFFF000U,
+	GNUPrelinked     = 0x6FFFFDF5U,
+	GNUConflictSize  = 0x6FFFFDF6U,
+	GNULibListSize   = 0x6FFFFDF7U,
+	Checksum         = 0x6FFFFDF8U,
+	PLTPadSize       = 0x6FFFFDF9U,
+	MoveEnt          = 0x6FFFFDFAU,
+	MoveSize         = 0x6FFFFDFBU,
+	Feature          = 0x6FFFFDFCU,
+	PosFlag          = 0x6FFFFDFDU,
+	SyminfoSize      = 0x6FFFFDFEU,
+	SyminfoEnt       = 0x6FFFFDFFU,
+	AddrRNGLow       = 0x6FFFFE00U,
+	GNUHash          = 0x6FFFFEF5U,
+	TLSDescPLT       = 0x6FFFFEF6U,
+	TLSDescGOT       = 0x6FFFFEF7U,
+	GNUConflict      = 0x6FFFFEF8U,
+	GNULibList       = 0x6FFFFEF9U,
+	Config           = 0x6FFFFEFAU,
+	DEPAudit         = 0x6FFFFEFBU,
+	Audit            = 0x6FFFFEFCU,
+	PLTPad           = 0x6FFFFEFDU,
+	MoveTAB          = 0x6FFFFEFEU,
+	Syminfo          = 0x6FFFFEFFU,
+	VerSym           = 0x6FFFFF00U,
+	RelACount        = 0x6FFFFFF9U,
+	RelCount         = 0x6FFFFFFAU,
+	Flags_1          = 0x6FFFFFFBU,
+	VerDef           = 0x6FFFFFFCU,
+	VerDefNum        = 0x6FFFFFFDU,
+	VerNeed          = 0x6FFFFFFEU,
+	VerNeedNum       = 0x6FFFFFFFU,
+	LowProc          = 0x70000000U,
+	Auxiliary        = 0x7FFFFFFDU,
+	HighProc         = 0x7FFFFFFFU,
 };
 extern const std::array<const enum_pair_t<elf32_dyn_tag_t>, 71> elf32_dyn_tag_s;
 extern std::ostream& operator<<(std::ostream& out, const elf32_dyn_tag_t& dyntag);
 
 
 enum class elf64_dyn_tag_t : elf64_sxword_t {
-	None             = 0x00000000,
-	Needed           = 0x00000001,
-	PLTRelSize       = 0x00000002,
-	PLTGOT           = 0x00000003,
-	Hash             = 0x00000004,
-	StrTab           = 0x00000005,
-	SymTab           = 0x00000006,
-	RelA             = 0x00000006,
-	RelASize         = 0x00000008,
-	RelAEnt          = 0x00000009,
-	StrTabSize       = 0x0000000A,
-	SymTabEnt        = 0x0000000B,
-	Init             = 0x0000000C,
-	Fini             = 0x0000000D,
-	SOName           = 0x0000000E,
-	RPath            = 0x0000000F,
-	Symbolic         = 0x00000010,
-	Rel              = 0x00000011,
-	RelSize          = 0x00000012,
-	RelEnt           = 0x00000013,
-	PLTRel           = 0x00000014,
-	Debug            = 0x00000015,
-	TextRel          = 0x00000016,
-	JmpRel           = 0x00000017,
-	BindNow          = 0x00000018,
-	InitArray        = 0x00000019,
-	FiniArray        = 0x0000001A,
-	InitArraySize    = 0x0000001B,
-	FiniArraySize    = 0x0000001C,
-	RunPath          = 0x0000001D,
-	Flags            = 0x0000001E,
-	Encoding         = 0x0000001F,
-	PreInitArray     = 0x00000020,
-	PreInitArraySize = 0x00000021,
-	SymtabSHNDX      = 0x00000022,
-	LowOS            = 0x6000000D,
-	HighOS           = 0x6FFFF000,
-	GNUPrelinked     = 0x6FFFFDF5,
-	GNUConflictSize  = 0x6FFFFDF6,
-	GNULibListSize   = 0x6FFFFDF7,
-	Checksum         = 0x6FFFFDF8,
-	PLTPadSize       = 0x6FFFFDF9,
-	MoveEnt          = 0x6FFFFDFA,
-	MoveSize         = 0x6FFFFDFB,
-	Feature          = 0x6FFFFDFC,
-	PosFlag          = 0x6FFFFDFD,
-	SyminfoSize      = 0x6FFFFDFE,
-	SyminfoEnt       = 0x6FFFFDFF,
-	AddrRNGLow       = 0x6FFFFE00,
-	GNUHash          = 0x6FFFFEF5,
-	TLSDescPLT       = 0x6FFFFEF6,
-	TLSDescGOT       = 0x6FFFFEF7,
-	GNUConflict      = 0x6FFFFEF8,
-	GNULibList       = 0x6FFFFEF9,
-	Config           = 0x6FFFFEFA,
-	DEPAudit         = 0x6FFFFEFB,
-	Audit            = 0x6FFFFEFC,
-	PLTPad           = 0x6FFFFEFD,
-	MoveTAB          = 0x6FFFFEFE,
-	Syminfo          = 0x6FFFFEFF,
-	VerSym           = 0x6FFFFF00,
-	RelACount        = 0x6FFFFFF9,
-	RelCount         = 0x6FFFFFFA,
-	Flags_1          = 0x6FFFFFFB,
-	VerDef           = 0x6FFFFFFC,
-	VerDefNum        = 0x6FFFFFFD,
-	VerNeed          = 0x6FFFFFFE,
-	VerNeedNum       = 0x6FFFFFFF,
-	LowProc          = 0x70000000,
-	Auxiliary        = 0x7FFFFFFD,
-	HighProc         = 0x7FFFFFFF,
+	None             = 0x00000000U,
+	Needed           = 0x00000001U,
+	PLTRelSize       = 0x00000002U,
+	PLTGOT           = 0x00000003U,
+	Hash             = 0x00000004U,
+	StrTab           = 0x00000005U,
+	SymTab           = 0x00000006U,
+	RelA             = 0x00000006U,
+	RelASize         = 0x00000008U,
+	RelAEnt          = 0x00000009U,
+	StrTabSize       = 0x0000000AU,
+	SymTabEnt        = 0x0000000BU,
+	Init             = 0x0000000CU,
+	Fini             = 0x0000000DU,
+	SOName           = 0x0000000EU,
+	RPath            = 0x0000000FU,
+	Symbolic         = 0x00000010U,
+	Rel              = 0x00000011U,
+	RelSize          = 0x00000012U,
+	RelEnt           = 0x00000013U,
+	PLTRel           = 0x00000014U,
+	Debug            = 0x00000015U,
+	TextRel          = 0x00000016U,
+	JmpRel           = 0x00000017U,
+	BindNow          = 0x00000018U,
+	InitArray        = 0x00000019U,
+	FiniArray        = 0x0000001AU,
+	InitArraySize    = 0x0000001BU,
+	FiniArraySize    = 0x0000001CU,
+	RunPath          = 0x0000001DU,
+	Flags            = 0x0000001EU,
+	Encoding         = 0x0000001FU,
+	PreInitArray     = 0x00000020U,
+	PreInitArraySize = 0x00000021U,
+	SymtabSHNDX      = 0x00000022U,
+	LowOS            = 0x6000000DU,
+	HighOS           = 0x6FFFF000U,
+	GNUPrelinked     = 0x6FFFFDF5U,
+	GNUConflictSize  = 0x6FFFFDF6U,
+	GNULibListSize   = 0x6FFFFDF7U,
+	Checksum         = 0x6FFFFDF8U,
+	PLTPadSize       = 0x6FFFFDF9U,
+	MoveEnt          = 0x6FFFFDFAU,
+	MoveSize         = 0x6FFFFDFBU,
+	Feature          = 0x6FFFFDFCU,
+	PosFlag          = 0x6FFFFDFDU,
+	SyminfoSize      = 0x6FFFFDFEU,
+	SyminfoEnt       = 0x6FFFFDFFU,
+	AddrRNGLow       = 0x6FFFFE00U,
+	GNUHash          = 0x6FFFFEF5U,
+	TLSDescPLT       = 0x6FFFFEF6U,
+	TLSDescGOT       = 0x6FFFFEF7U,
+	GNUConflict      = 0x6FFFFEF8U,
+	GNULibList       = 0x6FFFFEF9U,
+	Config           = 0x6FFFFEFAU,
+	DEPAudit         = 0x6FFFFEFBU,
+	Audit            = 0x6FFFFEFCU,
+	PLTPad           = 0x6FFFFEFDU,
+	MoveTAB          = 0x6FFFFEFEU,
+	Syminfo          = 0x6FFFFEFFU,
+	VerSym           = 0x6FFFFF00U,
+	RelACount        = 0x6FFFFFF9U,
+	RelCount         = 0x6FFFFFFAU,
+	Flags_1          = 0x6FFFFFFBU,
+	VerDef           = 0x6FFFFFFCU,
+	VerDefNum        = 0x6FFFFFFDU,
+	VerNeed          = 0x6FFFFFFEU,
+	VerNeedNum       = 0x6FFFFFFFU,
+	LowProc          = 0x70000000U,
+	Auxiliary        = 0x7FFFFFFDU,
+	HighProc         = 0x7FFFFFFFU,
 };
 extern const std::array<const enum_pair_t<elf64_dyn_tag_t>, 71> elf64_dyn_tag_s;
 extern std::ostream& operator<<(std::ostream& out, const elf64_dyn_tag_t& dyntag);
@@ -811,12 +811,12 @@ extern std::ostream& operator<<(std::ostream& out, const elf64_dyn_tag_t& dyntag
 
 /* Dynamic Entry Flags */
 enum class elf_dyn_flags_t : uint8_t {
-	None      = 0x00,
-	Origin    = 0x01,
-	Symbolic  = 0x02,
-	TextRel   = 0x04,
-	BindNow   = 0x08,
-	StaticTLS = 0x10,
+	None      = 0x00U,
+	Origin    = 0x01U,
+	Symbolic  = 0x02U,
+	TextRel   = 0x04U,
+	BindNow   = 0x08U,
+	StaticTLS = 0x10U,
 };
 template<>
 struct EnableBitmask<elf_dyn_flags_t>{
@@ -828,35 +828,35 @@ extern std::ostream& operator<<(std::ostream& out, const elf_dyn_flags_t& dynfla
 
 /* Extended Dynamic Entry Flags */
 enum class elf_dyn_eflags_t : uint32_t {
-	None           = 0x00000000,
-	Now            = 0x00000001,
-	Global         = 0x00000002,
-	Group          = 0x00000004,
-	NoDelete       = 0x00000008,
-	LoadFLTR       = 0x00000010,
-	InitFirst      = 0x00000020,
-	NoOpen         = 0x00000040,
-	Origin         = 0x00000080,
-	Direct         = 0x00000100,
-	Trans          = 0x00000200,
-	Interpose      = 0x00000400,
-	NoDefaultLib   = 0x00000800,
-	NoDump         = 0x00001000,
-	ConFALT        = 0x00002000,
-	EndFileTEE     = 0x00004000,
-	DispRelDNE     = 0x00008000,
-	DispRelPND     = 0x00010000,
-	NoDirect       = 0x00020000,
-	IgnoreMultiDef = 0x00040000,
-	NoKSyms        = 0x00080000,
-	NoHDR          = 0x00100000,
-	Edited         = 0x00200000,
-	NoReloc        = 0x00400000,
-	SymInterpose   = 0x00800000,
-	GlobalAudit    = 0x01000000,
-	Singleton      = 0x02000000,
-	Stub           = 0x04000000,
-	PIE            = 0x08000000,
+	None           = 0x00000000U,
+	Now            = 0x00000001U,
+	Global         = 0x00000002U,
+	Group          = 0x00000004U,
+	NoDelete       = 0x00000008U,
+	LoadFLTR       = 0x00000010U,
+	InitFirst      = 0x00000020U,
+	NoOpen         = 0x00000040U,
+	Origin         = 0x00000080U,
+	Direct         = 0x00000100U,
+	Trans          = 0x00000200U,
+	Interpose      = 0x00000400U,
+	NoDefaultLib   = 0x00000800U,
+	NoDump         = 0x00001000U,
+	ConFALT        = 0x00002000U,
+	EndFileTEE     = 0x00004000U,
+	DispRelDNE     = 0x00008000U,
+	DispRelPND     = 0x00010000U,
+	NoDirect       = 0x00020000U,
+	IgnoreMultiDef = 0x00040000U,
+	NoKSyms        = 0x00080000U,
+	NoHDR          = 0x00100000U,
+	Edited         = 0x00200000U,
+	NoReloc        = 0x00400000U,
+	SymInterpose   = 0x00800000U,
+	GlobalAudit    = 0x01000000U,
+	Singleton      = 0x02000000U,
+	Stub           = 0x04000000U,
+	PIE            = 0x08000000U,
 };
 template<>
 struct EnableBitmask<elf_dyn_eflags_t>{
@@ -868,9 +868,9 @@ extern std::ostream& operator<<(std::ostream& out, const elf_dyn_eflags_t& dynef
 
 /* Dynamic Table Features */
 enum class elf_dyn_feature_t : uint32_t {
-	None    = 0x00,
-	ParInit = 0x01,
-	ConfEXP = 0x02,
+	None    = 0x00U,
+	ParInit = 0x01U,
+	ConfEXP = 0x02U,
 };
 template<>
 struct EnableBitmask<elf_dyn_feature_t>{
@@ -882,9 +882,9 @@ extern std::ostream& operator<<(std::ostream& out, const elf_dyn_feature_t& dynf
 
 /* Dynamic entry posflags */
 enum class elf_dyn_posflag_t : uint32_t {
-	None      = 0x00,
-	LazyLoad  = 0x01,
-	GroupPerm = 0x02,
+	None      = 0x00U,
+	LazyLoad  = 0x01U,
+	GroupPerm = 0x02U,
 };
 template<>
 struct EnableBitmask<elf_dyn_posflag_t>{
@@ -896,20 +896,20 @@ extern std::ostream& operator<<(std::ostream& out, const elf_dyn_posflag_t& dynp
 
 /* Compressed Header Type */
 enum class elf_chdr_type_t : uint32_t {
-	None     = 0x00000000,
-	Zlib     = 0x00000001,
-	LowOS    = 0x60000000,
-	HighOS   = 0x6fffffff,
-	LowProc  = 0x70000000,
-	HighProc = 0x7fffffff,
+	None     = 0x00000000U,
+	Zlib     = 0x00000001U,
+	LowOS    = 0x60000000U,
+	HighOS   = 0x6fffffffU,
+	LowProc  = 0x70000000U,
+	HighProc = 0x7fffffffU,
 };
 extern const std::array<const enum_pair_t<elf_chdr_type_t>, 6> elf_chdr_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_chdr_type_t& chdrtype);
 
 /* Version definition revisions */
 enum class elf_verdef_revision_t : uint16_t {
-	None    = 0x0000,
-	Current = 0x0001,
+	None    = 0x0000U,
+	Current = 0x0001U,
 };
 extern const std::array<const enum_pair_t<elf_verdef_revision_t>, 2> elf_verdef_revision_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_verdef_revision_t& verdefr);
@@ -917,9 +917,9 @@ extern std::ostream& operator<<(std::ostream& out, const elf_verdef_revision_t& 
 
 /* Version definitions flags */
 enum class elf_verdef_flag_t : uint16_t {
-	None = 0x0000,
-	Base = 0x0001,
-	Weak = 0x0002,
+	None = 0x0000U,
+	Base = 0x0001U,
+	Weak = 0x0002U,
 };
 template<>
 struct EnableBitmask<elf_verdef_flag_t>{
@@ -931,10 +931,10 @@ extern std::ostream& operator<<(std::ostream& out, const elf_verdef_flag_t& verd
 
 /* Versym index values */
 enum class elf_verdef_index_t : uint16_t {
-	Local      = 0x0000,
-	Global     = 0x0000,
-	LowReserve = 0xFF00,
-	Eliminate  = 0xFF01,
+	Local      = 0x0000U,
+	Global     = 0x0000U,
+	LowReserve = 0xFF00U,
+	Eliminate  = 0xFF01U,
 };
 extern const std::array<const enum_pair_t<elf_verdef_index_t>, 4> elf_verdef_index_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_verdef_index_t& verdefi);
@@ -942,8 +942,8 @@ extern std::ostream& operator<<(std::ostream& out, const elf_verdef_index_t& ver
 
 /* Vernaux flags */
 enum class elf_vernaux_flag_t : uint16_t {
-	None = 0x00,
-	Weak = 0x02,
+	None = 0x00U,
+	Weak = 0x02U,
 };
 template<>
 struct EnableBitmask<elf_vernaux_flag_t>{
@@ -955,47 +955,47 @@ extern std::ostream& operator<<(std::ostream& out, const elf_vernaux_flag_t& ver
 
 /* Auxiliary Vector Types */
 enum elf_auxv_type_t : uint32_t {
-	Null                  = 0x00000000,
-	Ignore                = 0x00000001,
-	ExecFD                = 0x00000002,
-	PHDR                  = 0x00000003,
-	PHEnt                 = 0x00000004,
-	PHNum                 = 0x00000005,
-	PageSize              = 0x00000006,
-	Base                  = 0x00000007,
-	Entry                 = 0x00000008,
-	NotElf                = 0x00000009,
-	UID                   = 0x0000000A,
-	EUID                  = 0x0000000B,
-	GID                   = 0x0000000C,
-	EGID                  = 0x0000000D,
-	Platform              = 0x0000000E,
-	HWCap                 = 0x0000000F,
-	ClkTck                = 0x00000010,
-	FPUControlWord        = 0x00000011,
-	DataCacheBSize        = 0x00000012,
-	InstructionCacheBSize = 0x00000013,
-	UnifiedCacheBSize     = 0x00000014,
-	IgnorePPC             = 0x00000015, /* poor PPC */
-	Secure                = 0x00000016,
-	BasePlatform          = 0x00000017,
-	Random                = 0x00000018,
-	HWCap2                = 0x00000019, /* The electric boogaloo */
-	ExecFN                = 0x0000001A,
-	Sysinfo               = 0x0000001B,
-	SysinfoEHDR           = 0x0000001C,
-	L1InstCacheShape      = 0x0000001D,
-	L1DataCacheShape      = 0x0000001E,
-	L2CacheShape          = 0x0000001F,
-	L3CacheShape          = 0x00000020,
-	L1InstCacheSize       = 0x00000021,
-	L1InstCacheGeometry   = 0x00000022,
-	L1DataCacheSize       = 0x00000023,
-	L1DataCacheGeometry   = 0x00000024,
-	L2CacheSize           = 0x00000025,
-	L2CacheGeometry       = 0x00000026,
-	L3CacheSize           = 0x00000027,
-	L3CacheGeometry       = 0x00000028,
+	Null                  = 0x00000000U,
+	Ignore                = 0x00000001U,
+	ExecFD                = 0x00000002U,
+	PHDR                  = 0x00000003U,
+	PHEnt                 = 0x00000004U,
+	PHNum                 = 0x00000005U,
+	PageSize              = 0x00000006U,
+	Base                  = 0x00000007U,
+	Entry                 = 0x00000008U,
+	NotElf                = 0x00000009U,
+	UID                   = 0x0000000AU,
+	EUID                  = 0x0000000BU,
+	GID                   = 0x0000000CU,
+	EGID                  = 0x0000000DU,
+	Platform              = 0x0000000EU,
+	HWCap                 = 0x0000000FU,
+	ClkTck                = 0x00000010U,
+	FPUControlWord        = 0x00000011U,
+	DataCacheBSize        = 0x00000012U,
+	InstructionCacheBSize = 0x00000013U,
+	UnifiedCacheBSize     = 0x00000014U,
+	IgnorePPC             = 0x00000015U, /* poor PPC */
+	Secure                = 0x00000016U,
+	BasePlatform          = 0x00000017U,
+	Random                = 0x00000018U,
+	HWCap2                = 0x00000019U, /* The electric boogaloo */
+	ExecFN                = 0x0000001AU,
+	Sysinfo               = 0x0000001BU,
+	SysinfoEHDR           = 0x0000001CU,
+	L1InstCacheShape      = 0x0000001DU,
+	L1DataCacheShape      = 0x0000001EU,
+	L2CacheShape          = 0x0000001FU,
+	L3CacheShape          = 0x00000020U,
+	L1InstCacheSize       = 0x00000021U,
+	L1InstCacheGeometry   = 0x00000022U,
+	L1DataCacheSize       = 0x00000023U,
+	L1DataCacheGeometry   = 0x00000024U,
+	L2CacheSize           = 0x00000025U,
+	L2CacheGeometry       = 0x00000026U,
+	L3CacheSize           = 0x00000027U,
+	L3CacheGeometry       = 0x00000028U,
 };
 extern const std::array<const enum_pair_t<elf_auxv_type_t>, 41> elf_auxv_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_auxv_type_t& auxvtype);
@@ -1003,10 +1003,10 @@ extern std::ostream& operator<<(std::ostream& out, const elf_auxv_type_t& auxvty
 
 /* Note known systems */
 enum class elf_note_os_t : uint32_t {
-	Linux    = 0x00000000,
-	GNU      = 0x00000001,
-	Solaris2 = 0x00000002,
-	FreeBSD  = 0x00000003,
+	Linux    = 0x00000000U,
+	GNU      = 0x00000001U,
+	Solaris2 = 0x00000002U,
+	FreeBSD  = 0x00000003U,
 };
 extern const std::array<const enum_pair_t<elf_note_os_t>, 4> elf_note_os_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_note_os_t& noteos);
@@ -1014,12 +1014,12 @@ extern std::ostream& operator<<(std::ostream& out, const elf_note_os_t& noteos);
 
 /* Note Type */
 enum class elf_note_type_t : uint32_t {
-	None            = 0x00000000,
-	GNUABI          = 0x00000001,
-	GNUHWCap        = 0x00000002,
-	GNUBuildID      = 0x00000003,
-	GNUGoldVersion  = 0x00000004,
-	GNUPropertyType = 0x00000005,
+	None            = 0x00000000U,
+	GNUABI          = 0x00000001U,
+	GNUHWCap        = 0x00000002U,
+	GNUBuildID      = 0x00000003U,
+	GNUGoldVersion  = 0x00000004U,
+	GNUPropertyType = 0x00000005U,
 };
 extern const std::array<const enum_pair_t<elf_note_type_t>, 6> elf_note_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_note_type_t& notetype);
@@ -1039,18 +1039,21 @@ public:
 		_magic1{}, _magic2{}, _magic3{}, _magic4{}
 		{ /* NOP */ }
 
+
+	[[nodiscard]]
 	bool is_valid() const noexcept {
-		return (_magic1 == 0x7F && _magic2 == 0x45
-			 && _magic3 == 0x4C && _magic4 == 0x46);
+		return (_magic1 == 0x7FU && _magic2 == 0x45U
+			 && _magic3 == 0x4CU && _magic4 == 0x46U);
 	}
 
 	void set() noexcept {
-		_magic1 = 0x7F;
-		_magic2 = 0x45;
-		_magic3 = 0x4C;
-		_magic4 = 0x46;
+		_magic1 = 0x7FU;
+		_magic2 = 0x45U;
+		_magic3 = 0x4CU;
+		_magic4 = 0x46U;
 	}
 
+	[[nodiscard]]
 	std::array<uint8_t, 4> get() const noexcept {
 		return { _magic1, _magic2, _magic3, _magic4 };
 	}
@@ -1080,25 +1083,31 @@ public:
 			_magic{magic}, _eclass{eclass}, _data{data}, _version{version},
 			_abi{abi}, _abi_version{abi_version}, _padding{} { /* NOP */ }
 
-
+	[[nodiscard]]
 	elf_magic_t magic() const noexcept { return _magic; }
 
 	void eclass(const elf_class_t eclass) noexcept { _eclass = eclass; }
+	[[nodiscard]]
 	elf_class_t eclass() const noexcept { return _eclass; }
 
 	void data(const elf_data_t data) noexcept { _data = data; }
+	[[nodiscard]]
 	elf_data_t data() const noexcept { return _data; }
 
 	void version(const elf_ident_version_t version) noexcept { _version = version; }
+	[[nodiscard]]
 	elf_ident_version_t version() const noexcept { return _version; }
 
 	void abi(const elf_osabi_t abi) noexcept { _abi = abi; }
+	[[nodiscard]]
 	elf_osabi_t abi() const noexcept { return _abi; }
 
 	void abi_version(const uint8_t abi_version) noexcept { _abi_version = abi_version; }
+	[[nodiscard]]
 	uint8_t abi_version() const noexcept { return _abi_version; }
 
 	void padding(const std::array<uint8_t, 7> padding) noexcept { _padding = padding; }
+	[[nodiscard]]
 	std::array<uint8_t, 7> padding() const noexcept { return _padding; }
 };
 
@@ -1144,45 +1153,59 @@ public:
 		_shentsize{shentsize}, _shnum{shnum}, _shstrndx{shstrndx} { /* NOP */ }
 
 	void ident(const elf_ident_t ident) noexcept { _ident = ident; }
+	[[nodiscard]]
 	elf_ident_t ident() const noexcept { return _ident; }
 
 	void type(const elf_type_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_type_t type() const noexcept { return _type; }
 
 	void machine(const elf_machine_t machine) noexcept { _machine = machine; }
+	[[nodiscard]]
 	elf_machine_t machine() const noexcept { return _machine; }
 
 	void version(const elf_version_t version) noexcept { _version = version; }
+	[[nodiscard]]
 	elf_version_t version() const noexcept { return _version; }
 
 	void entry(const addr_t entry) noexcept { _entry = entry; }
+	[[nodiscard]]
 	addr_t entry() const noexcept { return _entry; }
 
 	void phoff(const offset_t phoff) noexcept { _phoff = phoff; }
+	[[nodiscard]]
 	offset_t phoff() const noexcept { return _phoff; }
 
 	void shoff(const offset_t shoff) noexcept { _shoff = shoff; }
+	[[nodiscard]]
 	offset_t shoff() const noexcept { return _shoff; }
 
 	void flags(const word_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	word_t flags() const noexcept { return _flags; }
 
 	void ehsize(const half_t ehsize) noexcept { _ehsize = ehsize; }
+	[[nodiscard]]
 	half_t ehsize() const noexcept { return _ehsize; }
 
 	void phentsize(const half_t phentsize) noexcept { _phentsize = phentsize; }
+	[[nodiscard]]
 	half_t phentsize() const noexcept { return _phentsize; }
 
 	void phnum(const half_t phnum) noexcept { _phnum = phnum; }
+	[[nodiscard]]
 	half_t phnum() const noexcept { return _phnum; }
 
 	void shentsize(const half_t shentsize) noexcept { _shentsize = shentsize; }
+	[[nodiscard]]
 	half_t shentsize() const noexcept { return _shentsize; }
 
 	void shnum(const half_t shnum) noexcept { _shnum = shnum; }
+	[[nodiscard]]
 	half_t shnum() const noexcept { return _shnum; }
 
 	void shstrndx(const half_t shstrndx) noexcept { _shstrndx = shstrndx; }
+	[[nodiscard]]
 	half_t shstrndx() const noexcept { return _shstrndx; }
 };
 using elf32_ehdr_t = elf_ehdr_t<elf_types_32_t>;
@@ -1217,33 +1240,43 @@ public:
 		_entsize{entsize} { /* NOP */}
 
 	void name(const elf32_word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	elf32_word_t name() const noexcept { return _name; }
 
 	void type(const elf_shtype_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_shtype_t type() const noexcept { return _type; }
 
 	void flags(const elf32_shflags_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf32_shflags_t flags() const noexcept { return _flags; }
 
 	void addr(const elf32_addr_t addr) noexcept { _addr = addr; }
+	[[nodiscard]]
 	elf32_addr_t addr() const noexcept { return _addr; }
 
 	void offset(const elf32_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf32_off_t offset() const noexcept { return _offset; }
 
 	void size(const elf32_word_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf32_word_t size() const noexcept { return _size; }
 
 	void link(const elf32_word_t link) noexcept { _link = link; }
+	[[nodiscard]]
 	elf32_word_t link() const noexcept { return _link; }
 
 	void info(const elf32_word_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf32_word_t info() const noexcept { return _info; }
 
 	void addraline(const elf32_word_t addraline) noexcept { _addraline = addraline; }
+	[[nodiscard]]
 	elf32_word_t addraline() const noexcept { return _addraline; }
 
 	void entsize(const elf32_word_t entsize) noexcept { _entsize = entsize; }
+	[[nodiscard]]
 	elf32_word_t entsize() const noexcept { return _entsize; }
 };
 
@@ -1274,33 +1307,43 @@ public:
 		_entsize{entsize} { /* NOP */ }
 
 	void name(const elf64_word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	elf64_word_t name() const noexcept { return _name; }
 
 	void type(const elf_shtype_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_shtype_t type() const noexcept { return _type; }
 
 	void flags(const elf64_shflags_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf64_shflags_t flags() const noexcept { return _flags; }
 
 	void addr(const elf64_addr_t addr) noexcept { _addr = addr; }
+	[[nodiscard]]
 	elf64_addr_t addr() const noexcept { return _addr; }
 
 	void offset(const elf64_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf64_off_t offset() const noexcept { return _offset; }
 
 	void size(const elf64_xword_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf64_xword_t size() const noexcept { return _size; }
 
 	void link(const elf64_word_t link) noexcept { _link = link; }
+	[[nodiscard]]
 	elf64_word_t link() const noexcept { return _link; }
 
 	void info(const elf64_word_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf64_word_t info() const noexcept { return _info; }
 
 	void addraline(const elf64_xword_t addraline) noexcept { _addraline = addraline; }
+	[[nodiscard]]
 	elf64_xword_t addraline() const noexcept { return _addraline; }
 
 	void entsize(const elf64_xword_t entsize) noexcept { _entsize = entsize; }
+	[[nodiscard]]
 	elf64_xword_t entsize() const noexcept { return _entsize; }
 };
 
@@ -1325,28 +1368,41 @@ public:
 		_shndx{shndx} { /* NOP */ }
 
 	void name(elf32_word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	elf32_word_t name() const noexcept { return _name; }
 
 	void value(const elf32_addr_t value) noexcept { _value = value; }
+	[[nodiscard]]
 	elf32_addr_t value() const noexcept { return _value; }
 
 	void size(const elf32_word_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf32_word_t size() const noexcept { return _size; }
 
 	void info(const elf32_uchar_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf32_uchar_t info() const noexcept { return _info; }
 
 	void other(const elf32_uchar_t other) noexcept { _other = other; }
+	[[nodiscard]]
 	elf32_uchar_t other() const noexcept { return _other; }
 
 	void shndx(const elf32_half_t shndx) noexcept { _shndx = shndx; }
+	[[nodiscard]]
 	elf32_half_t shndx() const noexcept { return _shndx; }
-};
 
-#define ELF32_ST_BIND(i)   ((i)>>4)
-#define ELF32_ST_TYPE(i)   ((i)&0xf)
-#define ELF32_ST_INFO(b,t) (((b)<<4)+((t)&0xf))
-#define ELF32_ST_VISIBILITY(o) ((o)&0x3)
+	[[nodiscard]]
+	elf32_uchar_t bind() const noexcept { return _info >> 0x04U; }
+	[[nodiscard]]
+	elf32_uchar_t type() const noexcept { return _info &  0x0FU; }
+	[[nodiscard]]
+	elf32_uchar_t visibility() const noexcept { return _other &  0x03U; }
+
+	static elf32_uchar_t make_info(elf32_uchar_t bind,
+								   elf32_uchar_t type) {
+		return (bind << 0x04U) + (type & 0xFU);
+	}
+};
 
 /* 64-Bit Symbol Table Entry */
 struct elf64_symbol_t final {
@@ -1368,28 +1424,41 @@ public:
 		_size{size} { /* NOP */ }
 
 	void name(const elf64_word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	elf64_word_t name() const noexcept { return _name; }
 
 	void info(const elf64_uchar_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf64_uchar_t info() const noexcept { return _info; }
 
 	void other(const elf64_uchar_t other) noexcept { _other = other; }
+	[[nodiscard]]
 	elf64_uchar_t other() const noexcept { return _other; }
 
 	void shndx(const elf64_half_t shndx) noexcept { _shndx = shndx; }
+	[[nodiscard]]
 	elf64_half_t shndx() const noexcept { return _shndx; }
 
 	void value(const elf64_addr_t value) noexcept { _value = value; }
+	[[nodiscard]]
 	elf64_addr_t value() const noexcept { return _value; }
 
 	void size(const elf64_xword_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf64_xword_t size() const noexcept { return _size; }
-};
 
-#define ELF64_ST_BIND(i)   ((i)>>4)
-#define ELF64_ST_TYPE(i)   ((i)&0xf)
-#define ELF64_ST_INFO(b,t) (((b)<<4)+((t)&0xf))
-#define ELF64_ST_VISIBILITY(o) ((o)&0x3)
+	[[nodiscard]]
+	elf64_uchar_t bind() const noexcept { return _info >> 0x04U; }
+	[[nodiscard]]
+	elf64_uchar_t type() const noexcept { return _info &  0x0FU; }
+	[[nodiscard]]
+	elf64_uchar_t visibility() const noexcept { return _other &  0x03U; }
+
+	static elf64_uchar_t make_info(elf64_uchar_t bind,
+								   elf64_uchar_t type) {
+		return (bind << 0x04U) + (type & 0xFU);
+	}
+};
 
 /* 32/64-Bit syminfo section */
 struct elf_syminfo_t final {
@@ -1404,9 +1473,11 @@ public:
 		_boundto{boundto}, _flags{flags} { /* NOP */ }
 
 	void boundto(elf_syminfo_bound_t boundto) noexcept { _boundto = boundto; }
+	[[nodiscard]]
 	elf_syminfo_bound_t boundto() const noexcept { return _boundto; }
 
 	void flags(elf_syminfo_flag_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf_syminfo_flag_t flags() const noexcept { return _flags; }
 };
 
@@ -1423,9 +1494,11 @@ public:
 		_offset{offset}, _info{info} { /* NOP */ }
 
 	void offset(const elf32_addr_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf32_addr_t offset() const noexcept { return _offset; }
 
 	void info(const elf32_word_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf32_word_t info() const noexcept { return _info; }
 };
 
@@ -1443,18 +1516,28 @@ public:
 		_offset{offset}, _info{info}, _addend{addend} { /* NOP */ }
 
 	void offset(const elf32_addr_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf32_addr_t offset() const noexcept { return _offset; }
 
 	void info(const elf32_word_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf32_word_t info() const noexcept { return _info; }
 
 	void addend(const elf32_sword_t addend) noexcept { _addend = addend; }
+	[[nodiscard]]
 	elf32_sword_t addend() const noexcept { return _addend; }
-};
 
-#define ELF32_R_SYM(i)	((i)>>8)
-#define ELF32_R_TYPE(i)   ((unsigned char)(i))
-#define ELF32_R_INFO(s,t) (((s)<<8)+(unsigned char)(t))
+
+	[[nodiscard]]
+	elf32_word_t sym() const noexcept { return (_info >> 0x20U); }
+	[[nodiscard]]
+	elf32_word_t type() const noexcept { return (_info & 0xFFFFFFFFUL); }
+
+	static elf32_word_t make_info(elf32_word_t sym,
+								  elf32_word_t type) {
+		return (sym << 0x20U) + (type & 0xFFFFFFFFUL);
+	}
+};
 
 /* 64-Bit Relocation Entries */
 struct elf64_rel_t final {
@@ -1469,9 +1552,11 @@ public:
 		_offset{offset}, _info{info} { /* NOP */ }
 
 	void offset(const elf64_addr_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf64_addr_t offset() const noexcept { return _offset; }
 
 	void info(const elf64_xword_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf64_xword_t info() const noexcept { return _info; }
 };
 
@@ -1489,18 +1574,27 @@ public:
 		_offset{offset}, _info{info}, _addend{addend} { /* NOP */ }
 
 	void offset(const elf64_addr_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf64_addr_t offset() const noexcept { return _offset; }
 
 	void info(const elf64_xword_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf64_xword_t info() const noexcept { return _info; }
 
 	void addend(const elf64_sword_t addend) noexcept { _addend = addend; }
+	[[nodiscard]]
 	elf64_sword_t addend() const noexcept { return _addend; }
-};
 
-#define ELF64_R_SYM(i)    ((i)>>32)
-#define ELF64_R_TYPE(i)   ((i)&0xffffffffL)
-#define ELF64_R_INFO(s,t) (((s)<<32)+((t)&0xffffffffL))
+	[[nodiscard]]
+	elf64_word_t sym() const noexcept { return _info >> 0x20U; }
+	[[nodiscard]]
+	elf64_word_t type() const noexcept { return _info & 0xFFFFFFFFUL; }
+
+	static elf64_word_t make_info(elf64_word_t sym,
+								  elf64_word_t type) {
+		return (sym << 0x20U) + (type & 0xFFFFFFFFUL);
+	}
+};
 
 /* 32-Bit Program header */
 struct elf32_phdr_t final {
@@ -1525,27 +1619,35 @@ public:
 		_memsize{memsize}, _flags{flags}, _align{align} { /* NOP */ }
 
 	void type(const elf_phdr_type_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_phdr_type_t type() const noexcept { return _type; }
 
 	void flags(const elf_phdr_flags_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf_phdr_flags_t flags() const noexcept { return _flags; }
 
 	void offset(const elf32_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf32_off_t offset() const noexcept { return _offset; }
 
 	void vaddr(const elf32_addr_t vaddr) noexcept { _vaddr = vaddr; }
+	[[nodiscard]]
 	elf32_addr_t vaddr() const noexcept { return _vaddr; }
 
 	void paddr(const elf32_addr_t paddr) noexcept { _paddr = paddr; }
+	[[nodiscard]]
 	elf32_addr_t paddr() const noexcept { return _paddr; }
 
 	void filesz(const elf32_word_t filesz) noexcept { _filesz = filesz; }
+	[[nodiscard]]
 	elf32_word_t filesz() const noexcept { return _filesz; }
 
 	void memsize(const elf32_word_t memsize) noexcept { _memsize = memsize; }
+	[[nodiscard]]
 	elf32_word_t memsize() const noexcept { return _memsize; }
 
 	void align(const elf32_word_t align) noexcept { _align = align; }
+	[[nodiscard]]
 	elf32_word_t align() const noexcept { return _align; }
 };
 
@@ -1573,27 +1675,35 @@ public:
 
 
 	void type(const elf_phdr_type_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_phdr_type_t type() const noexcept { return _type; }
 
 	void flags(const elf_phdr_flags_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf_phdr_flags_t flags() const noexcept { return _flags; }
 
 	void offset(const elf64_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf64_off_t offset() const noexcept { return _offset; }
 
 	void vaddr(const elf64_addr_t vaddr) noexcept { _vaddr = vaddr; }
+	[[nodiscard]]
 	elf64_addr_t vaddr() const noexcept { return _vaddr; }
 
 	void paddr(const elf64_addr_t paddr) noexcept { _paddr = paddr; }
+	[[nodiscard]]
 	elf64_addr_t paddr() const noexcept { return _paddr; }
 
 	void filesz(const elf64_xword_t filesz) noexcept { _filesz = filesz; }
+	[[nodiscard]]
 	elf64_xword_t filesz() const noexcept { return _filesz; }
 
 	void memsize(const elf64_xword_t memsize) noexcept { _memsize = memsize; }
+	[[nodiscard]]
 	elf64_xword_t memsize() const noexcept { return _memsize; }
 
 	void align(const elf64_xword_t align) noexcept { _align = align; }
+	[[nodiscard]]
 	elf64_xword_t align() const noexcept { return _align; }
 };
 
@@ -1613,12 +1723,15 @@ public:
 		_tag{tag}, _data{value} { /* NOP */ }
 
 	void tag(elf32_dyn_tag_t tag) noexcept { _tag = tag; }
+	[[nodiscard]]
 	elf32_dyn_tag_t tag() const noexcept { return _tag; }
 
 	void value(elf32_word_t value) noexcept { _data.value = value; }
+	[[nodiscard]]
 	elf32_word_t value() const noexcept { return _data.value; }
 
 	void pointer(elf32_addr_t pointer) noexcept { _data.pointer = pointer; }
+	[[nodiscard]]
 	elf32_addr_t pointer() const noexcept { return _data.pointer; }
 };
 
@@ -1638,12 +1751,15 @@ public:
 		_tag{tag}, _data{value} { /* NOP */ }
 
 	void tag(elf64_dyn_tag_t tag) noexcept { _tag = tag; }
+	[[nodiscard]]
 	elf64_dyn_tag_t tag() const noexcept { return _tag; }
 
 	void value(elf64_xword_t value) noexcept { _data.value = value; }
+	[[nodiscard]]
 	elf64_xword_t value() const noexcept { return _data.value; }
 
 	void pointer(elf64_addr_t pointer) noexcept { _data.pointer = pointer; }
+	[[nodiscard]]
 	elf64_addr_t pointer() const noexcept { return _data.pointer; }
 };
 
@@ -1662,12 +1778,15 @@ public:
 		_type{type}, _size{size}, _addr_align{addr_align} { /* NOP */ }
 
 	void type(const elf_chdr_type_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_chdr_type_t type() const noexcept { return _type; }
 
 	void size(const elf32_word_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf32_word_t size() const noexcept { return _size; }
 
 	void addr_align(const elf32_word_t addr_align) noexcept { _addr_align = addr_align;	}
+	[[nodiscard]]
 	elf32_word_t addr_align() const noexcept { return _addr_align; }
 };
 
@@ -1687,15 +1806,19 @@ public:
 		_type{type}, _reserved{}, _size{size}, _addr_align{addr_align} { /* NOP */ }
 
 	void type(const elf_chdr_type_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	elf_chdr_type_t type() const noexcept { return _type; }
 
 	void reserved(const elf64_word_t reserved) noexcept { _reserved = reserved; }
+	[[nodiscard]]
 	elf64_word_t reserved() const noexcept { return _reserved; }
 
 	void size(const elf64_xword_t size) noexcept { _size = size; }
+	[[nodiscard]]
 	elf64_xword_t size() const noexcept { return _size; }
 
 	void addr_align(const elf64_xword_t addr_align) noexcept { _addr_align = addr_align; }
+	[[nodiscard]]
 	elf64_xword_t addr_align() const noexcept { return _addr_align; }
 };
 
@@ -1725,24 +1848,31 @@ public:
 		{ /* NOP */ }
 
 	void version(const elf_verdef_revision_t version) noexcept { _version = version; }
+	[[nodiscard]]
 	elf_verdef_revision_t version() const noexcept { return _version; }
 
 	void flags(const elf_verdef_flag_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf_verdef_flag_t flags() const noexcept { return _flags; }
 
 	void index(const elf_verdef_index_t index) noexcept { _index = index; }
+	[[nodiscard]]
 	elf_verdef_index_t index() const noexcept { return _index; }
 
 	void count(const half_t count) noexcept { _count = count; }
+	[[nodiscard]]
 	half_t count() const noexcept { return _count; }
 
 	void hash(const word_t hash) noexcept { _hash = hash; }
+	[[nodiscard]]
 	word_t hash() const noexcept { return _hash; }
 
 	void aux_offset(const word_t aux_offset) noexcept { _aux_offset = aux_offset; }
+	[[nodiscard]]
 	word_t aux_offset() const noexcept { return _aux_offset; }
 
 	void next_offset(const word_t next_offset) noexcept { _next_offset = next_offset; }
+	[[nodiscard]]
 	word_t next_offset() const noexcept { return _next_offset; }
 };
 using elf32_verdef_t = elf_verdef_t<elf_types_32_t>;
@@ -1763,9 +1893,11 @@ public:
 		_name{name}, _next{next} { /* NOP */ }
 
 	void name(const word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	word_t name() const noexcept { return _name; }
 
 	void next(const word_t next) noexcept { _next = next; }
+	[[nodiscard]]
 	word_t next() const noexcept { return _next; }
 };
 using elf32_verdaux_t = elf_verdaux_t<elf_types_32_t>;
@@ -1792,18 +1924,23 @@ public:
 		{ /* NOP */ }
 
 	void version(const half_t version) noexcept { _version = version; }
+	[[nodiscard]]
 	half_t version() const noexcept { return _version; }
 
 	void count(const half_t count) noexcept { _count = count; }
+	[[nodiscard]]
 	half_t count() const noexcept { return _count; }
 
 	void file(const word_t file) noexcept { _file = file; }
+	[[nodiscard]]
 	word_t file() const noexcept { return _file; }
 
 	void aux(const word_t aux) noexcept { _aux = aux; }
+	[[nodiscard]]
 	word_t aux() const noexcept { return _aux; }
 
 	void next(const word_t next) noexcept { _next = next; }
+	[[nodiscard]]
 	word_t next() const noexcept { return _next; }
 };
 using elf32_verneed_t = elf_verneed_t<elf_types_32_t>;
@@ -1830,18 +1967,23 @@ public:
 		{ /* NOP */ }
 
 	void hash(const word_t hash) noexcept { _hash = hash; }
+	[[nodiscard]]
 	word_t hash() const noexcept { return _hash; }
 
 	void flags(const elf_vernaux_flag_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	elf_vernaux_flag_t flags() const noexcept { return _flags; }
 
 	void other(const half_t other) noexcept { _other = other; }
+	[[nodiscard]]
 	half_t other() const noexcept { return _other; }
 
 	void name(const word_t name) noexcept { _name = name; }
+	[[nodiscard]]
 	word_t name() const noexcept { return _name; }
 
 	void next(const word_t next) noexcept { _next = next; }
+	[[nodiscard]]
 	word_t next() const noexcept { return _next; }
 };
 using elf32_vernaux_t = elf_vernaux_t<elf_types_32_t>;
@@ -1866,12 +2008,15 @@ public:
 		_type{type}, _data{data} { /* NOP */ }
 
 	void type(const xword_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	xword_t type() const noexcept { return _type; }
 
 	void value(const xword_t value) noexcept { _data.value = value; }
+	[[nodiscard]]
 	xword_t value() const noexcept { return _data.value; }
 
 	void pointer(const addr_t pointer) noexcept { _data.pointer = pointer; }
+	[[nodiscard]]
 	addr_t pointer() const noexcept { return _data.pointer; }
 };
 using elf32_auxv_t = elf_auxv_t<elf_types_32_t>;
@@ -1895,12 +2040,15 @@ public:
 		_name_sz{name_sz}, _desc_sz{desc_sz}, _type{type} { /* NOP */ }
 
 	void name_sz(const word_t name_sz) noexcept { _name_sz = name_sz; }
+	[[nodiscard]]
 	word_t name_sz() const noexcept { return _name_sz; }
 
 	void desc_sz(const word_t desc_sz) noexcept { _desc_sz = desc_sz; }
+	[[nodiscard]]
 	word_t desc_sz() const noexcept { return _desc_sz; }
 
 	void type(const word_t type) noexcept { _type = type; }
+	[[nodiscard]]
 	word_t type() const noexcept { return type; }
 };
 using elf32_nhdr_t = elf_nhdr_t<elf_types_32_t>;
@@ -1924,23 +2072,36 @@ public:
 		_stride{stride} { /* NOP */ }
 
 	void value(const elf32_xword_t value) noexcept { _value = value; }
+	[[nodiscard]]
 	elf32_xword_t value() const noexcept { return _value; }
 
 	void info(const elf32_word_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf32_word_t info() const noexcept { return _info; }
 
 	void offset(const elf32_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf32_off_t offset() const noexcept { return _offset; }
 
 	void repeat(const elf32_half_t repeat) noexcept { _repeat = repeat; }
+	[[nodiscard]]
 	elf32_half_t repeat() const noexcept { return _repeat; }
 
 	void stride(const elf32_half_t stride) noexcept { _stride = stride; }
+	[[nodiscard]]
 	elf32_half_t stride() const noexcept { return _stride; }
+
+
+	[[nodiscard]]
+	uint8_t size() const noexcept { return _info; }
+	[[nodiscard]]
+	elf32_word_t sym() const noexcept { return _info >> 0x8U; }
+
+	static elf32_word_t make_info(const elf32_word_t sym,
+								   const uint8_t size) {
+		return (sym << 0x08U) + size;
+	}
 };
-#define ELF32_M_SYM(info)	((info) >> 8)
-#define ELF32_M_SIZE(info)	((unsigned char) (info))
-#define ELF32_M_INFO(sym, size)	(((sym) << 8) + (unsigned char) (size))
 
 /* 64-Bit Move Record */
 struct elf64_move_t final {
@@ -1960,23 +2121,37 @@ public:
 		_stride{stride} { /* NOP */ }
 
 	void value(const elf64_xword_t value) noexcept { _value = value; }
+	[[nodiscard]]
 	elf64_xword_t value() const noexcept { return _value; }
 
 	void info(const elf64_xword_t info) noexcept { _info = info; }
+	[[nodiscard]]
 	elf64_xword_t info() const noexcept { return _info; }
 
 	void offset(const elf64_off_t offset) noexcept { _offset = offset; }
+	[[nodiscard]]
 	elf64_off_t offset() const noexcept { return _offset; }
 
 	void repeat(const elf64_half_t repeat) noexcept { _repeat = repeat; }
+	[[nodiscard]]
 	elf64_half_t repeat() const noexcept { return _repeat; }
 
 	void stride(const elf64_half_t stride) noexcept { _stride = stride; }
+	[[nodiscard]]
 	elf64_half_t stride() const noexcept { return _stride; }
+
+
+	[[nodiscard]]
+	uint8_t size() const noexcept { return _info; }
+	[[nodiscard]]
+	elf64_xword_t sym() const noexcept { return _info >> 0x8U; }
+
+	static elf64_xword_t make_info(const elf64_xword_t sym,
+								   const uint8_t size) {
+		return (sym << 0x08U) + size;
+	}
+
 };
-#define ELF64_M_SYM(info)	((info) >> 8)
-#define ELF64_M_SIZE(info)	((unsigned char) (info))
-#define ELF64_M_INFO(sym, size)	(((sym) << 8) + (unsigned char) (size))
 
 
 struct elf_types_32_t final {
@@ -2074,7 +2249,7 @@ public:
 		_constructed{true} { /* NOP */ }
 
 	elf_t(fs::path file, bool readonly = true) noexcept :
-		_file{file}, _file_fd{_file.c_str(), O_RDONLY},
+		_file{std::move(file)}, _file_fd{_file.c_str(), O_RDONLY},
 		_file_map{_file_fd.map(PROT_READ)},
 		_header{}, _pheaders{}, _sheaders{}, _constructed{true} {
 
@@ -2101,13 +2276,17 @@ public:
 	bool elf_valid() const noexcept { return _header.ident().magic().is_valid(); }
 
 	void header(const ehdr_t header) noexcept { _header = header; }
+	[[nodiscard]]
 	ehdr_t header() const noexcept { return _header; }
 
 	void pheaders(const set_t<phdr_t> pheaders) noexcept { _pheaders = pheaders; }
+	[[nodiscard]]
 	set_t<phdr_t> pheaders() const noexcept { return _pheaders; }
 
 	void sheaders(const set_t<shdr_t> sheaders) noexcept { _sheaders = sheaders; }
+	[[nodiscard]]
 	set_t<shdr_t> sheaders() const noexcept { return _sheaders; }
+
 
 	std::string section_name(const size_t index) const noexcept { return std::string(_strtbl + index); }
 
@@ -2115,7 +2294,7 @@ public:
 using elf32_t = elf_t<elf_types_32_t>;
 using elf64_t = elf_t<elf_types_64_t>;
 
-uint32_t elf_hash(const uint8_t name[]);
+uint32_t elf_hash(const uint8_t* name);
 
 
 #endif /* __SNS_ELF_HH__ */

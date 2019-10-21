@@ -2,12 +2,13 @@
 #include <zlib.hh>
 
 
-uint32_t elf_hash(const uint8_t name[]) {
-	uint32_t hash{}, g{};
+uint32_t elf_hash(const uint8_t* name) {
+	uint32_t hash{};
+	uint32_t g{};
 	while(*name) {
-		hash = (hash << 4) + *name++;
-		if((g = hash & 0xF0000000)) {
-			hash ^= g >> 24;
+		hash = (hash << 4U) + *name++;
+		if((g = hash & 0xF0000000U)) {
+			hash ^= g >> 24U;
 		}
 		hash &= ~g;
 	}
