@@ -119,6 +119,7 @@ public:
 	constexpr mach_magic_t() noexcept :
 		_magic1{}, _magic2{}, _magic3{}, _magic4{} { /* NOP */ }
 
+	[[nodiscard]]
 	bool is_valid() const  noexcept {
 		return (_magic1 == 0xFE && _magic2 == 0xED
 			 && _magic3 == 0xFA && _magic4 == 0xCE);
@@ -131,6 +132,7 @@ public:
 		_magic4 = 0xCE;
 	}
 
+	[[nodiscard]]
 	std::array<uint8_t, 4> get() const noexcept {
 		return { _magic1, _magic2, _magic3, _magic4 };
 	}
