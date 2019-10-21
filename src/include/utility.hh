@@ -261,9 +261,11 @@ struct enum_pair_t final {
 	const char* _name;
 
 	void value(const T value) noexcept { _value = value; }
+	[[nodiscard]]
 	T value() const noexcept { return _value; }
 
 	void name(const char* name) noexcept { _name = name; }
+	[[nodiscard]]
 	const char* name() const noexcept { return _name; }
 };
 
