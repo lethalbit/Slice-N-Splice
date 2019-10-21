@@ -94,24 +94,31 @@ public:
 		{ /* NOP */ }
 
 	void magic(const uint16_t magic) noexcept { _magic = magic; }
+	[[nodiscard]]
 	uint16_t magic() const noexcept { return _magic; }
 
 	void sec_num(const uint16_t sec_num) noexcept { _sec_num = sec_num; }
+	[[nodiscard]]
 	uint16_t sec_num() const noexcept { return _sec_num; }
 
 	void timdat(const int32_t timdat) noexcept { _timdat = timdat; }
+	[[nodiscard]]
 	int32_t timdat() const noexcept { return _timdat; }
 
 	void symtbl(const offset_t symtbl) noexcept { _symtbl = symtbl; }
+	[[nodiscard]]
 	offset_t symtbl() const noexcept { return _symtbl; }
 
 	void sym_count(const uint32_t sym_count) noexcept { _sym_count = sym_count; }
+	[[nodiscard]]
 	uint32_t sym_count() const noexcept { return _sym_count; }
 
 	void opthdr_offset(const uint16_t opthdr_offset) noexcept { _opthdr_offset = opthdr_offset; }
+	[[nodiscard]]
 	uint16_t opthdr_offset() const noexcept { return _opthdr_offset; }
 
 	void flags(const xcoff_hdr_flags_t flags) noexcept { _flags = flags; }
+	[[nodiscard]]
 	xcoff_hdr_flags_t flags() const noexcept { return _flags; }
 };
 using xcoff32_hdr_t = xcoff_hdr<xcoff_types_32_t>;
