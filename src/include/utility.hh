@@ -3,16 +3,8 @@
 #if !defined(__SNS_UTILITY_HH__)
 #define __SNS_UTILITY_HH__
 
-
-
 #ifndef __has_cpp_attribute
 	#define __has_cpp_attribute(x) 0
-#endif
-
-#if __has_cpp_attribute(nodiscard)
-	#define NODSC [[nodiscard]]
-#else
-	#define NODSC
 #endif
 
 #if __has_cpp_attribute(alignas)
