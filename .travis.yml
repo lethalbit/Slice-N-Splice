@@ -2,6 +2,10 @@ language: cpp
 sudo: false
 dist: xenial
 
+arch:
+  - amd64
+  - arm64
+
 matrix:
   include:
     - os: linux
