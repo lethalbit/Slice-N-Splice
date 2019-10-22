@@ -34,8 +34,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: amd64
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
       before_install:
@@ -63,8 +61,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: amd64
       env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
       before_install:
@@ -92,8 +88,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: amd64
       env: CXX=clang++-9 CC=clang-9 GCOV='llvm-cov gcov'
       before_install:
@@ -124,8 +118,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: amd64
       env: CXX=clang++-8 CC=clang-8 GCOV='llvm-cov gcov'
       before_install:
@@ -156,8 +148,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: amd64
       env: CXX=clang++-7 CC=clang-7 GCOV='llvm-cov gcov'
       before_install:
@@ -189,7 +179,6 @@ jobs:
         - pip3 install --user meson
         - pip3 install --user codecov
 # ARM64
-  include:
     - arch: arm64
       env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
       before_install:
@@ -217,8 +206,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: arm64
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
       before_install:
@@ -246,8 +233,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: arm64
       env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
       before_install:
@@ -276,7 +261,6 @@ jobs:
         - pip3 install --user meson
         - pip3 install --user codecov
 # PPC64LE
-  include:
     - arch: ppc64le
       env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
       before_install:
@@ -304,8 +288,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: ppc64le
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
       before_install:
@@ -333,8 +315,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-
-  include:
     - arch: ppc64le
       env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
       before_install:
