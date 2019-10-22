@@ -20,10 +20,10 @@ before_install:
   - mkdir -p ~/.local/bin
   - eval "PATH=$PATH:~/.local/bin"
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main" -y
-  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" -y
-  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" -y
+  - [[ "$(uname -m)" == "x86_64" ]] && wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main" -y
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" -y
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" -y
 
 install:
   - sudo apt-get install python3 -y
@@ -32,9 +32,9 @@ install:
 
   - sudo apt-get install g++-8 -y
   - sudo apt-get install g++-9 -y
-  - sudo apt-get install clang-7 -y
-  - sudo apt-get install clang-8 -y
-  - sudo apt-get install clang-9 -y
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-7 -y
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-8 -y
+  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-9 -y
 
   - sudo apt-get install pkg-config -y
   - sudo apt-get install zlib1g-dev -y
@@ -52,10 +52,11 @@ install:
   - pip3 install --user codecov
 
 script:
+  - [[ "$(uname -m)" != "x86_64" && "$CXX" == *"clang"* ]] && exit 0
   - meson -Db_coverage=true -Db_sanitize=address,undefined build
   - ninja -C build
   - ninja -C build test
 
 after_success:
   - cd build
-  - codecov --gcov-exec "$GCOV"
+  - [[ "$(uname -m)" != "x86_64" && "$CXX" != *"clang"* ]] && codecov --gcov-exec "$GCOV"
