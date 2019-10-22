@@ -99,6 +99,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - libncursesw5-dev
             - zlib1g-dev
             - pkg-config
             - g++-8
@@ -117,6 +118,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - libncursesw5-dev
             - zlib1g-dev
             - pkg-config
             - g++-9
