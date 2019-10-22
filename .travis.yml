@@ -32,7 +32,7 @@ before_install:
   - cp ninja ~/.local/bin/
   - popd
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -y -
+  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
   - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7.0 main" -y
   - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8.0 main" -y
   - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9.0 main" -y
