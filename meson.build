@@ -102,7 +102,9 @@ if get_option('enable_fuzzing')
 			message('Enabling fuzz target for @0@ objects'.format(fmt))
 			obj_fuzzer = executable('@0@-fuzz-harness'.format(fmt),
 				'src/fuzz-harness/afl-fuzzer.cc',
-				srcs,
+				'src/utility.cc',
+				'src/zlib.cc',
+				'src/@0@.cc'.format(fmt),
 				cpp_args: [
 					'-D_fuzz_target_@0@'.format(fmt)
 				],
@@ -119,7 +121,6 @@ if get_option('enable_fuzzing')
 			message('Skipping fuzz target for @0@ objects'.format(fmt))
 		endif
 	endforeach
-
 endif
 
 
