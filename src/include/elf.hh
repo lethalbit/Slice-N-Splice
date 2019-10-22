@@ -2246,12 +2246,12 @@ private:
 public:
 	constexpr elf_t() noexcept :
 		_file{}, _file_fd{}, _file_map{}, _header{}, _pheaders{}, _sheaders{},
-		_constructed{true} { /* NOP */ }
+		_strtbl{}, _constructed{true} { /* NOP */ }
 
 	elf_t(fs::path file, bool readonly = true) noexcept :
 		_file{std::move(file)}, _file_fd{_file.c_str(), O_RDONLY},
 		_file_map{_file_fd.map(PROT_READ)},
-		_header{}, _pheaders{}, _sheaders{}, _constructed{true} {
+		_header{}, _pheaders{}, _sheaders{}, _strtbl{}, _constructed{true} {
 
 		if(!_file_map.valid()) {
 			_constructed = false;
