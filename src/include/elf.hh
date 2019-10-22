@@ -1708,60 +1708,40 @@ public:
 };
 
 /* 32-Bit Dynamic Section */
-struct elf32_dyn_t final {
+template<typename T>
+struct elf_dyn_t final {
+	using dyn_tag_t = typename T::dyn_tag_t;
+	using xword_t   = typename T::xword_t;
+	using addr_t    = typename T::addr_t;
 private:
-	elf32_dyn_tag_t _tag;
+	dyn_tag_t _tag;
 	union {
-		elf32_word_t value;
-		elf32_addr_t pointer;
+		xword_t value;
+		addr_t pointer;
 	} _data;
 public:
-	constexpr elf32_dyn_t() noexcept :
+	constexpr elf_dyn_t() noexcept :
 		_tag{}, _data{} { /* NOP */ }
 
-	elf32_dyn_t(elf32_dyn_tag_t tag, elf32_word_t value) noexcept :
+	elf_dyn_t(dyn_tag_t tag, xword_t value) noexcept :
 		_tag{tag}, _data{value} { /* NOP */ }
 
-	void tag(elf32_dyn_tag_t tag) noexcept { _tag = tag; }
+	void tag(dyn_tag_t tag) noexcept { _tag = tag; }
 	[[nodiscard]]
-	elf32_dyn_tag_t tag() const noexcept { return _tag; }
+	dyn_tag_t tag() const noexcept { return _tag; }
 
-	void value(elf32_word_t value) noexcept { _data.value = value; }
+	void value(xword_t value) noexcept { _data.value = value; }
 	[[nodiscard]]
-	elf32_word_t value() const noexcept { return _data.value; }
+	xword_t value() const noexcept { return _data.value; }
 
-	void pointer(elf32_addr_t pointer) noexcept { _data.pointer = pointer; }
+	void pointer(addr_t pointer) noexcept { _data.pointer = pointer; }
 	[[nodiscard]]
-	elf32_addr_t pointer() const noexcept { return _data.pointer; }
+	addr_t pointer() const noexcept { return _data.pointer; }
 };
 
-/* 64-Bit Dynamic Section */
-struct elf64_dyn_t final {
-private:
-	elf64_dyn_tag_t _tag;
-	union {
-		elf64_xword_t value;
-		elf64_addr_t pointer;
-	} _data;
-public:
-	constexpr elf64_dyn_t() noexcept :
-		_tag{}, _data{} { /* NOP */ }
+using elf32_dyn_t = elf_dyn_t<elf_types_32_t>;
+using elf64_dyn_t = elf_dyn_t<elf_types_64_t>;
 
-	elf64_dyn_t(elf64_dyn_tag_t tag, elf64_xword_t value) noexcept :
-		_tag{tag}, _data{value} { /* NOP */ }
-
-	void tag(elf64_dyn_tag_t tag) noexcept { _tag = tag; }
-	[[nodiscard]]
-	elf64_dyn_tag_t tag() const noexcept { return _tag; }
-
-	void value(elf64_xword_t value) noexcept { _data.value = value; }
-	[[nodiscard]]
-	elf64_xword_t value() const noexcept { return _data.value; }
-
-	void pointer(elf64_addr_t pointer) noexcept { _data.pointer = pointer; }
-	[[nodiscard]]
-	elf64_addr_t pointer() const noexcept { return _data.pointer; }
-};
 
 /* 32-Bit Compressed section header */
 struct elf32_chdr_t final {
@@ -2173,6 +2153,7 @@ struct elf_types_32_t final {
 	using rel_t     = elf32_rel_t;
 	using rela_t    = elf32_rela_t;
 	using phdr_t    = elf32_phdr_t;
+	using dyn_tag_t = elf32_dyn_tag_t;
 	using dyn_t     = elf32_dyn_t;
 	using chdr_t    = elf32_chdr_t;
 	using verdef_t  = elf32_verdef_t;
@@ -2203,6 +2184,7 @@ struct elf_types_64_t final {
 	using rel_t     = elf64_rel_t;
 	using rela_t    = elf64_rela_t;
 	using phdr_t    = elf64_phdr_t;
+	using dyn_tag_t = elf64_dyn_tag_t;
 	using dyn_t     = elf64_dyn_t;
 	using chdr_t    = elf64_chdr_t;
 	using verdef_t  = elf64_verdef_t;
