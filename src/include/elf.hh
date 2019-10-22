@@ -1481,26 +1481,32 @@ public:
 	elf_syminfo_flag_t flags() const noexcept { return _flags; }
 };
 
-/* 32-Bit Relocation Entries */
-struct elf32_rel_t final {
+template<typename T>
+struct elf_rel_t final {
+	using addr_t  = typename T::addr_t;
+	using xword_t = typename T::xword_t;
 private:
-	elf32_addr_t _offset;
-	elf32_word_t _info;
+	addr_t _offset;
+	xword_t _info;
 public:
-	constexpr elf32_rel_t() noexcept :
+	constexpr elf_rel_t() noexcept :
 		_offset{}, _info{} { /* NOP */ }
 
-	elf32_rel_t(elf32_addr_t offset, elf32_word_t info) noexcept :
+	elf_rel_t(addr_t offset, xword_t info) noexcept :
 		_offset{offset}, _info{info} { /* NOP */ }
 
-	void offset(const elf32_addr_t offset) noexcept { _offset = offset; }
+	void offset(const addr_t offset) noexcept { _offset = offset; }
 	[[nodiscard]]
-	elf32_addr_t offset() const noexcept { return _offset; }
+	addr_t offset() const noexcept { return _offset; }
 
-	void info(const elf32_word_t info) noexcept { _info = info; }
+	void info(const xword_t info) noexcept { _info = info; }
 	[[nodiscard]]
-	elf32_word_t info() const noexcept { return _info; }
+	xword_t info() const noexcept { return _info; }
 };
+
+using elf32_rel_t = elf_rel_t<elf_types_32_t>;
+using elf64_rel_t = elf_rel_t<elf_types_64_t>;
+
 
 struct elf32_rela_t final {
 private:
@@ -1539,26 +1545,6 @@ public:
 	}
 };
 
-/* 64-Bit Relocation Entries */
-struct elf64_rel_t final {
-private:
-	elf64_addr_t _offset;
-	elf64_xword_t _info;
-public:
-	constexpr elf64_rel_t() noexcept :
-		_offset{}, _info{} { /* NOP */ }
-
-	elf64_rel_t(elf64_addr_t offset, elf64_xword_t info) noexcept :
-		_offset{offset}, _info{info} { /* NOP */ }
-
-	void offset(const elf64_addr_t offset) noexcept { _offset = offset; }
-	[[nodiscard]]
-	elf64_addr_t offset() const noexcept { return _offset; }
-
-	void info(const elf64_xword_t info) noexcept { _info = info; }
-	[[nodiscard]]
-	elf64_xword_t info() const noexcept { return _info; }
-};
 
 struct elf64_rela_t final {
 private:
