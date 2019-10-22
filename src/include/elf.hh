@@ -1129,7 +1129,7 @@ private:
 	addr_t _entry;          /* Virtual Address of entry point */
 	offset_t _phoff;        /* Program header table offset */
 	offset_t _shoff;        /* Section header table offset */
-	word_t _flags;          /* Processor dependent flags */
+	elf_flag_t _flags;      /* Processor dependent flags */
 	half_t _ehsize;         /* Size of elf header */
 	half_t _phentsize;      /* Size of program header table entry */
 	half_t _phnum;          /* Number of program header table entries */
@@ -1182,9 +1182,9 @@ public:
 	[[nodiscard]]
 	offset_t shoff() const noexcept { return _shoff; }
 
-	void flags(const word_t flags) noexcept { _flags = flags; }
+	void flags(const elf_flag_t flags) noexcept { _flags = flags; }
 	[[nodiscard]]
-	word_t flags() const noexcept { return _flags; }
+	elf_flag_t flags() const noexcept { return _flags; }
 
 	void ehsize(const half_t ehsize) noexcept { _ehsize = ehsize; }
 	[[nodiscard]]
