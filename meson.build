@@ -94,3 +94,33 @@ catch_harness = executable(
 	install: false,
 )
 test('Catch2 test', catch_harness)
+
+if get_option('enable_fuzzing')
+	obj_fmts = [ 'aout', 'coff', 'ecoff', 'elf', 'macho', 'os360', 'pe', 'xcoff' ]
+	foreach fmt : obj_fmts
+		if get_option('fuzz_@0@'.format(fmt))
+			message('Enabling fuzz target for @0@ objects'.format(fmt))
+			obj_fuzzer = executable('@0@-fuzz-harness'.format(fmt),
+				'src/fuzz-harness/afl-fuzzer.cc',
+				srcs,
+				cpp_args: [
+					'-D_fuzz_target_@0@'.format(fmt)
+				],
+				include_directories: [ include_directories('src/include', 'third_party') ] ,
+				dependencies: [ deps ]
+			)
+
+			run_target('fuzz-@0@'.format(fmt),
+				command: ['etc/afl-fuzz.sh', obj_fuzzer.full_path()],
+				depends: obj_fuzzer
+			)
+			message('Added \'fuzz-@0@\' target'.format(fmt))
+		else
+			message('Skipping fuzz target for @0@ objects'.format(fmt))
+		endif
+	endforeach
+
+endif
+
+
+run_target('lint', command: ['etc/lint.sh'])

@@ -1,0 +1,13 @@
+# Fuzzing Options
+option('enable_fuzzing', type: 'boolean', value: false, description: 'This will assume that CC and CXX are using AFL and will build the fuzzing targets')
+
+option('fuzz_aout', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable aout object fuzzing')
+option('fuzz_coff', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable coff object fuzzing')
+option('fuzz_ecoff', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable ecoff object fuzzing')
+option('fuzz_aout', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable elf object fuzzing')
+option('fuzz_elf', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable aout object fuzzing')
+option('fuzz_macho', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable macho object fuzzing')
+option('fuzz_os360', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable os360 object fuzzing')
+option('fuzz_pe', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable pe object fuzzing')
+option('fuzz_xcoff', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable xcoff object fuzzing')
+
