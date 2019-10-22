@@ -9,16 +9,11 @@ arch:
   - ppc64le
 
 env:
-  - CC=gcc-9 GCOV=gcov-9
-  - CC=gcc-8 GCOV=gcov-8
-  - CC=clang-7 GCOV='llvm-cov gcov'
-  - CC=clang-8 GCOV='llvm-cov gcov'
-  - CC=clang-9 GCOV='llvm-cov gcov'
-  - CXX=g++-9 GCOV=gcov-9
-  - CXX=g++-8 GCOV=gcov-8
-  - CXX=clang++-7 GCOV='llvm-cov gcov'
-  - CXX=clang++-8 GCOV='llvm-cov gcov'
-  - CXX=clang++-9 GCOV='llvm-cov gcov'
+  - CXX=g++-9 CC=gcc-9 GCOV=gcov-9
+  - CXX=g++-8 CC=gcc-8 GCOV=gcov-8
+  - CXX=clang++-7 CC=clang-7 GCOV='llvm-cov gcov'
+  - CXX=clang++-8 CC=clang-8 GCOV='llvm-cov gcov'
+  - CXX=clang++-9 CC=clang-9 GCOV='llvm-cov gcov'
 
 
 before_install:
