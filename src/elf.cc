@@ -63,6 +63,8 @@ const std::array<const enum_pair_t<elf_osabi_t>, 19> elf_osabi_s{{
 	{ elf_osabi_t::AmigaROS,      "Amiga Research OS" },
 	{ elf_osabi_t::FenixOS,       "FenixOS"           },
 	{ elf_osabi_t::OpenVOS,       "OpenVOS"           },
+	{ elf_osabi_t::ArmAEABI,      "Arm AEABI"         },
+	{ elf_osabi_t::Arm,           "Arm"               },
 	{ elf_osabi_t::Standalone,    "Standalone"        },
 }};
 std::ostream& operator<<(std::ostream& out, const elf_osabi_t& abi) {
