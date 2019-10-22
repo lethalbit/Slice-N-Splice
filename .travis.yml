@@ -78,9 +78,7 @@ matrix:
       arch: amd64
       addons:
         apt:
-          sources:
-            - ppa:ubuntu-toolchain-r/test
-            - llvm-toolchain-bionic-7
+            -
           packages:
             - g++-7
             - clang-7
@@ -176,6 +174,11 @@ before_install:
   - python3 ./configure.py --bootstrap
   - cp ninja ~/.local/bin/
   - popd
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo add-apt-repository ppa:llvm-toolchain-bionic-7 -y
+  - sudo add-apt-repository ppa:llvm-toolchain-bionic-8 -y
+  - sudo add-apt-repository ppa:llvm-toolchain-bionic-9 -y
+
 
 install:
   - pip3 install --user wheel
