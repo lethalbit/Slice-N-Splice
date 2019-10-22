@@ -1529,13 +1529,13 @@ public:
 
 
 	[[nodiscard]]
-	elf32_word_t sym() const noexcept { return (_info >> 0x20U); }
+	elf32_word_t sym() const noexcept { return (_info >> 0x08U); }
 	[[nodiscard]]
 	elf32_word_t type() const noexcept { return (_info & 0xFFFFFFFFUL); }
 
 	static elf32_word_t make_info(elf32_word_t sym,
 								  elf32_word_t type) {
-		return (sym << 0x20U) + (type & 0xFFFFFFFFUL);
+		return (sym << 0x08U) + (type & 0xFFFFFFFFUL);
 	}
 };
 
@@ -1586,12 +1586,12 @@ public:
 	elf64_sword_t addend() const noexcept { return _addend; }
 
 	[[nodiscard]]
-	elf64_word_t sym() const noexcept { return _info >> 0x20U; }
+	elf64_xword_t sym() const noexcept { return _info >> 0x20U; }
 	[[nodiscard]]
-	elf64_word_t type() const noexcept { return _info & 0xFFFFFFFFUL; }
+	elf64_xword_t type() const noexcept { return _info & 0xFFFFFFFFUL; }
 
-	static elf64_word_t make_info(elf64_word_t sym,
-								  elf64_word_t type) {
+	static elf64_xword_t make_info(elf64_xword_t sym,
+								   elf64_xword_t type) {
 		return (sym << 0x20U) + (type & 0xFFFFFFFFUL);
 	}
 };
