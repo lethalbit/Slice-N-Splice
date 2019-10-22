@@ -3,60 +3,371 @@ dist: bionic
 os:
   - linux
 
-arch:
-  - amd64
-  - arm64
-  - ppc64le
 
-env:
-  - CXX=g++-9 CC=gcc-9 GCOV=gcov-9
-  - CXX=g++-8 CC=gcc-8 GCOV=gcov-8
-  - CXX=clang++-7 CC=clang-7 GCOV='llvm-cov gcov'
-  - CXX=clang++-8 CC=clang-8 GCOV='llvm-cov gcov'
-  - CXX=clang++-9 CC=clang-9 GCOV='llvm-cov gcov'
+jobs:
+# AMD64
+  include:
+    - arch: amd64
+      env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
 
+        - sudo apt-get install g++-9 -y
 
-before_install:
-  - mkdir -p ~/.local/bin
-  - eval "PATH=$PATH:~/.local/bin"
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - [[ "$(uname -m)" == "x86_64" ]] && wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main" -y
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" -y
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" -y
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
 
-install:
-  - sudo apt-get install python3 -y
-  - sudo apt-get install python3-pip -y
-  - sudo apt-get install python3-setuptools -y
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
 
-  - sudo apt-get install g++-8 -y
-  - sudo apt-get install g++-9 -y
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-7 -y
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-8 -y
-  - [[ "$(uname -m)" == "x86_64" ]] && sudo apt-get install clang-9 -y
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
 
-  - sudo apt-get install pkg-config -y
-  - sudo apt-get install zlib1g-dev -y
-  - sudo apt-get install libncursesw5-dev -y
+  include:
+    - arch: amd64
+      env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
 
-  - pushd /tmp
-  - git clone https://github.com/ninja-build/ninja.git
-  - cd ninja
-  - python3 ./configure.py --bootstrap
-  - cp ninja ~/.local/bin/
-  - popd
+        - sudo apt-get install g++-8 -y
 
-  - pip3 install --user wheel
-  - pip3 install --user meson
-  - pip3 install --user codecov
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: amd64
+      env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-7 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: amd64
+      env: CXX=clang++-9 CC=clang-9 GCOV='llvm-cov gcov'
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9 main" -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-9 -y
+        - sudo apt-get install clang-9 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: amd64
+      env: CXX=clang++-8 CC=clang-8 GCOV='llvm-cov gcov'
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8 main" -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-8 -y
+        - sudo apt-get install clang-8 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: amd64
+      env: CXX=clang++-7 CC=clang-7 GCOV='llvm-cov gcov'
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7 main" -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-7 -y
+        - sudo apt-get install clang-7 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+# ARM64
+  include:
+    - arch: arm64
+      env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-9 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: arm64
+      env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-8 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: arm64
+      env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-7 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+# PPC64LE
+  include:
+    - arch: ppc64le
+      env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-9 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: ppc64le
+      env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-8 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
+
+  include:
+    - arch: ppc64le
+      env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7
+      before_install:
+        - mkdir -p ~/.local/bin
+        - eval "PATH=$PATH:~/.local/bin"
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+      install:
+        - sudo apt-get install python3 -y
+        - sudo apt-get install python3-pip -y
+        - sudo apt-get install python3-setuptools -y
+
+        - sudo apt-get install g++-7 -y
+
+        - sudo apt-get install pkg-config -y
+        - sudo apt-get install zlib1g-dev -y
+        - sudo apt-get install libncursesw5-dev -y
+
+        - pushd /tmp
+        - git clone https://github.com/ninja-build/ninja.git
+        - cd ninja
+        - python3 ./configure.py --bootstrap
+        - cp ninja ~/.local/bin/
+        - popd
+
+        - pip3 install --user wheel
+        - pip3 install --user meson
+        - pip3 install --user codecov
 
 script:
-  - [[ "$(uname -m)" != "x86_64" && "$CXX" == *"clang"* ]] && exit 0
   - meson -Db_coverage=true -Db_sanitize=address,undefined build
   - ninja -C build
   - ninja -C build test
 
 after_success:
   - cd build
-  - [[ "$(uname -m)" != "x86_64" && "$CXX" != *"clang"* ]] && codecov --gcov-exec "$GCOV"
+  - codecov --gcov-exec "$GCOV"
