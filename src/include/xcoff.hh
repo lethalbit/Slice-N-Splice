@@ -22,7 +22,7 @@ struct xcoff_types_32_t final {
 	using xsize_t  = uint32_t;
 	using half_t   = uint16_t;
 
-	constexpr static uint16_t magic = 0x01DF;
+	constexpr static uint16_t magic = 0x01DFU;
 };
 
 struct xcoff_types_64_t final {
@@ -31,27 +31,27 @@ struct xcoff_types_64_t final {
 	using xsize_t  = uint64_t;
 	using half_t   = uint16_t;
 
-	constexpr static uint16_t magic = 0x01F7;
+	constexpr static uint16_t magic = 0x01F7U;
 };
 
 enum class xcoff_hdr_flags_t : uint16_t {
-	None        = 0x0000,
-	NoRealoc    = 0x0001,
-	Exec        = 0x0002,
-	NoLineNos   = 0x0004,
-	Reserved_1  = 0x0008,
-	FDPRProf    = 0x0010,
-	FDPROpti    = 0x0020,
-	DSASupport  = 0x0040,
-	Reserved_2  = 0x0080,
-	VarPageSize = 0x0100,
-	Reserved_3  = 0x0200,
-	Reserved_4  = 0x0400,
-	Reserved_5  = 0x0800,
-	DynamicLoad = 0x1000,
-	SharedObj   = 0x2000,
-	LoadOnly    = 0x4000,
-	Reserved_6  = 0x8000,
+	None        = 0x0000U,
+	NoRealoc    = 0x0001U,
+	Exec        = 0x0002U,
+	NoLineNos   = 0x0004U,
+	Reserved_1  = 0x0008U,
+	FDPRProf    = 0x0010U,
+	FDPROpti    = 0x0020U,
+	DSASupport  = 0x0040U,
+	Reserved_2  = 0x0080U,
+	VarPageSize = 0x0100U,
+	Reserved_3  = 0x0200U,
+	Reserved_4  = 0x0400U,
+	Reserved_5  = 0x0800U,
+	DynamicLoad = 0x1000U,
+	SharedObj   = 0x2000U,
+	LoadOnly    = 0x4000U,
+	Reserved_6  = 0x8000U,
 };
 template<>
 struct EnableBitmask<xcoff_hdr_flags_t>{
@@ -61,7 +61,7 @@ extern const std::array<const enum_pair_t<xcoff_hdr_flags_t>, 17> xcoff_hdr_flag
 extern std::ostream& operator<<(std::ostream& out, const xcoff_hdr_flags_t& xhdrflag);
 
 enum class xcoff_opthdr_flags_t : uint16_t {
-	None = 0x0000,
+	None = 0x0000U,
 };
 template<>
 struct EnableBitmask<xcoff_opthdr_flags_t>{
