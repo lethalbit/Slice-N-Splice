@@ -178,7 +178,6 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-  allow_failures:
 # ARM64
     - arch: arm64
       env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
@@ -261,6 +260,7 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
+  allow_failures:
 # PPC64LE
     - arch: ppc64le
       env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
