@@ -20,83 +20,83 @@ namespace fs = std::experimental::filesystem;
 
 /* Mach-O CPU Type */
 enum class mach_cpu_t : uint32_t {
-	Any       = 0xFFFFFFFF,
-	None      = 0x00000000,
-	Vax       = 0x00000001,
-	MC680X0   = 0x00000006,
-	x86       = 0x00000007,
-	x86_64    = (mach_cpu_t::x86 | 0x01000000),
-	MIPS      = 0x00000008,
-	MC98000   = 0x0000000A,
-	HPPA      = 0x0000000B,
-	ARM       = 0x0000000C,
-	ARM64     = (mach_cpu_t::ARM | 0x01000000),
-	MC88000   = 0x0000000D,
-	SPARC     = 0x0000000E,
-	I860      = 0x0000000F,
-	ALPHA     = 0x00000010,
-	PowerPC   = 0x00000012,
-	PowerPC64 = (mach_cpu_t::PowerPC | 0x01000000)
+	Any       = 0xFFFFFFFFU,
+	None      = 0x00000000U,
+	Vax       = 0x00000001U,
+	MC680X0   = 0x00000006U,
+	x86       = 0x00000007U,
+	x86_64    = (mach_cpu_t::x86 | 0x01000000U),
+	MIPS      = 0x00000008U,
+	MC98000   = 0x0000000AU,
+	HPPA      = 0x0000000BU,
+	ARM       = 0x0000000CU,
+	ARM64     = (mach_cpu_t::ARM | 0x01000000U),
+	MC88000   = 0x0000000DU,
+	SPARC     = 0x0000000EU,
+	I860      = 0x0000000FU,
+	ALPHA     = 0x00000010U,
+	PowerPC   = 0x00000012U,
+	PowerPC64 = (mach_cpu_t::PowerPC | 0x01000000U)
 };
 extern const std::array<const enum_pair_t<mach_cpu_t>, 17> mach_cpu_s;
 extern std::ostream& operator<<(std::ostream& out, const mach_cpu_t& mcpu);
 
 /* Mach-O CPU Sub-type */
 enum class mach_cpu_sub_t : uint32_t {
-	Multiple = 0xFFFFFFFF,
-	LSB      = 0x00,
-	MSB      = 0x01,
+	Multiple = 0xFFFFFFFFU,
+	LSB      = 0x00000000U,
+	MSB      = 0x00000001U,
 };
 extern const std::array<const enum_pair_t<mach_cpu_sub_t>, 3> mach_cpu_sub_s;
 extern std::ostream& operator<<(std::ostream& out, const mach_cpu_sub_t& mcpusub);
 
 /* Mach-O CPU Sub-type */
 enum class mach_filetype_t : uint32_t {
-	None       = 0x00000000,
-	Object     = 0x00000001,
-	Execute    = 0x00000002,
-	FVMLib     = 0x00000003,
-	Core       = 0x00000004,
-	Preload    = 0x00000005,
-	Dylib      = 0x00000006,
-	Dylinker   = 0x00000007,
-	Bundle     = 0x00000008,
-	DylibStub  = 0x00000009,
-	DSym       = 0x0000000A,
-	KEXTBundle = 0x0000000B,
+	None       = 0x00000000U,
+	Object     = 0x00000001U,
+	Execute    = 0x00000002U,
+	FVMLib     = 0x00000003U,
+	Core       = 0x00000004U,
+	Preload    = 0x00000005U,
+	Dylib      = 0x00000006U,
+	Dylinker   = 0x00000007U,
+	Bundle     = 0x00000008U,
+	DylibStub  = 0x00000009U,
+	DSym       = 0x0000000AU,
+	KEXTBundle = 0x0000000BU,
 };
 extern const std::array<const enum_pair_t<mach_filetype_t>, 17> mach_filetype_s;
 extern std::ostream& operator<<(std::ostream& out, const mach_filetype_t& mftype);
 
 
 enum class mach_flags_t : uint32_t {
-	None                = 0x00000000,
-	NoUndefs            = 0x00000001,
-	IncrLink            = 0x00000002,
-	DyndLink            = 0x00000004,
-	BinDataLoad         = 0x00000008,
-	PreBound            = 0x00000010,
-	SplitSegs           = 0x00000020,
-	LazyInit            = 0x00000040,
-	TwoLevel            = 0x00000080,
-	ForceFlat           = 0x00000100,
-	NoMultiDefs         = 0x00000200,
-	NoFixePreBinding    = 0x00000400,
-	Prebindable         = 0x00000800,
-	AllModsBound        = 0x00001000,
-	SubsectionsViaSyms  = 0x00002000,
-	Canonical           = 0x00004000,
-	WeakDefines         = 0x00008000,
-	BindsToWeak         = 0x00010000,
-	AllowStackExecution = 0x00020000,
-	RootSafe            = 0x00040000,
-	SetUIDSafe          = 0x00080000,
-	NoReexportedDylibs  = 0x00100000,
-	PIE                 = 0x00200000,
-	DeadStrippableDylib = 0x00400000,
-	HasTLVDescriptions = 0x00800000,
-	NoHeapExecution    = 0x01000000,
-	AppExtensionSafe   = 0x02000000,
+	None                = 0x00000000U,
+	NoUndefs            = 0x00000001U,
+	IncrLink            = 0x00000002U,
+	DyndLink            = 0x00000004U,
+	BinDataLoad         = 0x00000008U,
+	PreBound            = 0x00000010U,
+	SplitSegs           = 0x00000020U,
+	LazyInit            = 0x00000040U,
+	TwoLevel            = 0x00000080U,
+	ForceFlat           = 0x00000100U,
+	NoMultiDefs         = 0x00000200U,
+	NoFixePreBinding    = 0x00000400U,
+	Prebindable         = 0x00000800U,
+	AllModsBound        = 0x00001000U,
+	SubsectionsViaSyms  = 0x00002000U,
+	Canonical           = 0x00004000U,
+	WeakDefines         = 0x00008000U,
+	BindsToWeak         = 0x00010000U,
+	AllowStackExecution = 0x00020000U,
+	RootSafe            = 0x00040000U,
+	SetUIDSafe          = 0x00080000U,
+	NoReexportedDylibs  = 0x00100000U,
+	PIE                 = 0x00200000U,
+	DeadStrippableDylib = 0x00400000U,
+	HasTLVDescriptions  = 0x00800000U,
+	NoHeapExecution     = 0x01000000U,
+	AppExtensionSafe    = 0x02000000U,
 };
 template<>
 struct EnableBitmask<mach_flags_t>{
@@ -121,15 +121,15 @@ public:
 
 	[[nodiscard]]
 	bool is_valid() const  noexcept {
-		return (_magic1 == 0xFE && _magic2 == 0xED
-			 && _magic3 == 0xFA && _magic4 == 0xCE);
+		return (_magic1 == 0xFEU && _magic2 == 0xEDU
+			 && _magic3 == 0xFAU && _magic4 == 0xCEU);
 	}
 
 	void set() noexcept {
-		_magic1 = 0xFE;
-		_magic2 = 0xED;
-		_magic3 = 0xFA;
-		_magic4 = 0xCE;
+		_magic1 = 0xFEU;
+		_magic2 = 0xEDU;
+		_magic3 = 0xFAU;
+		_magic4 = 0xCEU;
 	}
 
 	[[nodiscard]]
