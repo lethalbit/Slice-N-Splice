@@ -87,8 +87,6 @@ matrix:
       arch: arm64
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
             - libncursesw5-dev
             - zlib1g-dev
@@ -106,8 +104,6 @@ matrix:
       arch: arm64
       addons:
         apt:
-          sources:
-            - ubuntu-toolchain-r-test
           packages:
             - libncursesw5-dev
             - zlib1g-dev
@@ -126,9 +122,6 @@ matrix:
     #   arch: arm64
     #   addons:
     #     apt:
-    #       sources:
-    #         - ubuntu-toolchain-r-test
-    #         - llvm-toolchain-xenial-8
     #       packages:
     #         - g++-8
     #         - clang-8
@@ -144,9 +137,6 @@ matrix:
     #   arch: arm64
     #   addons:
     #     apt:
-    #       sources:
-    #         - ubuntu-toolchain-r-test
-    #         - llvm-toolchain-xenial-7
     #       packages:
     #         - g++-7
     #         - clang-7
@@ -168,9 +158,11 @@ before_install:
   - cp ninja ~/.local/bin/
   - popd
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo add-apt-repository ppa:llvm-toolchain-bionic-7 -y
-  - sudo add-apt-repository ppa:llvm-toolchain-bionic-8 -y
-  - sudo add-apt-repository ppa:llvm-toolchain-bionic-9 -y
+  - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -y -
+  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-7.0 main" -y
+  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8.0 main" -y
+  - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9.0 main" -y
+
 
 
 install:
