@@ -1213,139 +1213,82 @@ using elf64_ehdr_t = elf_ehdr_t<elf_types_64_t>;
 
 
 
-/* 32-Bit Section header */
-struct elf32_shdr_t final {
+/* Elf Section Header */
+template<typename T>
+struct elf_shdr_t final {
+	using addr_t    = typename T::addr_t;
+	using offset_t  = typename T::offset_t;
+	using shflags_t = typename T::shflags_t;
+	using word_t    = typename T::word_t;
+	using xword_t   = typename T::xword_t;
 private:
-	elf32_word_t _name;
+	word_t _name;
 	elf_shtype_t _type;
-	elf32_shflags_t _flags;
-	elf32_addr_t _addr;
-	elf32_off_t _offset;
-	elf32_word_t _size;
-	elf32_word_t _link;
-	elf32_word_t _info;
-	elf32_word_t _addraline;
-	elf32_word_t _entsize;
+	shflags_t _flags;
+	addr_t _addr;
+	offset_t _offset;
+	xword_t _size;
+	word_t _link;
+	word_t _info;
+	xword_t _addraline;
+	xword_t _entsize;
 public:
-	constexpr elf32_shdr_t() noexcept :
+	constexpr elf_shdr_t() noexcept :
 		_name{}, _type{}, _flags{}, _addr{}, _offset{}, _size{},
 		_link{}, _info{}, _addraline{}, _entsize{} { /* NOP */ }
 
-	elf32_shdr_t(elf32_word_t name, elf32_word_t type, elf32_word_t flags,
-			elf32_addr_t addr, elf32_off_t offset, elf32_word_t size,
-			elf32_word_t link, elf32_word_t info, elf32_word_t addraline,
-			elf32_word_t entsize) noexcept :
+	elf_shdr_t(word_t name, elf_shtype_t type, shflags_t flags,
+			addr_t addr, offset_t offset, xword_t size,
+			word_t link, word_t info, xword_t addraline,
+			xword_t entsize) noexcept :
 		_name{name}, _type{type}, _flags{flags}, _addr{addr}, _offset{offset},
 		_size{size}, _link{link}, _info{info}, _addraline{addraline},
 		_entsize{entsize} { /* NOP */}
 
-	void name(const elf32_word_t name) noexcept { _name = name; }
+	void name(const word_t name) noexcept { _name = name; }
 	[[nodiscard]]
-	elf32_word_t name() const noexcept { return _name; }
+	word_t name() const noexcept { return _name; }
 
 	void type(const elf_shtype_t type) noexcept { _type = type; }
 	[[nodiscard]]
 	elf_shtype_t type() const noexcept { return _type; }
 
-	void flags(const elf32_shflags_t flags) noexcept { _flags = flags; }
+	void flags(const shflags_t flags) noexcept { _flags = flags; }
 	[[nodiscard]]
-	elf32_shflags_t flags() const noexcept { return _flags; }
+	shflags_t flags() const noexcept { return _flags; }
 
-	void addr(const elf32_addr_t addr) noexcept { _addr = addr; }
+	void addr(const addr_t addr) noexcept { _addr = addr; }
 	[[nodiscard]]
-	elf32_addr_t addr() const noexcept { return _addr; }
+	addr_t addr() const noexcept { return _addr; }
 
-	void offset(const elf32_off_t offset) noexcept { _offset = offset; }
+	void offset(const offset_t offset) noexcept { _offset = offset; }
 	[[nodiscard]]
-	elf32_off_t offset() const noexcept { return _offset; }
+	offset_t offset() const noexcept { return _offset; }
 
-	void size(const elf32_word_t size) noexcept { _size = size; }
+	void size(const xword_t size) noexcept { _size = size; }
 	[[nodiscard]]
-	elf32_word_t size() const noexcept { return _size; }
+	xword_t size() const noexcept { return _size; }
 
-	void link(const elf32_word_t link) noexcept { _link = link; }
+	void link(const word_t link) noexcept { _link = link; }
 	[[nodiscard]]
-	elf32_word_t link() const noexcept { return _link; }
+	word_t link() const noexcept { return _link; }
 
-	void info(const elf32_word_t info) noexcept { _info = info; }
+	void info(const word_t info) noexcept { _info = info; }
 	[[nodiscard]]
-	elf32_word_t info() const noexcept { return _info; }
+	word_t info() const noexcept { return _info; }
 
-	void addraline(const elf32_word_t addraline) noexcept { _addraline = addraline; }
+	void addraline(const xword_t addraline) noexcept { _addraline = addraline; }
 	[[nodiscard]]
-	elf32_word_t addraline() const noexcept { return _addraline; }
+	xword_t addraline() const noexcept { return _addraline; }
 
-	void entsize(const elf32_word_t entsize) noexcept { _entsize = entsize; }
+	void entsize(const xword_t entsize) noexcept { _entsize = entsize; }
 	[[nodiscard]]
-	elf32_word_t entsize() const noexcept { return _entsize; }
+	xword_t entsize() const noexcept { return _entsize; }
 };
 
-/* 64-Bit Section header */
-struct elf64_shdr_t final {
-private:
-	elf64_word_t _name;
-	elf_shtype_t _type;
-	elf64_shflags_t _flags;
-	elf64_addr_t _addr;
-	elf64_off_t  _offset;
-	elf64_xword_t _size;
-	elf64_word_t _link;
-	elf64_word_t _info;
-	elf64_xword_t _addraline;
-	elf64_xword_t _entsize;
-public:
-	constexpr elf64_shdr_t() noexcept :
-		_name{}, _type{}, _flags{}, _addr{}, _offset{}, _size{},
-		_link{}, _info{}, _addraline{}, _entsize{} { /* NOP */ }
+using elf32_shdr_t = elf_shdr_t<elf_types_32_t>;
+using elf64_shdr_t = elf_shdr_t<elf_types_32_t>;
 
-	elf64_shdr_t(elf64_word_t name, elf64_word_t type, elf64_word_t flags,
-			elf64_addr_t addr, elf64_off_t offset, elf64_word_t size,
-			elf64_word_t link, elf64_word_t info, elf64_word_t addraline,
-			elf64_word_t entsize) noexcept :
-		_name{name}, _type{type}, _flags{flags}, _addr{addr}, _offset{offset},
-		_size{size}, _link{link}, _info{info}, _addraline{addraline},
-		_entsize{entsize} { /* NOP */ }
-
-	void name(const elf64_word_t name) noexcept { _name = name; }
-	[[nodiscard]]
-	elf64_word_t name() const noexcept { return _name; }
-
-	void type(const elf_shtype_t type) noexcept { _type = type; }
-	[[nodiscard]]
-	elf_shtype_t type() const noexcept { return _type; }
-
-	void flags(const elf64_shflags_t flags) noexcept { _flags = flags; }
-	[[nodiscard]]
-	elf64_shflags_t flags() const noexcept { return _flags; }
-
-	void addr(const elf64_addr_t addr) noexcept { _addr = addr; }
-	[[nodiscard]]
-	elf64_addr_t addr() const noexcept { return _addr; }
-
-	void offset(const elf64_off_t offset) noexcept { _offset = offset; }
-	[[nodiscard]]
-	elf64_off_t offset() const noexcept { return _offset; }
-
-	void size(const elf64_xword_t size) noexcept { _size = size; }
-	[[nodiscard]]
-	elf64_xword_t size() const noexcept { return _size; }
-
-	void link(const elf64_word_t link) noexcept { _link = link; }
-	[[nodiscard]]
-	elf64_word_t link() const noexcept { return _link; }
-
-	void info(const elf64_word_t info) noexcept { _info = info; }
-	[[nodiscard]]
-	elf64_word_t info() const noexcept { return _info; }
-
-	void addraline(const elf64_xword_t addraline) noexcept { _addraline = addraline; }
-	[[nodiscard]]
-	elf64_xword_t addraline() const noexcept { return _addraline; }
-
-	void entsize(const elf64_xword_t entsize) noexcept { _entsize = entsize; }
-	[[nodiscard]]
-	elf64_xword_t entsize() const noexcept { return _entsize; }
-};
 
 /* 32-Bit Symbol Table Entry */
 struct elf32_symbol_t final {
@@ -2099,6 +2042,7 @@ struct elf_types_32_t final {
 	using sword_t   = ALIGN(0x04) int32_t;
 	using xsword_t  = sword_t;
 	using uchar_t   = ALIGN(0x01) uint8_t;
+
 	/* Structure Definitions */
 	using ident_t   = elf_ident_t;
 	using ehdr_t    = elf32_ehdr_t;
@@ -2108,7 +2052,6 @@ struct elf_types_32_t final {
 	using rel_t     = elf32_rel_t;
 	using rela_t    = elf32_rela_t;
 	using phdr_t    = elf32_phdr_t;
-	using dyn_tag_t = elf32_dyn_tag_t;
 	using dyn_t     = elf32_dyn_t;
 	using chdr_t    = elf32_chdr_t;
 	using verdef_t  = elf32_verdef_t;
@@ -2118,6 +2061,11 @@ struct elf_types_32_t final {
 	using auxv_t    = elf32_auxv_t;
 	using nhdr_t    = elf32_nhdr_t;
 	using move_t    = elf32_move_t;
+
+	/* Flags / Enums */
+	using shflags_t = elf32_shflags_t;
+	using dyn_tag_t = elf32_dyn_tag_t;
+
 
 	/* Constants */
 	constexpr static uint8_t sym_shift = 0x08U;
@@ -2133,6 +2081,7 @@ struct elf_types_64_t final {
 	using sword_t  = ALIGN(0x04) int32_t;
 	using sxword_t = ALIGN(0x08) int64_t;
 	using uchar_t  = ALIGN(0x01) uint8_t;
+
 	/* Structure Definitions */
 	using ident_t   = elf_ident_t;
 	using ehdr_t    = elf64_ehdr_t;
@@ -2142,7 +2091,6 @@ struct elf_types_64_t final {
 	using rel_t     = elf64_rel_t;
 	using rela_t    = elf64_rela_t;
 	using phdr_t    = elf64_phdr_t;
-	using dyn_tag_t = elf64_dyn_tag_t;
 	using dyn_t     = elf64_dyn_t;
 	using chdr_t    = elf64_chdr_t;
 	using verdef_t  = elf64_verdef_t;
@@ -2152,6 +2100,10 @@ struct elf_types_64_t final {
 	using auxv_t    = elf64_auxv_t;
 	using nhdr_t    = elf64_nhdr_t;
 	using move_t    = elf64_move_t;
+
+	/* Flags / Enums */
+	using shflags_t = elf64_shflags_t;
+	using dyn_tag_t = elf64_dyn_tag_t;
 
 	/* Constants */
 	constexpr static uint8_t sym_shift = 0x20U;
