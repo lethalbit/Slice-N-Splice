@@ -1,151 +1,25 @@
 language: cpp
 dist: bionic
+os:
+  - linux
 
-# AMD64 Builds
-matrix:
-  include:
-    - os: linux
-      compiler: gcc-8
-      arch: amd64
-      addons:
-        apt:
-          packages:
-            - g++-8
-            - python3
-            - python3-pip
-            - python3-setuptools
+arch:
+  - amd64
+  - arm64
+  - ppc64le
 
-      env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && GCOV=gcov-8"
+env:
+  - CC=gcc-9 GCOV=gcov-9
+  - CC=gcc-8 GCOV=gcov-8
+  - CC=clang-7 GCOV='llvm-cov gcov'
+  - CC=clang-8 GCOV='llvm-cov gcov'
+  - CC=clang-9 GCOV='llvm-cov gcov'
+  - CXX=g++-9 GCOV=gcov-9
+  - CXX=g++-8 GCOV=gcov-8
+  - CXX=clang++-7 GCOV='llvm-cov gcov'
+  - CXX=clang++-8 GCOV='llvm-cov gcov'
+  - CXX=clang++-9 GCOV='llvm-cov gcov'
 
-    - os: linux
-      compiler: gcc-9
-      arch: amd64
-      addons:
-        apt:
-          sources:
-            - ppa:ubuntu-toolchain-r/test
-          packages:
-            - g++-9
-            - python3
-            - python3-pip
-            - python3-setuptools
-
-      env:
-        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9 && GCOV=gcov-9"
-
-    # - os: linux
-    #   compiler: clang-9
-    #   arch: amd64
-    #   addons:
-    #     apt:
-    #       sources:
-    #         - ppa:ubuntu-toolchain-r/test
-    #         - llvm-toolchain-bionic-9
-    #       packages:
-    #         - g++-9
-    #         - clang-9
-    #         - python3
-    #         - python3-pip
-    #         - python3-setuptools
-
-    #   env:
-    #     - MATRIX_EVAL="CC=clang-9 && CXX=clang++-9 && GCOV='llvm-cov gcov'"
-
-    - os: linux
-      compiler: clang-8
-      arch: amd64
-      addons:
-        apt:
-          packages:
-            - g++-8
-            - clang-8
-            - python3
-            - python3-pip
-            - python3-setuptools
-
-      env:
-        - MATRIX_EVAL="CC=clang-8 && CXX=clang++-8 && GCOV='llvm-cov gcov'"
-
-    - os: linux
-      compiler: clang-7
-      arch: amd64
-      addons:
-        apt:
-          packages:
-            - g++-7
-            - clang-7
-            - python3
-            - python3-pip
-            - python3-setuptools
-
-      env:
-        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7 && GCOV='llvm-cov gcov'"
-# ARM64 Builds
-    - os: linux
-      compiler: gcc-8
-      arch: arm64
-      addons:
-        apt:
-          packages:
-            - libncursesw5-dev
-            - zlib1g-dev
-            - pkg-config
-            - g++-8
-            - python3
-            - python3-pip
-            - python3-setuptools
-
-      env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8 && GCOV=gcov-8"
-
-    - os: linux
-      compiler: gcc-9
-      arch: arm64
-      addons:
-        apt:
-          packages:
-            - libncursesw5-dev
-            - zlib1g-dev
-            - pkg-config
-            - g++-9
-            - python3
-            - python3-pip
-            - python3-setuptools
-
-      env:
-        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9 && GCOV=gcov-9"
-
-    # Clang on arm is not a thing apparently
-    # - os: linux
-    #   compiler: clang-8
-    #   arch: arm64
-    #   addons:
-    #     apt:
-    #       packages:
-    #         - g++-8
-    #         - clang-8
-    #         - python3
-    #         - python3-pip
-    #         - python3-setuptools
-
-    #   env:
-    #     - MATRIX_EVAL="CC=clang-8 && CXX=clang++-8 && GCOV='llvm-cov gcov'"
-
-    # - os: linux
-    #   compiler: clang-7
-    #   arch: arm64
-    #   addons:
-    #     apt:
-    #       packages:
-    #         - g++-7
-    #         - clang-7
-    #         - python3
-    #         - python3-pip
-    #         - python3-setuptools
-
-    #   env:
-    #     - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7 && GCOV='llvm-cov gcov'"
 
 before_install:
   - mkdir -p ~/.local/bin
@@ -163,9 +37,21 @@ before_install:
   - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-8.0 main" -y
   - sudo apt-add-repository "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-9.0 main" -y
 
-
-
 install:
+  - sudo apt-get install python3 -y
+  - sudo apt-get install python3-pip -y
+  - sudo apt-get install python3-setuptools -y
+
+  - sudo apt-get install g++-8 -y
+  - sudo apt-get install g++-9 -y
+  - sudo apt-get install clang-7 -y
+  - sudo apt-get install clang-8 -y
+  - sudo apt-get install clang-9 -y
+
+  - sudo apt-get install pkg-config -y
+  - sudo apt-get install zlib1g-dev -y
+  - sudo apt-get install libncursesw5-dev -y
+
   - pip3 install --user wheel
   - pip3 install --user meson
   - pip3 install --user codecov
