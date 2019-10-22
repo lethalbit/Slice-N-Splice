@@ -1213,7 +1213,7 @@ using elf64_ehdr_t = elf_ehdr_t<elf_types_64_t>;
 
 
 
-/* Elf Section Header */
+/* ELF Section Header */
 template<typename T>
 struct elf_shdr_t final {
 	using addr_t    = typename T::addr_t;
@@ -1403,7 +1403,7 @@ public:
 	}
 };
 
-/* 32/64-Bit syminfo section */
+/* ELF syminfo section */
 struct elf_syminfo_t final {
 private:
 	elf_syminfo_bound_t _boundto;
@@ -1424,6 +1424,7 @@ public:
 	elf_syminfo_flag_t flags() const noexcept { return _flags; }
 };
 
+/* ELF Relocation information */
 template<typename T>
 struct elf_rel_t final {
 	using addr_t  = typename T::addr_t;
@@ -1450,6 +1451,7 @@ public:
 using elf32_rel_t = elf_rel_t<elf_types_32_t>;
 using elf64_rel_t = elf_rel_t<elf_types_64_t>;
 
+/* ELF Relocation information with addend */
 template<typename T>
 struct elf_rela_t final {
 	using addr_t    = typename T::addr_t;
@@ -1605,7 +1607,7 @@ public:
 	elf64_xword_t align() const noexcept { return _align; }
 };
 
-/* 32-Bit Dynamic Section */
+/* ELF Dynamic Section */
 template<typename T>
 struct elf_dyn_t final {
 	using dyn_tag_t = typename T::dyn_tag_t;
@@ -2031,7 +2033,7 @@ public:
 
 };
 
-
+/* ELF Type definitions */
 struct elf_types_32_t final {
 	/* Basic Types */
 	using addr_t    = ALIGN(0x04) uint32_t;
@@ -2109,6 +2111,7 @@ struct elf_types_64_t final {
 	constexpr static uint8_t sym_shift = 0x20U;
 };
 
+/* ELF File representation itself */
 template<typename T>
 struct elf_t final {
 	using ident_t   = typename T::ident_t;
