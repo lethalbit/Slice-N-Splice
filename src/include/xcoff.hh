@@ -134,41 +134,9 @@ struct xcoff_opthdr_t final {
 private:
 	xcoff_opthdr_flags_t _flags;
 	uint16_t _vstamp;
-	/* XCOFF32 ordered */
-	enabled_if_sv<T, xcoff_types_32_t, xsize_t> _text_size;
-	enabled_if_sv<T, xcoff_types_32_t, xsize_t> _data_size;
-	enabled_if_sv<T, xcoff_types_32_t, xsize_t> _bss_size;
-	enabled_if_sv<T, xcoff_types_32_t, addr_t> _entry;
-	enabled_if_sv<T, xcoff_types_32_t, addr_t> _text_start;
-	enabled_if_sv<T, xcoff_types_32_t, addr_t> _data_start;
-	// enabled_if_sv<T, xcoff_types_32_t, half_t> _toc_anchor;
-	// enabled_if_sv<T, xcoff_types_32_t, half_t> _entry_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _text_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _data_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _toc_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _loader_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _bss_sn;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _text_align;
-	// enabled_if_sv<T, xcoff_types_32_t, uint16_t> _data_align;
-	/* XCOFF64 ordered */
-
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _entry_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _text_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _data_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _toc_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _loader_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _bss_sn;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _text_align;
-	// enabled_if_sv<T, xcoff_types_64_t, uint16_t> _data_align;
 
 public:
-	constexpr xcoff_opthdr_t(
-		std::enable_if_t<std::is_same_v<T, xcoff_types_32_t>> * = nullptr) noexcept :
-		_flags{}, _vstamp{}, _text_size{} { /* NOP */ }
 
-	constexpr xcoff_opthdr_t(
-		std::enable_if_t<std::is_same_v<T, xcoff_types_64_t>> * = nullptr) noexcept :
-		_flags{}, _vstamp{} { /* NOP */ }
 };
 
 using xcoff32_opthdr_t = xcoff_opthdr_t<xcoff_types_32_t>;
