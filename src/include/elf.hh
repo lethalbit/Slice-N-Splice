@@ -1507,80 +1507,49 @@ public:
 using elf32_rel_t = elf_rel_t<elf_types_32_t>;
 using elf64_rel_t = elf_rel_t<elf_types_64_t>;
 
-
-struct elf32_rela_t final {
+template<typename T>
+struct elf_rela_t final {
+	using addr_t    = typename T::addr_t;
+	using xword_t   = typename T::xword_t;
+	using sword_t   = typename T::sword_t;
 private:
-	elf32_addr_t _offset;
-	elf32_word_t _info;
-	elf32_sword_t _addend;
+	addr_t _offset;
+	xword_t _info;
+	sword_t _addend;
 public:
-	constexpr elf32_rela_t() noexcept :
+	constexpr elf_rela_t() noexcept :
 		_offset{}, _info{}, _addend{} { /* NOP */ }
 
-	elf32_rela_t(elf32_addr_t offset, elf32_word_t info,
-			elf32_sword_t addend) noexcept :
+	elf_rela_t(addr_t offset, xword_t info,	sword_t addend) noexcept :
 		_offset{offset}, _info{info}, _addend{addend} { /* NOP */ }
 
-	void offset(const elf32_addr_t offset) noexcept { _offset = offset; }
+	void offset(const addr_t offset) noexcept { _offset = offset; }
 	[[nodiscard]]
-	elf32_addr_t offset() const noexcept { return _offset; }
+	addr_t offset() const noexcept { return _offset; }
 
-	void info(const elf32_word_t info) noexcept { _info = info; }
+	void info(const xword_t info) noexcept { _info = info; }
 	[[nodiscard]]
-	elf32_word_t info() const noexcept { return _info; }
+	xword_t info() const noexcept { return _info; }
 
-	void addend(const elf32_sword_t addend) noexcept { _addend = addend; }
+	void addend(const sword_t addend) noexcept { _addend = addend; }
 	[[nodiscard]]
-	elf32_sword_t addend() const noexcept { return _addend; }
+	sword_t addend() const noexcept { return _addend; }
 
 
 	[[nodiscard]]
-	elf32_word_t sym() const noexcept { return (_info >> 0x08U); }
-	[[nodiscard]]
-	elf32_word_t type() const noexcept { return (_info & 0xFFFFFFFFUL); }
+	xword_t sym() const noexcept { return (_info >> T::sym_shift); }
 
-	static elf32_word_t make_info(elf32_word_t sym,
-								  elf32_word_t type) {
-		return (sym << 0x08U) + (type & 0xFFFFFFFFUL);
+	[[nodiscard]]
+	xword_t type() const noexcept { return (_info & 0xFFFFFFFFUL); }
+
+	static xword_t make_info(xword_t sym, xword_t type) {
+		return (sym << T::sym_shift) + (type & 0xFFFFFFFFUL);
 	}
 };
 
+using elf32_rela_t = elf_rela_t<elf_types_32_t>;
+using elf64_rela_t = elf_rela_t<elf_types_64_t>;
 
-struct elf64_rela_t final {
-private:
-	elf64_addr_t _offset;
-	elf64_xword_t _info;
-	elf64_sword_t _addend;
-public:
-	constexpr elf64_rela_t() noexcept :
-		_offset{}, _info{}, _addend{} { /* NOP */ }
-
-	elf64_rela_t(elf64_addr_t offset, elf64_xword_t info,
-			elf64_sword_t addend) noexcept :
-		_offset{offset}, _info{info}, _addend{addend} { /* NOP */ }
-
-	void offset(const elf64_addr_t offset) noexcept { _offset = offset; }
-	[[nodiscard]]
-	elf64_addr_t offset() const noexcept { return _offset; }
-
-	void info(const elf64_xword_t info) noexcept { _info = info; }
-	[[nodiscard]]
-	elf64_xword_t info() const noexcept { return _info; }
-
-	void addend(const elf64_sword_t addend) noexcept { _addend = addend; }
-	[[nodiscard]]
-	elf64_sword_t addend() const noexcept { return _addend; }
-
-	[[nodiscard]]
-	elf64_xword_t sym() const noexcept { return _info >> 0x20U; }
-	[[nodiscard]]
-	elf64_xword_t type() const noexcept { return _info & 0xFFFFFFFFUL; }
-
-	static elf64_xword_t make_info(elf64_xword_t sym,
-								   elf64_xword_t type) {
-		return (sym << 0x20U) + (type & 0xFFFFFFFFUL);
-	}
-};
 
 /* 32-Bit Program header */
 struct elf32_phdr_t final {
@@ -2149,6 +2118,9 @@ struct elf_types_32_t final {
 	using auxv_t    = elf32_auxv_t;
 	using nhdr_t    = elf32_nhdr_t;
 	using move_t    = elf32_move_t;
+
+	/* Constants */
+	constexpr static uint8_t sym_shift = 0x08U;
 };
 
 struct elf_types_64_t final {
@@ -2180,6 +2152,9 @@ struct elf_types_64_t final {
 	using auxv_t    = elf64_auxv_t;
 	using nhdr_t    = elf64_nhdr_t;
 	using move_t    = elf64_move_t;
+
+	/* Constants */
+	constexpr static uint8_t sym_shift = 0x20U;
 };
 
 template<typename T>
