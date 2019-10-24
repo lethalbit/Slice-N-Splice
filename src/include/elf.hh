@@ -2159,16 +2159,19 @@ public:
 		} else {
 			_header = _file_map.at<ehdr_t>(0);
 
-			if(_header.phnum() > 0)
+			if(_header.phnum() > 0 && _header.phoff() < _file_map.length())
 				_pheaders = {&_file_map.at<phdr_t>(_header.phoff()), _header.phnum()};
 
 
-			if(_header.shnum() > 0) {
+			if(_header.shnum() > 0 && _header.shoff() < _file_map.length()) {
 				_sheaders = {&_file_map.at<shdr_t>(_header.shoff()), _header.shnum()};
 				/* Map the string table */
-				_strtbl = &_file_map.at<char>((_sheaders[_header.shstrndx()]).offset());
+				if(_header.shstrndx() < _file_map.length()) {
+					auto strtbl_offset =  (_sheaders[_header.shstrndx()]).offset();
+					if(strtbl_offset < _file_map.length())
+						_strtbl = &_file_map.at<char>(strtbl_offset);
+				}
 			}
-
 		}
 	}
 
