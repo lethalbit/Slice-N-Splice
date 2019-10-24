@@ -12,8 +12,7 @@
  */
 
 import cpp
-import Buffer
- 
+
 from ReinterpretCast cast_
 where
   not cast_.isCompilerGenerated()
