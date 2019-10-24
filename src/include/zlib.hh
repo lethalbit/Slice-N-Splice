@@ -51,7 +51,7 @@ public:
 		}
 
 		size_t transform(void* const value, const size_t len, void* output) noexcept {
-
+			return 0;
 		}
 	};
 
