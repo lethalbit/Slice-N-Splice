@@ -260,35 +260,34 @@ jobs:
         - pip3 install --user wheel
         - pip3 install --user meson
         - pip3 install --user codecov
-  allow_failures:
-# PPC64LE
-    - arch: ppc64le
-      env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
-      before_install:
-        - mkdir -p ~/.local/bin
-        - eval "PATH=$PATH:~/.local/bin"
-        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-      install:
-        - sudo apt-get install python3 -y
-        - sudo apt-get install python3-pip -y
-        - sudo apt-get install python3-setuptools -y
+# # PPC64LE
+#     - arch: ppc64le
+#       env: CXX=g++-9 CC=gcc-9 GCOV=gcov-9
+#       before_install:
+#         - mkdir -p ~/.local/bin
+#         - eval "PATH=$PATH:~/.local/bin"
+#         - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+#       install:
+#         - sudo apt-get install python3 -y
+#         - sudo apt-get install python3-pip -y
+#         - sudo apt-get install python3-setuptools -y
 
-        - sudo apt-get install g++-9 -y
+#         - sudo apt-get install g++-9 -y
 
-        - sudo apt-get install pkg-config -y
-        - sudo apt-get install zlib1g-dev -y
-        - sudo apt-get install libncursesw5-dev -y
+#         - sudo apt-get install pkg-config -y
+#         - sudo apt-get install zlib1g-dev -y
+#         - sudo apt-get install libncursesw5-dev -y
 
-        - pushd /tmp
-        - git clone https://github.com/ninja-build/ninja.git
-        - cd ninja
-        - python3 ./configure.py --bootstrap
-        - cp ninja ~/.local/bin/
-        - popd
+#         - pushd /tmp
+#         - git clone https://github.com/ninja-build/ninja.git
+#         - cd ninja
+#         - python3 ./configure.py --bootstrap
+#         - cp ninja ~/.local/bin/
+#         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+#         - pip3 install --user wheel
+#         - pip3 install --user meson
+#         - pip3 install --user codecov
     - arch: ppc64le
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8
       before_install:
