@@ -9,6 +9,7 @@
  * @tags reliability
  *       correctness
  *       security
+ *       external/cppcoreguidelines/pro-type-reinterpretcast
  */
 
 import cpp
