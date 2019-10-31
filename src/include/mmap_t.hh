@@ -14,8 +14,11 @@ private:
 	off_t len;
 
 	template<typename T> T &index(const off_t idx) const {
-		if (idx < len)
-			return *reinterpret_cast<T *const>(long(addr) + idx);
+		if (idx < len) {
+			const uintptr_t _addr = reinterpret_cast<uintptr_t>(addr); // lgtm[cpp/reinterpret-cast]
+			void* obj = reinterpret_cast<void*>(_addr + idx);     // lgtm[cpp/reinterpret-cast]
+			return *static_cast<T*>(obj);
+		}
 		throw std::out_of_range("index out of range in mmap_t");
 	}
 
