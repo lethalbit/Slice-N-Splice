@@ -21,6 +21,8 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <vector>
+
 
 #include <sys/stat.h>
 #include <sys/types.h>

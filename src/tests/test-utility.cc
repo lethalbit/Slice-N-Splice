@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <type_traits>
 #include <algorithm>
+#include <vector>
 
 #include <catch2/catch.hpp>
 
