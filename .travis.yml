@@ -350,4 +350,4 @@ script:
 
 after_success:
   - cd build
-  - codecov --gcov-exec "$GCOV" -e ARCH -e CXX
+  - codecov --gcov-exec "$GCOV" -e ARCH,CXX
