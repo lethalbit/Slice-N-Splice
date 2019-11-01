@@ -27,13 +27,16 @@ done
 echo "Dropping root, peace~"
 sudo -k
 
-echo "Starting AFL Master"
-afl-fuzz -i $AFL_TESTCASE_DIR -o $AFL_SYNC_DIR -M fuzzer1 $1 @@ 1>/dev/null&
-
-
 for i in $(seq 1 $(($CPU_COUNT-1))); do
 	SLAVE_NAME="fuzz-slave-$i"
 	echo "Spawning AFL slave $SLAVE_NAME"
-	afl-fuzz -i $AFL_TESTCASE_DIR -o $AFL_SYNC_DIR -S $SLAVE_NAME $1 @@ 1>/dev/null&
+	afl-fuzz -i $AFL_TESTCASE_DIR -o $AFL_SYNC_DIR -S $SLAVE_NAME $1 @@ > /dev/null 2>&1 &
+	SLAVE_PID=$!
+	echo "Setting $SLAVE_NAME (PID: $SLAVE_PID) affinity to CPU $i"
+	taskset -cp $i $SLAVE_PID
 done
+
+echo "Starting AFL Master"
+afl-fuzz -i $AFL_TESTCASE_DIR -o $AFL_SYNC_DIR -M fuzz-master $1 @@
+
 echo "Fuzzers now running...."
