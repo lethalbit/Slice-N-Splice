@@ -2,6 +2,7 @@
 
 #include <zlib.hh>
 #include <utility.hh>
+#include <iostream>
 
 #if defined(_fuzz_target_elf)
 #include <elf.hh>

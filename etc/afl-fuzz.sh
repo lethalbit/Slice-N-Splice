@@ -1,13 +1,13 @@
 #!/bin/bash
 AFL_DIR=$MESON_BUILD_ROOT/afl
-AFL_SYNC_DIR=$AFL_DIR/afl_sync
-AFL_TESTCASE_DIR=$AFL_DIR/afl_test
+AFL_SYNC_DIR=$AFL_DIR/.sync
+AFL_TESTCASE_DIR=$AFL_DIR/testcases
 
 if [ ! -d $AFL_DIR  ]; then
 		mkdir -p $AFL_DIR $AFL_SYNC_DIR $AFL_TESTCASE_DIR
 fi
 echo "Copying initial test case"
-cp $MESON_BUILD_ROOT/test-objs/* $AFL_TESTCASE_DIR/
+# cp $MESON_BUILD_ROOT/test-objs/* $AFL_TESTCASE_DIR/
 
 CPU_COUNT=$(cat /proc/cpuinfo | awk '/^processor/{print $3}' | tail -1)
 echo "Found $CPU_COUNT CPU Cores"
