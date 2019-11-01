@@ -29,14 +29,6 @@
 #include <utility>
 
 
-/* Some basic logging */
-#if !defined(NDEBUG)
-#include <cstdio>
-#define LOG(...) fprintf(stderr, __VA_ARGS__)
-#else
-#define LOG(...)
-#endif
-
 /* SFINAE helpers */
 template<typename T1, typename T2, typename T3> using enabled_if_sv =
 	typename std::enable_if_t<std::is_same_v<T1, T2>, T3>;
@@ -296,10 +288,31 @@ typename Map::value_type::value_type enum_value(Map m, const std::string& n) noe
 		static_cast<typename Map::value_type::value_type>(0);
 }
 
-constexpr uint16_t _sns_bswap16(const uint16_t x) noexcept;
-constexpr uint32_t _sns_bswap32(const uint32_t x) noexcept;
-constexpr uint64_t _sns_bswap64(const uint64_t x) noexcept;
 
+
+uint16_t _sns_bswap16(const uint16_t x) noexcept;
+uint32_t _sns_bswap32(const uint32_t x) noexcept;
+uint64_t _sns_bswap64(const uint64_t x) noexcept;
+
+
+
+/* Extract a collection of flags set in a field */
+/* This is kind of expensive run-time wise, being at leas O(n+1) but *shrug* */
+template<typename T, typename A>
+std::enable_if_t<std::is_enum_v<T>, std::vector<T>>
+extract_flags(T flags, A enum_table) {
+	std::vector<T> _found_flags;
+	using ut = typename std::underlying_type_t<T>;
+	for (auto flag : enum_table) {
+		if((flags & flag.value()) == flag.value() && static_cast<ut>(flag.value()) != 0)
+			_found_flags.emplace_back(flag.value());
+	}
+
+	if(_found_flags.size() == 0)
+		_found_flags.emplace_back(static_cast<T>(0));
+
+	return _found_flags;
+}
 
 
 #endif /* __SNS_UTILITY_HH__ */

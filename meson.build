@@ -62,6 +62,8 @@ test_srcs = [
 	'src/tests/test-pe.cc',
 	'src/tests/test-xcoff.cc',
 	'src/tests/test-zlib.cc',
+	'src/tests/test-utility.cc',
+
 ]
 
 obj_srcs = [
