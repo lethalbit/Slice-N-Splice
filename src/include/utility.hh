@@ -314,5 +314,21 @@ extract_flags(T flags, A enum_table) {
 	return _found_flags;
 }
 
+template<typename T, typename A>
+std::enable_if_t<std::is_enum_v<T>, std::vector<enum_pair_t<T>>>
+extract_flag_pairs(T flags, A enum_table) {
+	std::vector<enum_pair_t<T>> _found_flags;
+	using ut = typename std::underlying_type_t<T>;
+	for (auto flag : enum_table) {
+		if((flags & flag.value()) == flag.value() && static_cast<ut>(flag.value()) != 0)
+			_found_flags.emplace_back(flag);
+	}
+
+	if(_found_flags.size() == 0)
+		_found_flags.emplace_back(enum_table[0]);
+
+	return _found_flags;
+}
+
 
 #endif /* __SNS_UTILITY_HH__ */

@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <type_traits>
+#include <algorithm>
 
 #include <catch2/catch.hpp>
 
@@ -32,13 +33,42 @@ const std::array<const enum_pair_t<Flags>, 8> flags_s{{
 }};
 
 TEST_CASE( "Flag extraction", "[utility]" ) {
-	Flags tc1 = Flags::Foo | Flags::Baz | Flags::Grault;
-	std::vector<Flags> tc1_exp = { Flags::Foo , Flags::Baz , Flags::Grault };
+	/* This test isn't the best as it's order-dependent for the flags */
+	SECTION( "Raw flag extraction" ) {
+		Flags tc1 = Flags::Foo | Flags::Baz | Flags::Grault;
+		std::vector<Flags> tc1_exp = { Flags::Foo , Flags::Baz , Flags::Grault };
 
-	auto retvec = extract_flags<Flags, decltype(flags_s)>(tc1, flags_s);
+		auto retvec = extract_flags<Flags, decltype(flags_s)>(tc1, flags_s);
 
-	REQUIRE(retvec.size() == tc1_exp.size());
-	REQUIRE(retvec == tc1_exp);
+		REQUIRE(retvec.size() == tc1_exp.size());
+		REQUIRE(retvec == tc1_exp);
+	}
+
+	SECTION( "Flag pair extraction" ) {
+		Flags tc2 = Flags::Grault | Flags::Quux | Flags::Baz | Flags::Bar;
+		std::vector<enum_pair_t<Flags>> tc2_exp = {
+			{ Flags::Grault,  "Grault"   },
+			{ Flags::Quux,    "Quux"     },
+			{ Flags::Baz,     "Baz"      },
+			{ Flags::Bar,     "Bar"      },
+		};
+
+		auto retvec = extract_flag_pairs<Flags, decltype(flags_s)>(tc2, flags_s);
+
+		/*
+			We need to reverse the returned vector because it's in-order
+			while the test vector is inverted.
+		*/
+		std::reverse(retvec.begin(), retvec.end());
+
+		REQUIRE(retvec.size() == tc2_exp.size());
+		REQUIRE(std::equal(retvec.begin(),
+					retvec.end(),
+					tc2_exp.begin(),
+					[](const enum_pair_t<Flags>& l, const enum_pair_t<Flags>& r){
+						return (l.value() == r.value());
+					}));
+	}
 }
 
 TEST_CASE( "Byte Swapping" , "[utility]") {
