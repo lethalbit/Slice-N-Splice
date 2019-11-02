@@ -39,7 +39,7 @@ TEST_CASE( "Flag extraction", "[utility]" ) {
 		Flags tc1 = Flags::Foo | Flags::Baz | Flags::Grault;
 		std::vector<Flags> tc1_exp = { Flags::Foo , Flags::Baz , Flags::Grault };
 
-		auto retvec = extract_flags<Flags, decltype(flags_s)>(tc1, flags_s);
+		auto retvec = extract_flags<Flags>(tc1, flags_s);
 
 		REQUIRE(retvec.size() == tc1_exp.size());
 		REQUIRE(retvec == tc1_exp);
@@ -54,7 +54,7 @@ TEST_CASE( "Flag extraction", "[utility]" ) {
 			{ Flags::Bar,     "Bar"      },
 		};
 
-		auto retvec = extract_flag_pairs<Flags, decltype(flags_s)>(tc2, flags_s);
+		auto retvec = extract_flag_pairs<Flags>(tc2, flags_s);
 
 		/*
 			We need to reverse the returned vector because it's in-order

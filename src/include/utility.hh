@@ -302,7 +302,7 @@ uint64_t _sns_bswap64(const uint64_t x) noexcept;
 /* This is kind of expensive run-time wise, being at leas O(n+1) but *shrug* */
 template<typename T, typename A>
 std::enable_if_t<std::is_enum_v<T>, std::vector<T>>
-extract_flags(T flags, A enum_table) {
+extract_flags(T flags, A& enum_table) {
 	std::vector<T> _found_flags;
 	using ut = typename std::underlying_type_t<T>;
 	for (auto flag : enum_table) {
@@ -311,14 +311,14 @@ extract_flags(T flags, A enum_table) {
 	}
 
 	if(_found_flags.size() == 0)
-		_found_flags.emplace_back(static_cast<T>(0));
+		_found_flags.emplace_back(T{});
 
 	return _found_flags;
 }
 
 template<typename T, typename A>
 std::enable_if_t<std::is_enum_v<T>, std::vector<enum_pair_t<T>>>
-extract_flag_pairs(T flags, A enum_table) {
+extract_flag_pairs(T flags, A& enum_table) {
 	std::vector<enum_pair_t<T>> _found_flags;
 	using ut = typename std::underlying_type_t<T>;
 	for (auto flag : enum_table) {
