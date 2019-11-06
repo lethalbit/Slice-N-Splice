@@ -249,10 +249,16 @@ constexpr uint64_t operator ""_GB(const unsigned long long value) noexcept { ret
 
 template<class T>
 struct enum_pair_t final {
-
 	using value_type = T;
+private:
 	T _value;
 	const char* _name;
+public:
+	constexpr enum_pair_t() noexcept :
+		_value{}, _name{} { /* NOP */ }
+
+	constexpr enum_pair_t(T value, const char* name) noexcept :
+		_value{value}, _name{name} { /* NOP */ }
 
 	void value(const T value) noexcept { _value = value; }
 	[[nodiscard]]
