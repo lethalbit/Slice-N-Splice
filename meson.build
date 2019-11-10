@@ -4,7 +4,6 @@ project(
 	default_options: [
 		'cpp_std=gnu++17',
 		'warning_level=3',
-		'b_lto=true',
 	],
 	version: '0.1'
 )
