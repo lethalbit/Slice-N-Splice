@@ -2138,8 +2138,8 @@ private:
 	fd_t _file_fd;           /* File descriptor */
 	mmap_t _file_map;        /* mmap object for object file */
 	ehdr_t _header;          /* The executable header */
-	set_t<phdr_t> _pheaders; /* Program Headers */
-	set_t<shdr_t> _sheaders; /* Section Headers */
+	span<phdr_t> _pheaders; /* Program Headers */
+	span<shdr_t> _sheaders; /* Section Headers */
 	char* _strtbl;           /* Section name string table */
 
 	bool _constructed;
@@ -2182,13 +2182,13 @@ public:
 	[[nodiscard]]
 	ehdr_t header() const noexcept { return _header; }
 
-	void pheaders(const set_t<phdr_t> pheaders) noexcept { _pheaders = pheaders; }
+	void pheaders(const span<phdr_t> pheaders) noexcept { _pheaders = pheaders; }
 	[[nodiscard]]
-	set_t<phdr_t> pheaders() const noexcept { return _pheaders; }
+	span<phdr_t> pheaders() const noexcept { return _pheaders; }
 
-	void sheaders(const set_t<shdr_t> sheaders) noexcept { _sheaders = sheaders; }
+	void sheaders(const span<shdr_t> sheaders) noexcept { _sheaders = sheaders; }
 	[[nodiscard]]
-	set_t<shdr_t> sheaders() const noexcept { return _sheaders; }
+	span<shdr_t> sheaders() const noexcept { return _sheaders; }
 
 
 	std::string section_name(const size_t index) const noexcept { return std::string(_strtbl + index); }

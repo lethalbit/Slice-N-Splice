@@ -59,7 +59,7 @@ TEST_CASE( "ELF File Test", "[elf]" ) {
 
 	REQUIRE(self.header().shentsize() == 0);
 
-	REQUIRE(self.header().phnum() == self.pheaders().length());
+	REQUIRE(self.header().phnum() == self.pheaders().size());
 
-	REQUIRE(self.header().shnum() == self.sheaders().length());
+	REQUIRE(self.header().shnum() == self.sheaders().size());
 }
