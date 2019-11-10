@@ -161,3 +161,8 @@ TEST_CASE( "Enum bitwise operators", "[utility]" ) {
 		REQUIRE(static_cast<uint8_t>(f ^= Flags::Quux) == (r ^= (1U << 5U)));
 	}
 }
+
+TEST_CASE( "Enum and string mapping", "[utility]" ) {
+	REQUIRE(enum_name(flags_s, Flags::Quux) == std::string{"Quux"});
+	REQUIRE(enum_value(flags_s, "Quux") == Flags::Quux);
+}
