@@ -303,7 +303,6 @@ uint32_t _sns_bswap32(const uint32_t x) noexcept;
 uint64_t _sns_bswap64(const uint64_t x) noexcept;
 
 
-
 /* Extract a collection of flags set in a field */
 /* This is kind of expensive run-time wise, being at leas O(n+1) but *shrug* */
 template<typename T, typename A>

@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <type_traits>
 #include <algorithm>
+#include <string>
 #include <vector>
 
 #include <catch2/catch.hpp>
@@ -70,6 +71,19 @@ TEST_CASE( "Flag extraction", "[utility]" ) {
 						return (l.value() == r.value());
 					}));
 	}
+
+	SECTION ( "Unknown Flag extraction" ) {
+		auto ret = extract_flags<Flags>(Flags::None, flags_s);
+		auto ret2 = extract_flag_pairs<Flags>(Flags::None, flags_s);
+
+		REQUIRE(ret.size() == 1);
+		REQUIRE(ret2.size() == 1);
+
+		REQUIRE(ret[0] == Flags::None);
+
+		REQUIRE(ret2[0].value() == Flags::None);
+		REQUIRE(std::string{ret2[0].name()} == std::string{"No Flags"});
+	}
 }
 
 TEST_CASE( "Byte Swapping" , "[utility]") {
@@ -97,5 +111,53 @@ TEST_CASE( "Units", "[utility]") {
 		REQUIRE(1000_MB == 1_GB);
 
 		REQUIRE(512_GB == 512000000000);
+	}
+}
+
+TEST_CASE( "Enum bitwise operators", "[utility]" ) {
+	SECTION ( "Bitwise Or" ) {
+		REQUIRE(static_cast<uint8_t>(Flags::Foo    | Flags::Quux)  == ((1U << 1U) | (1U << 5U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Quux   | Flags::Foo)   == ((1U << 5U) | (1U << 1U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Grault | Flags::Corge) == ((1U << 7U) | (1U << 6U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Corge  | Flags::None)  == ((1U << 6U) | 0U));
+	}
+
+	SECTION ( "Bitwise And" ) {
+		REQUIRE(static_cast<uint8_t>(Flags::Foo    & Flags::Quux)  == ((1U << 1) & (1U << 5U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Quux   & Flags::Foo)   == ((1U << 5) & (1U << 1U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Grault & Flags::Corge) == ((1U << 7) & (1U << 6U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Corge  & Flags::None)  == ((1U << 6) & 0U));
+	}
+
+	SECTION ( "Bitwise Not" ) {
+		REQUIRE(static_cast<uint8_t>(~Flags::Foo   )  == static_cast<uint8_t>(~(1U << 1U)));
+		REQUIRE(static_cast<uint8_t>(~Flags::Quux  )  == static_cast<uint8_t>(~(1U << 5U)));
+		REQUIRE(static_cast<uint8_t>(~Flags::Grault)  == static_cast<uint8_t>(~(1U << 7U)));
+		REQUIRE(static_cast<uint8_t>(~Flags::Corge )  == static_cast<uint8_t>(~(1U << 6U)));
+	}
+
+	SECTION ( "Bitwise Xor" ) {
+		REQUIRE(static_cast<uint8_t>(Flags::Foo    ^ Flags::Quux)  == ((1U << 1U) ^ (1U << 5U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Quux   ^ Flags::Foo)   == ((1U << 5U) ^ (1U << 1U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Grault ^ Flags::Corge) == ((1U << 7U) ^ (1U << 6U)));
+		REQUIRE(static_cast<uint8_t>(Flags::Corge  ^ Flags::None)  == ((1U << 6U) ^ 0U));
+	}
+
+	SECTION ( "Bitwise Or Equ" ) {
+		Flags f{Flags::Foo};
+		uint8_t r{1U << 1U};
+		REQUIRE(static_cast<uint8_t>(f |= Flags::Quux) == (r |= (1U << 5U)));
+	}
+
+	SECTION ( "Bitwise And Equ" ) {
+		Flags f{Flags::Foo};
+		uint8_t r{1U << 1U};
+		REQUIRE(static_cast<uint8_t>(f &= Flags::Quux) == (r &= (1U << 5U)));
+	}
+
+	SECTION ( "Bitwise Xor Equ" ) {
+		Flags f{Flags::Foo};
+		uint8_t r{1U << 1U};
+		REQUIRE(static_cast<uint8_t>(f ^= Flags::Quux) == (r ^= (1U << 5U)));
 	}
 }
