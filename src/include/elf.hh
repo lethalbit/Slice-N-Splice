@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+/* I know this is my code, but shh */
+#include <span.hh>
 
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
