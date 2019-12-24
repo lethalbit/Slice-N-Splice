@@ -80,12 +80,14 @@ std::ostream& operator<<(std::ostream& out, const elf_version_t& version) {
 	return (out << enum_name(elf_version_s, version));
 }
 
-const std::array<const enum_pair_t<elf_type_t>, 9> elf_type_s{{
+const std::array<const enum_pair_t<elf_type_t>, 11> elf_type_s{{
 	{ elf_type_t::None,         "None"           },
 	{ elf_type_t::Relocatable,  "Relocatable"    },
 	{ elf_type_t::Executable,   "Executable"     },
 	{ elf_type_t::SharedObject, "Shared Object"  },
 	{ elf_type_t::CoreFile,     "Core File"      },
+	{ elf_type_t::TandemPIC,    "Tandem PIC"     },
+	{ elf_type_t::TandemHybrid, "Tandem Hybrid"  },
 	{ elf_type_t::LOW_OS,       "Low OS"         },
 	{ elf_type_t::HIGH_OS,      "High OS"        },
 	{ elf_type_t::LOW_PROC,     "Low Processor"  },

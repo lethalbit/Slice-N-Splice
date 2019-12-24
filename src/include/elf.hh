@@ -119,6 +119,9 @@ enum class ALIGN(0x02) elf_type_t : uint16_t {
 	Executable   = 0x0002U,
 	SharedObject = 0x0003U,
 	CoreFile     = 0x0004U,
+	/* Tandem is naughty and didn't put their shit in the OS reserved section */
+	TandemPIC	 = 0x0064U,
+	TandemHybrid = 0x00C8U,
 	LOW_OS       = 0xFE00U,
 	/* Operating System Specific */
 	HIGH_OS      = 0xFEFFU,
@@ -126,7 +129,7 @@ enum class ALIGN(0x02) elf_type_t : uint16_t {
 	/* Processor Specific */
 	HIGH_PROC    = 0xFFFFU,
 };
-extern const std::array<const enum_pair_t<elf_type_t>, 9> elf_type_s;
+extern const std::array<const enum_pair_t<elf_type_t>, 11> elf_type_s;
 extern std::ostream& operator<<(std::ostream& out, const elf_type_t& type);
 
 
@@ -344,6 +347,9 @@ enum class elf_flag_t : uint32_t {
 	IA64_Absolute     = 0x00000100U,
 	IA64_MaskOS       = 0x00FF000FU,
 	IA64_Arch         = 0xFF000000U,
+
+	/* Tandem / NSK Supplement */
+
 };
 template<>
 struct EnableBitmask<elf_flag_t>{
