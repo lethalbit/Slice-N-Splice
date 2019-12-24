@@ -11,3 +11,4 @@ option('fuzz_os360', type: 'boolean', value: true, description: 'If enable_fuzzi
 option('fuzz_pe', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable pe object fuzzing')
 option('fuzz_xcoff', type: 'boolean', value: true, description: 'If enable_fuzzing is set, will enable xcoff object fuzzing')
 
+option('valgrind_checks', type: 'boolean', value: true, description: 'Enables the valgrind run targets')
