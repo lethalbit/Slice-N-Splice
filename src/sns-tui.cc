@@ -1,3 +1,5 @@
+#include <filesystem>
+
 #include <utility.hh>
 #include <aout.hh>
 #include <coff.hh>
@@ -11,8 +13,8 @@
 
 #include <sns-tui.hh>
 
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
+
 
 
 int main(int argc, char** argv) {

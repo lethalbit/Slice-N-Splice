@@ -9,18 +9,11 @@ project(
 )
 
 cxx = meson.get_compiler('cpp')
-
-if cxx.has_header('experimental/filesystem') == false
-	error('Unable to find C++17 header experimental/filesystem')
-endif
-
-
 mkobj = find_program('./etc/mkobj.sh', required: true)
 
 deps = [
 	dependency('zlib', required: true),
-	dependency('ncursesw', required: true, version: '>=6.0.20160213'),
-	cxx.find_library('libstdc++fs', required: true)
+	dependency('ncursesw', required: true, version: '>=6.0.20160213')
 ]
 
 srcs = [

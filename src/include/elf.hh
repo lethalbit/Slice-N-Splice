@@ -10,14 +10,15 @@
 #include <iostream>
 /* I know this is my code, but shh */
 #include <span.hh>
-
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
 
 #include <utility.hh>
 #include <mmap_t.hh>
 #include <fd_t.hh>
 #include <zlib.hh>
+
+namespace fs = std::filesystem;
+
 
 /* Basic types used to composite the larger types */
 

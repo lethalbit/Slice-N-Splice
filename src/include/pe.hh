@@ -7,12 +7,13 @@
 #include <cstring>
 #include <memory>
 #include <vector>
-
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
 
 #include <mmap_t.hh>
 #include <fd_t.hh>
 #include <utility.hh>
+
+namespace fs = std::filesystem;
+
 
 #endif /* __SNS_PE_HH__ */
