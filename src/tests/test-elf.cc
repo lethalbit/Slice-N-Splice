@@ -1,13 +1,15 @@
 #include <cstdio>
 #include <iostream>
 #include <type_traits>
-
+#include <cstdlib>
+#include <filesystem>
 
 #include <catch2/catch.hpp>
 
 #include <zlib.hh>
 #include <elf.hh>
 #include <utility.hh>
+
 
 
 TEST_CASE("ELF64 File", "[elf]") {
@@ -29,7 +31,18 @@ TEST_CASE( "ELF File Test", "[elf]" ) {
 
 	// auto self = elf_loader("/proc/self/exe");
 
-	elf64_t self{"./test-objs/elf"};
+
+	fs::path test_file{"test-objs/elf"};
+	auto mbld = std::getenv("MESON_BUILD_ROOT");
+	fs::path bld_path{(mbld != nullptr) ? mbld : "./"};
+
+	bld_path /= test_file;
+
+	if(!fs::exists(bld_path)) {
+		abort();
+	}
+
+	elf64_t self{bld_path};
 
 	REQUIRE(self.valid() == true);
 
