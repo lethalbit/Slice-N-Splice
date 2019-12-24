@@ -80,7 +80,7 @@ enum class elf_osabi_t : uint8_t {
 	HPUX          = 0x01U,
 	NetBSD        = 0x02U,
 	Linux         = 0x03U,
-	GNUMach       = 0x04U, /* IA64 Supplemented */
+	GNUMach       = 0x04U,    /* IA64 Supplemented */
 	IA32          = 0x05U,    /* IA64 Supplemented */
 	Solaris       = 0x06U,
 	AIX           = 0x07U,
