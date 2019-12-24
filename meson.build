@@ -50,12 +50,15 @@ test_srcs = [
 	'src/tests/test-coff.cc',
 	'src/tests/test-ecoff.cc',
 	'src/tests/test-elf.cc',
+	'src/tests/test-fd_t.cc',
 	'src/tests/test-macho.cc',
+	'src/tests/test-mmap_t.cc',
 	'src/tests/test-os360.cc',
 	'src/tests/test-pe.cc',
+	'src/tests/test-span.cc',
+	'src/tests/test-utility.cc',
 	'src/tests/test-xcoff.cc',
 	'src/tests/test-zlib.cc',
-	'src/tests/test-utility.cc',
 
 ]
 
