@@ -1,5 +1,3 @@
-#include <filesystem>
-
 #include <utility.hh>
 #include <aout.hh>
 #include <coff.hh>
@@ -13,7 +11,7 @@
 
 #include <sns-tui.hh>
 
-namespace fs = std::filesystem;
+
 
 
 
