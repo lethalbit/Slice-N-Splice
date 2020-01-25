@@ -111,7 +111,8 @@ private:
 	T* _data;
 	size_t _len;
 public:
-	constexpr span() noexcept { /* NOP */ }
+	constexpr span() noexcept :
+		_data{nullptr}, _len{0} { /* NOP */ }
 	constexpr span(T* data, size_t len) noexcept :
 		_data{data}, _len{len} { /* NOP */ }
 
