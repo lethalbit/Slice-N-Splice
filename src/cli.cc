@@ -7,7 +7,9 @@
 #include <variant>
 #include <vector>
 
-std::vector<arg_variant> _args{};
+
+
+std::unordered_map<std::string, std::any> _args{};
 
 /* TODO: */
 uint64_t ParseCli(int argc, const char** argv, std::ostream& output) {
