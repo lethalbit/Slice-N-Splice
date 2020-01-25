@@ -16,6 +16,14 @@ deps = [
 	dependency('ncursesw', required: true, version: '>=6.0.20160213')
 ]
 
+if cxx.get_id() == 'clang' or cxx.version().version_compare('<9.0.0')
+	if cxx.has_header('filesystem') == false
+		error('Unable to find C++17 filesystem header')
+	endif
+	deps += [ cxx.find_library('libstdc++fs', required: true) ]
+
+endif
+
 srcs = [
 	'src/aout.cc',
 	'src/cli.cc',
