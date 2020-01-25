@@ -2,7 +2,6 @@
 #include <iostream>
 #include <type_traits>
 #include <cstdlib>
-#include <filesystem>
 
 #include <catch2/catch.hpp>
 
@@ -10,6 +9,14 @@
 #include <elf.hh>
 #include <utility.hh>
 
+
+#if defined(CXXFS_EXP)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
+#include <filesystem>
+namespace fs = std::filesystem;
+#endif
 
 
 TEST_CASE("ELF64 File", "[elf]") {

@@ -8,13 +8,19 @@
 #include <memory>
 #include <vector>
 #include <iostream>
-#include <filesystem>
 
 #include <mmap_t.hh>
 #include <fd_t.hh>
 #include <utility.hh>
 
+#if defined(CXXFS_EXP)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
+#include <filesystem>
 namespace fs = std::filesystem;
+#endif
+
 
 
 /* Basic types used to composite the larger types */
