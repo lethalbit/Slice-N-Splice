@@ -2148,13 +2148,13 @@ struct elf_t final {
 	using nhdr_t    = typename T::nhdr_t;
 	using move_t    = typename T::move_t;
 private:
-	fs::path _file;          /* The path to the object file */
-	fd_t _file_fd;           /* File descriptor */
-	mmap_t _file_map;        /* mmap object for object file */
-	ehdr_t _header;          /* The executable header */
+	fs::path _file;         /* The path to the object file */
+	fd_t _file_fd;          /* File descriptor */
+	mmap_t _file_map;       /* mmap object for object file */
+	ehdr_t _header;         /* The executable header */
 	span<phdr_t> _pheaders; /* Program Headers */
 	span<shdr_t> _sheaders; /* Section Headers */
-	char* _strtbl;           /* Section name string table */
+	char* _strtbl;          /* Section name string table */
 
 	bool _constructed;
 public:
