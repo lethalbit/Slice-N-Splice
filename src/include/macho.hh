@@ -143,7 +143,7 @@ public:
 /* 32-Bit Mach-O header */
 struct mach32_header_t final {
 private:
-	uint32_t _magic;        /* Should always be 0xFEEDFACE */
+	mach_magic_t _magic;    /* Should always be 0xFEEDFACE */
 	mach_cpu_t _cpu;        /* CPU Type */
 	mach_cpu_sub_t _subcpu; /* Sub CPU Type */
 	uint32_t _filetype;     /* Type of binary file this is */
@@ -154,6 +154,17 @@ public:
 	constexpr mach32_header_t() noexcept :
 		_magic{}, _cpu{}, _subcpu{}, _filetype{}, _ncmds{}, _cmd_size{},
 		_flags{} { /* NOP */ }
+
+	constexpr mach32_header_t(
+		mach_magic_t magic, mach_cpu_t cpu, mach_cpu_sub_t subcpu,
+		uint32_t filetype, uint32_t ncmds, uint32_t cmd_size,
+		mach_flags_t flags) noexcept :
+		_magic{magic}, _cpu{cpu}, _subcpu{subcpu}, _filetype{filetype},
+		_ncmds{ncmds}, _cmd_size{cmd_size}, _flags{flags} { /* NOP */ }
+
+
+	// void magic()
+
 };
 
 
