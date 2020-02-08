@@ -36,10 +36,10 @@ template<typename T1, typename T2, typename T3> using enabled_if_sv =
 	typename std::enable_if_t<std::is_same_v<T1, T2>, T3>;
 
 template<typename T1> using enabled_if_enum =
-	std::enable_if_t<std::is_enum<T1>::value, void*>;
+	std::enable_if_t<std::is_enum_v<T1>, void*>;
 
 template<typename T1> using enabled_ifn_enum =
-	std::enable_if_t<!std::is_enum<T1>::value, void*>;
+	std::enable_if_t<!std::is_enum_v<T1>, void*>;
 
 /* Enum bitmasks */
 
@@ -49,68 +49,175 @@ struct EnableBitmask{
 };
 
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F>
 operator|(F lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return static_cast<F>(
 		static_cast<utype>(lh) | static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>,F1>
+operator|(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return static_cast<F1>(
+			static_cast<utype>(lh) | rh
+		);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>,F2>
+operator|(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return static_cast<F2>(
+			lh | static_cast<utype>(rh)
+		);
+}
+
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F>
 operator&(F lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return static_cast<F>(
 		static_cast<utype>(lh) & static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>,F1>
+operator&(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return static_cast<F1>(
+			static_cast<utype>(lh) & rh
+		);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>,F2>
+operator&(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return static_cast<F2>(
+			lh & static_cast<utype>(rh)
+		);
+}
+
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled, F>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F>
 operator~(F en) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return static_cast<F>(
 		~static_cast<utype>(en)
 	);
 }
 
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F>
 operator^(F lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return static_cast<F>(
 		static_cast<utype>(lh) ^ static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>,F1>
+operator^(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return static_cast<F1>(
+			static_cast<utype>(lh) ^ rh
+		);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>,F2>
+operator^(F1 lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return static_cast<F2>(
+			lh ^ static_cast<utype>(rh)
+		);
+}
+
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F&>
 operator|=(F& lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) | static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>, F1&>
+operator|=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return lh = static_cast<F1>(
+		static_cast<utype>(lh) | rh
+	);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>, F1&>
+operator|=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return lh = (
+		lh | static_cast<utype>(rh)
+	);
+}
+
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F&>
 operator&=(F& lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) & static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>, F1&>
+operator&=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return lh = static_cast<F1>(
+		static_cast<utype>(lh) & rh
+	);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>, F1&>
+operator&=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return lh = (
+		lh & static_cast<utype>(rh)
+	);
+}
+
 template<typename F>
-typename std::enable_if<EnableBitmask<F>::enabled,F&>::type
+typename std::enable_if_t<EnableBitmask<F>::enabled,F&>
 operator^=(F& lh, F rh) {
-	using utype = typename std::underlying_type<F>::type;
+	using utype = typename std::underlying_type_t<F>;
 	return lh = static_cast<F>(
 		static_cast<utype>(lh) ^ static_cast<utype>(rh)
 	);
 }
 
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F1>::enabled && std::is_integral_v<F2>, F1&>
+operator^=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F1>;
+	return lh = static_cast<F1>(
+		static_cast<utype>(lh) ^ rh
+	);
+}
+
+template<typename F1, typename F2>
+typename std::enable_if_t<EnableBitmask<F2>::enabled && std::is_integral_v<F1>, F1&>
+operator^=(F1& lh, F2 rh) {
+	using utype = typename std::underlying_type_t<F2>;
+	return lh = (
+		lh ^ static_cast<utype>(rh)
+	);
+}
 
 /* IEC Units*/
 constexpr uint64_t operator ""_KiB(const unsigned long long value) noexcept { return uint64_t(value) * 1024; }
