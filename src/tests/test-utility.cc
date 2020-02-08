@@ -120,6 +120,11 @@ TEST_CASE( "Enum bitwise operators", "[utility]" ) {
 		REQUIRE(static_cast<uint8_t>(Flags::Quux   | Flags::Foo)   == ((1U << 5U) | (1U << 1U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Grault | Flags::Corge) == ((1U << 7U) | (1U << 6U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Corge  | Flags::None)  == ((1U << 6U) | 0U));
+
+		REQUIRE(static_cast<uint8_t>(Flags::Grault | (1U << 6U)) == ((1U << 7U) | (1U << 6U)));
+		REQUIRE(static_cast<uint8_t>((1U << 5U)    | Flags::Foo)   == ((1U << 5U) | (1U << 1U)));
+
+
 	}
 
 	SECTION ( "Bitwise And" ) {
@@ -127,6 +132,11 @@ TEST_CASE( "Enum bitwise operators", "[utility]" ) {
 		REQUIRE(static_cast<uint8_t>(Flags::Quux   & Flags::Foo)   == ((1U << 5) & (1U << 1U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Grault & Flags::Corge) == ((1U << 7) & (1U << 6U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Corge  & Flags::None)  == ((1U << 6) & 0U));
+
+		REQUIRE(static_cast<uint8_t>(Flags::Foo    & (1U << 5U))  == ((1U << 1) & (1U << 5U)));
+		REQUIRE(static_cast<uint8_t>((1U << 7)     & Flags::Corge) == ((1U << 7) & (1U << 6U)));
+
+
 	}
 
 	SECTION ( "Bitwise Not" ) {
@@ -141,6 +151,9 @@ TEST_CASE( "Enum bitwise operators", "[utility]" ) {
 		REQUIRE(static_cast<uint8_t>(Flags::Quux   ^ Flags::Foo)   == ((1U << 5U) ^ (1U << 1U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Grault ^ Flags::Corge) == ((1U << 7U) ^ (1U << 6U)));
 		REQUIRE(static_cast<uint8_t>(Flags::Corge  ^ Flags::None)  == ((1U << 6U) ^ 0U));
+
+		REQUIRE(static_cast<uint8_t>(Flags::Quux   ^ (1U << 1U))   == ((1U << 5U) ^ (1U << 1U)));
+		REQUIRE(static_cast<uint8_t>((1U << 7U)    ^ Flags::Corge) == ((1U << 7U) ^ (1U << 6U)));
 	}
 
 	SECTION ( "Bitwise Or Equ" ) {
