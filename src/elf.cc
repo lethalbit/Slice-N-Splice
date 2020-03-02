@@ -5,9 +5,9 @@
 uint32_t elf_hash(const uint8_t* name) {
 	uint32_t hash{};
 	uint32_t g{};
-	while(*name) {
+	while(*name != 0U) {
 		hash = (hash << 4U) + *name++;
-		if((g = hash & 0xF0000000U)) {
+		if((g = hash & 0xF0000000U) != 0U) {
 			hash ^= g >> 24U;
 		}
 		hash &= ~g;
