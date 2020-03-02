@@ -285,9 +285,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
     - arch: ppc64le
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8 ARCH=ppc64le
       before_install:
@@ -312,9 +312,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
     - arch: ppc64le
       env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7 ARCH=ppc64le
       before_install:
@@ -339,9 +339,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
 
 
 # s390x
@@ -369,9 +369,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
     - arch: s390x
       env: CXX=g++-8 CC=gcc-8 GCOV=gcov-8 ARCH=s390x
       before_install:
@@ -396,9 +396,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
     - arch: s390x
       env: CXX=g++-7 CC=gcc-7 GCOV=gcov-7 ARCH=s390x
       before_install:
@@ -423,9 +423,9 @@ jobs:
         - cp ninja ~/.local/bin/
         - popd
 
-        - pip3 install --user wheel
-        - pip3 install --user meson
-        - pip3 install --user codecov
+        - sudo -H pip3 install --user wheel
+        - sudo -H pip3 install --user meson
+        - sudo -H pip3 install --user codecov
 
 script:
   - meson -Db_coverage=true -Db_sanitize=address,undefined -Dvalgrind_checks=false build
